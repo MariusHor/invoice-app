@@ -2,6 +2,7 @@ import { FC } from "react";
 import { useQuery } from "@tanstack/react-query";
 import fetchInvoices from "src/hooks/fetchInvoices";
 import Invoice from "./Invoice";
+import ErrorBoundary from "../pages/404";
 
 export interface InvoiceResult {
   id: string;
@@ -11,7 +12,7 @@ export interface InvoiceResult {
   status: string;
 }
 
-export const InvoiceList: FC = () => {
+const InvoiceList: FC = () => {
   const results = useQuery(["invoices"], fetchInvoices);
 
   if (results.isLoading) {
@@ -35,3 +36,11 @@ export const InvoiceList: FC = () => {
     </ul>
   );
 };
+
+export default function InvoicesErrorBoundary() {
+  return (
+    <ErrorBoundary>
+      <InvoiceList />
+    </ErrorBoundary>
+  );
+}

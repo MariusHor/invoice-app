@@ -1,6 +1,6 @@
 import { Navbar, Header } from "components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { InvoiceList } from "./components/InvoiceList";
+import InvoiceList from "./components/InvoiceList";
 
 import "./App.css";
 
