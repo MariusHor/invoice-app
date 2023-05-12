@@ -17,10 +17,8 @@
       "alias": {
         "map": [
           ["src", "./src"],
-          ["actions", "./src/actions"],
-          ["lib", "./src/lib"],
-          ["store", "./src/store"],
-          ["utils", "./src/utils"]
+          ["assets", "./src/assets"],
+          ["components", "./src/components"]
         ]
       }
     }
