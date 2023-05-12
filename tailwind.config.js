@@ -23,6 +23,18 @@ export default {
         500: "#EC5757",
       },
       white: "#FFFFFF",
+      green: {
+        100: "rgb(220 252 231)",
+        500: "rgb(16 185 129)",
+      },
+      orange: {
+        100: "rgb(255 237 213)",
+        600: "rgb(234 88 12)",
+      },
+      grey: {
+        100: "rgb(243 244 246)",
+        600: "rgb(75 85 99)",
+      },
     },
     fontSize: {
       "heading-lg": `2.25rem`,
@@ -42,6 +54,12 @@ export default {
       },
       maxWidth: {
         8: "2rem",
+        14: "3.5rem",
+        20: "5rem",
+      },
+      minWidth: {
+        8: "2rem",
+        10: "2.5rem",
       },
     },
   },
