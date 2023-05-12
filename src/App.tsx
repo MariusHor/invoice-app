@@ -1,9 +1,10 @@
+import { Navbar } from "components";
 import "./App.css";
 
 function App() {
   return (
-    <div className="flex items-center justify-center h-full">
-      <h1>INVOICE APP</h1>
+    <div className="bg-secondary-300font-league-spartan flex h-full flex-col md:flex-row">
+      <Navbar />
     </div>
   );
 }
