@@ -1,0 +1,17 @@
+.dropdown-transition-enter {
+  opacity: 0;
+}
+
+.dropdown-transition-enter-active {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+
+.dropdown-transition-exit {
+  opacity: 0;
+}
+
+.dropdown-transition-active {
+  opacity: 0;
+  transition: opacity 400ms;
+}
