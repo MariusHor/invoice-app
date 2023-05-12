@@ -16,9 +16,7 @@ export const InvoiceList: FC = () => {
 
   if (results.isLoading) {
     return (
-      <div className="loading-pane">
-        <h2 className="loader">🌀</h2>
-      </div>
+      <span className="loader m-4 mx-auto max-w-4xl flex-col gap-4 md:col-span-11 md:col-start-2 md:row-span-5 md:row-start-2"></span>
     );
   }
 

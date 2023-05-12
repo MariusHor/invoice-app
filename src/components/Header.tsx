@@ -4,10 +4,10 @@ import { ButtonAdd } from "./ButtonAdd";
 
 const Header: FC = () => {
   return (
-    <header className="mx-auto mt-4 flex h-fit w-full justify-between gap-2 p-4 md:col-span-11">
+    <header className="max-h-18 mx-auto mt-4 flex h-fit w-full items-center justify-between gap-2 p-4 md:col-span-11">
       <div>
         <h1 className="heading-md">Invoices</h1>
-        <p className="paragraph text-secondary-500">7 total invoices</p>
+        <p className="heading-md text-primary-600">7</p>
       </div>
       <Filters />
       <ButtonAdd />
