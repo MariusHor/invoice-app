@@ -29,11 +29,12 @@
 
   .heading-sm,
   .heading-sm-secondary {
-    letter-spacing: -0.25px;
+    letter-spacing: 0.25px;
     @apply text-heading-sm;
   }
 
-  .heading-sm {
+  .heading-sm,
+  .paragraph {
     line-height: 24px;
   }
 
@@ -47,17 +48,16 @@
     @apply text-paragraph;
   }
 
-  .paragraph {
-    line-height: 18px;
-  }
-
   .paragraph-secondary {
     line-height: 15px;
   }
 }
 
-html,
+html {
+  min-height: 100%;
+}
+
 body,
 #root {
-  height: 100%;
+  min-height: 100vh;
 }
