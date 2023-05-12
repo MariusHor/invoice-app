@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="bg-secondary-300font-league-spartan flex h-full flex-col md:flex-row">
+    <div className="flex h-full flex-col bg-secondary-200 font-league-spartan md:flex-row">
       <Navbar />
     </div>
   );
