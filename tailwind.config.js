@@ -22,6 +22,7 @@ export default {
         300: "#FF9797",
         500: "#EC5757",
       },
+      white: "#FFFFFF",
     },
     fontSize: {
       "heading-lg": `2.25rem`,

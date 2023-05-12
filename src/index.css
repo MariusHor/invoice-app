@@ -4,21 +4,32 @@
 @tailwind utilities;
 
 @layer base {
+  .transition-primary {
+    @apply transition duration-300 ease-in-out;
+  }
+
+  .heading-lg,
+  .heading-md,
+  .heading-sm,
+  .heading-sm-secondary {
+    @apply font-bold;
+  }
+
   .heading-lg {
     line-height: 33px;
-    letter-spacing: -1;
+    letter-spacing: -1px;
     @apply text-heading-lg;
   }
 
   .heading-md {
     line-height: 22px;
-    letter-spacing: -0.75;
+    letter-spacing: -0.75px;
     @apply text-heading-md;
   }
 
   .heading-sm,
   .heading-sm-secondary {
-    letter-spacing: -0.25;
+    letter-spacing: -0.25px;
     @apply text-heading-sm;
   }
 
@@ -32,7 +43,7 @@
 
   .paragraph,
   .paragraph-secondary {
-    letter-spacing: -0.1;
+    letter-spacing: -0.1px;
     @apply text-paragraph;
   }
 
