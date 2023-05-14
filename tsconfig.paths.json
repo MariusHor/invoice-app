@@ -8,6 +8,7 @@
       "hooks": ["./hooks"],
       "types": ["./types"],
       "utils": ["./utils"],
+      "pages": ["./pages"],
       "components": ["./components"]
     }
   }

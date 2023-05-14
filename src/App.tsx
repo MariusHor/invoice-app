@@ -1,8 +1,10 @@
-import { Navbar, Header, ErrorBoundary, InvoicesWrapper } from "components";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { FiltersProvider } from "context/filters";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient } from "@tanstack/react-query";
+import { Home } from "pages/Home";
+import { View } from "pages/View";
 
 import "./App.css";
+import Main from "pages/Main";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,20 +16,23 @@ const queryClient = new QueryClient({
   },
 });
 
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/invoices",
+    element: <Main queryClient={queryClient} />,
+  },
+  {
+    path: "/invoices/:id",
+    element: <View queryClient={queryClient} />,
+  },
+]);
+
 const App = (): React.JSX.Element => {
-  return (
-    <>
-      <Navbar />
-      <QueryClientProvider client={queryClient}>
-        <FiltersProvider>
-          <Header />
-          <ErrorBoundary>
-            <InvoicesWrapper />
-          </ErrorBoundary>
-        </FiltersProvider>
-      </QueryClientProvider>
-    </>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
