@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Filter } from "./Filter";
 import { ButtonFilter } from "./ButtonFilter";
@@ -6,9 +6,13 @@ import { ButtonFilter } from "./ButtonFilter";
 const Filters = (): JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
 
+  const handleOpen = useCallback(() => {
+    setOpen(!open);
+  }, [open]);
+
   return (
     <div className="relative flex grow items-center justify-end">
-      <ButtonFilter open={open} setOpen={setOpen} />
+      <ButtonFilter open={open} handleOpen={handleOpen} />
       <CSSTransition
         in={open}
         timeout={600}
