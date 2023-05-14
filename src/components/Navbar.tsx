@@ -1,9 +1,8 @@
-import { FC } from "react";
 import Avatar from "./Avatar";
 import ThemeSwitch from "./ThemeSwitch";
 import logo from "assets/logo.svg";
 
-const Navbar: FC = () => {
+const Navbar = (): JSX.Element => {
   return (
     <nav className="flex h-18 justify-between overflow-hidden bg-secondary-600 md:row-span-6 md:min-h-screen md:max-w-20 md:flex-col md:rounded-r-3xl">
       <div className="relative grid w-18 place-items-center overflow-hidden rounded-r-3xl bg-primary-600 md:h-20 md:w-full">

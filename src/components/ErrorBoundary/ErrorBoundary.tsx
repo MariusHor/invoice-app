@@ -1,4 +1,5 @@
 import { Component, ReactNode, ErrorInfo } from "react";
+import ErrorBoundaryFallback from "./ErrorBoundaryFallback";
 
 interface Props {
   children?: ReactNode;
@@ -16,7 +17,7 @@ export default class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false };
   }
 
-  public static getDerivedStateFromError(_: Error): State {
+  public static getDerivedStateFromError(): State {
     return { hasError: true };
   }
 
@@ -24,9 +25,11 @@ export default class ErrorBoundary extends Component<Props, State> {
     console.error("ErrorBoundary caught an error", error, errorInfo);
   }
 
-  public render() {
-    if (this.state.hasError) {
-      return <h2>There was an error with this listing.</h2>;
+  public render(): ReactNode {
+    const { hasError } = this.state;
+
+    if (hasError) {
+      return <ErrorBoundaryFallback />;
     }
 
     return this.props.children;

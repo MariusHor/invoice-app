@@ -1,15 +1,14 @@
-import { FC } from "react";
-import { InvoiceResult } from "./InvoiceList";
+import { InvoiceResult } from "src/types/types";
 import Status from "./Status";
-import arrowRight from "../assets/icon-arrow-right.svg";
+import arrowRight from "assets/icon-arrow-right.svg";
 
-const Invoice: FC<InvoiceResult> = ({
+const Invoice = ({
   id,
   paymentDue,
   clientName,
   total,
   status,
-}) => {
+}: InvoiceResult): JSX.Element => {
   return (
     <div className="flex justify-between rounded-lg bg-white">
       <div className="m-4 grid w-full grid-cols-2 grid-rows-2 items-center justify-center gap-2 text-center sm:grid-cols-5 sm:grid-rows-none md:gap-4">

@@ -1,12 +1,14 @@
-import { FC } from "react";
 import arrowDownIcon from "assets/icon-arrow-down.svg";
 
-interface IProps {
+interface ButtonFilterProps {
   open: boolean;
   setOpen: (state: boolean) => void;
 }
 
-export const ButtonFilter: FC<IProps> = ({ open, setOpen }) => {
+export const ButtonFilter = ({
+  open,
+  setOpen,
+}: ButtonFilterProps): JSX.Element => {
   return (
     <button
       className="grid h-fit grid-cols-2 place-items-center"

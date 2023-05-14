@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Filter } from "./Filter";
 import { ButtonFilter } from "./ButtonFilter";
 
-const Filters: FC = () => {
-  const [open, setOpen] = useState(false);
+const Filters = (): JSX.Element => {
+  const [open, setOpen] = useState<boolean>(false);
 
   return (
     <div className="relative flex grow items-center justify-end">
