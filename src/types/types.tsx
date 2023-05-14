@@ -12,3 +12,9 @@ export interface StatusClasses {
     header: string;
   };
 }
+
+export interface FiltersState {
+  paid: boolean;
+  pending: boolean;
+  draft: boolean;
+}

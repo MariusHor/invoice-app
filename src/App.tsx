@@ -2,6 +2,7 @@ import { Navbar, Header, InvoiceList, ErrorBoundary } from "components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "./App.css";
+import { FiltersProvider } from "./context/filters";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -18,10 +19,12 @@ const App = (): JSX.Element => {
     <>
       <Navbar />
       <QueryClientProvider client={queryClient}>
-        <Header />
-        <ErrorBoundary>
-          <InvoiceList />
-        </ErrorBoundary>
+        <FiltersProvider>
+          <Header />
+          <ErrorBoundary>
+            <InvoiceList />
+          </ErrorBoundary>
+        </FiltersProvider>
       </QueryClientProvider>
     </>
   );
