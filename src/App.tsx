@@ -7,7 +7,7 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       useErrorBoundary: true,
-      staleTime: Infinity,
+      staleTime: 1000 * 20,
       cacheTime: Infinity,
     },
   },
@@ -15,13 +15,15 @@ const queryClient = new QueryClient({
 
 const App = (): JSX.Element => {
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <Navbar />
-      <Header />
-      <ErrorBoundary>
-        <InvoiceList />
-      </ErrorBoundary>
-    </QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <Header />
+        <ErrorBoundary>
+          <InvoiceList />
+        </ErrorBoundary>
+      </QueryClientProvider>
+    </>
   );
 };
 
