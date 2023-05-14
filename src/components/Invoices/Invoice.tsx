@@ -1,6 +1,7 @@
 import { InvoiceResult } from "types/types";
 import InvoiceStatus from "./InvoiceStatus";
 import arrowRight from "assets/icon-arrow-right.svg";
+import { Link } from "react-router-dom";
 
 const Invoice = ({
   id,
@@ -25,12 +26,12 @@ const Invoice = ({
         <InvoiceStatus status={status} />
       </div>
 
-      <a
-        href="/"
+      <Link
+        to={`/invoices/:${id}`}
         className="min-h-10 grid min-w-10 place-items-center border-l border-l-secondary-300 p-2"
       >
         <img src={arrowRight} alt="open invoice" className="" />
-      </a>
+      </Link>
     </div>
   );
 };

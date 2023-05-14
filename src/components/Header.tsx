@@ -1,6 +1,7 @@
 import { Filters } from "./Filters";
-import { ButtonAdd } from "./ButtonAdd";
+import LinkButton from "./LinkButton";
 import { useInvoices } from "hooks/useInvoices";
+import plusIcon from "assets/icon-plus.svg";
 
 const Header = (): React.JSX.Element => {
   const { data } = useInvoices();
@@ -12,7 +13,13 @@ const Header = (): React.JSX.Element => {
         <p className="heading-md text-primary-600">{data?.length ?? 0}</p>
       </div>
       <Filters />
-      <ButtonAdd />
+      <LinkButton to="/create" title="New">
+        <img
+          src={plusIcon}
+          alt="add new entry"
+          className="transition-primary rounded-full bg-secondary-200 p-2 hover:rotate-180"
+        />
+      </LinkButton>
     </header>
   );
 };
