@@ -45,11 +45,11 @@
   .paragraph,
   .paragraph-secondary {
     letter-spacing: -0.1px;
-    @apply text-paragraph;
+    @apply text-paragraph text-secondary-500;
   }
 
   .paragraph-secondary {
-    line-height: 15px;
+    line-height: 18px;
   }
 }
 

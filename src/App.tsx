@@ -1,7 +1,5 @@
-import { Navbar, Header } from "components";
+import { Navbar, Header, InvoiceList, ErrorBoundary } from "components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import InvoiceList from "./components/InvoiceList";
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 import "./App.css";
 

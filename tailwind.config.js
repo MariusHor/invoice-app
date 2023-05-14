@@ -56,6 +56,7 @@ export default {
         8: "2rem",
         14: "3.5rem",
         20: "5rem",
+        42: "12rem",
       },
       minWidth: {
         8: "2rem",

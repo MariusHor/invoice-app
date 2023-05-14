@@ -10,7 +10,7 @@ export const ButtonFilter = memo(
   ({ open, handleOpen }: ButtonFilterProps): JSX.Element => {
     return (
       <button
-        className="grid h-fit grid-cols-2 place-items-center"
+        className="flex h-fit items-center gap-2"
         onClick={() => handleOpen()}
       >
         <h4 className="heading-sm">Filters</h4>

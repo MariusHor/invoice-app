@@ -20,7 +20,7 @@ const Filters = (): JSX.Element => {
         unmountOnExit
         mountOnEnter
       >
-        <ul className="transition-primary absolute -bottom-32 right-0 flex w-40 flex-col gap-2 rounded-lg bg-white p-6 shadow-xl">
+        <ul className="transition-primary absolute -bottom-36 right-0 flex w-40 flex-col gap-2 rounded-lg bg-white p-6 shadow-xl">
           <Filter id="draft" name="draft" title="Draft" />
           <Filter id="pending" name="pending" title="Pending" />
           <Filter id="paid" name="paid" title="Paid" />
