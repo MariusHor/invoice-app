@@ -7,7 +7,7 @@ interface ButtonFilterProps {
 }
 
 export const ButtonFilter = memo(
-  ({ open, handleOpen }: ButtonFilterProps): JSX.Element => {
+  ({ open, handleOpen }: ButtonFilterProps): React.JSX.Element => {
     return (
       <button
         className="flex h-fit items-center gap-2"

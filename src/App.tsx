@@ -1,8 +1,8 @@
-import { Navbar, Header, InvoiceList, ErrorBoundary } from "components";
+import { Navbar, Header, ErrorBoundary, InvoicesWrapper } from "components";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { FiltersProvider } from "context/filters";
 
 import "./App.css";
-import { FiltersProvider } from "./context/filters";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,7 +14,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = (): JSX.Element => {
+const App = (): React.JSX.Element => {
   return (
     <>
       <Navbar />
@@ -22,7 +22,7 @@ const App = (): JSX.Element => {
         <FiltersProvider>
           <Header />
           <ErrorBoundary>
-            <InvoiceList />
+            <InvoicesWrapper />
           </ErrorBoundary>
         </FiltersProvider>
       </QueryClientProvider>

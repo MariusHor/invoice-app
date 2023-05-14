@@ -6,7 +6,7 @@ export interface InvoiceResult {
   status: string;
 }
 
-export interface StatusClasses {
+export interface InvoiceStatusClasses {
   [key: string]: {
     div: string;
     header: string;

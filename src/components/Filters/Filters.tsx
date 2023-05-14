@@ -3,7 +3,7 @@ import { CSSTransition } from "react-transition-group";
 import { Filter } from "./Filter";
 import { ButtonFilter } from "./ButtonFilter";
 
-const Filters = (): JSX.Element => {
+const Filters = (): React.JSX.Element => {
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = useCallback(() => {

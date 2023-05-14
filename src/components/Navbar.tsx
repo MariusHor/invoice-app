@@ -2,7 +2,7 @@ import Avatar from "./Avatar";
 import ThemeSwitch from "./ThemeSwitch";
 import logo from "assets/logo.svg";
 
-const Navbar = (): JSX.Element => {
+const Navbar = (): React.JSX.Element => {
   return (
     <nav className="flex h-16 justify-between overflow-hidden bg-secondary-600 lg:row-span-6 lg:min-h-screen lg:w-20 lg:flex-col lg:rounded-r-3xl">
       <div className="relative grid w-18 place-items-center overflow-hidden rounded-r-3xl bg-primary-600 lg:h-20 lg:w-full">
