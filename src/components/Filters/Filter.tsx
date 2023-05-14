@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { FiltersState } from "src/types/types";
-import { FiltersContext } from "src/context/filters";
+import { FiltersState } from "types/types";
+import { FiltersContext } from "context/filters";
 import "./Filter.css";
 
 interface FilterProps {
@@ -9,7 +9,7 @@ interface FilterProps {
   title: string;
 }
 
-export const Filter = ({ id, name, title }: FilterProps): JSX.Element => {
+export const Filter = ({ id, name, title }: FilterProps): React.JSX.Element => {
   const context = useContext(FiltersContext);
 
   if (!context) {

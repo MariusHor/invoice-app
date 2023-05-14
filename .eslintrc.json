@@ -28,7 +28,7 @@
         "project": ["tsconfig.json", "package/tsconfig.json"]
       },
       "node": {
-        "moduleDirectory": ["."]
+        "moduleDirectory": ["./"]
       }
     }
   }

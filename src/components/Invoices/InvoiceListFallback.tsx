@@ -1,6 +1,6 @@
-import fallbackImg from "../assets/illustration-empty.svg";
+import fallbackImg from "assets/illustration-empty.svg";
 
-export const InvoiceListFallback = () => {
+const InvoiceListFallback = (): React.JSX.Element => {
   return (
     <div className="-none mx-auto my-8 flex h-full w-fit grow flex-col items-center justify-center text-center lg:col-span-11 lg:col-start-2 lg:row-span-5 lg:row-start-2 lg:my-0">
       <img src={fallbackImg} alt="list is empty" />
@@ -11,3 +11,5 @@ export const InvoiceListFallback = () => {
     </div>
   );
 };
+
+export default InvoiceListFallback;

@@ -1,6 +1,6 @@
-import plusIcon from "../assets/icon-plus.svg";
+import plusIcon from "assets/icon-plus.svg";
 
-export const ButtonAdd = (): JSX.Element => {
+export const ButtonAdd = (): React.JSX.Element => {
   return (
     <button className="transition-primary flex h-fit items-center gap-2 rounded-full bg-primary-600 px-2 py-2 hover:bg-primary-400">
       <img

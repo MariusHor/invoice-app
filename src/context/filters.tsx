@@ -1,4 +1,4 @@
-import { FiltersState } from "src/types/types";
+import { FiltersState } from "types/types";
 import { ReactNode, createContext, useState } from "react";
 
 interface FiltersContextType {

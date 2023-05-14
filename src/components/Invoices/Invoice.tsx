@@ -1,5 +1,5 @@
-import { InvoiceResult } from "src/types/types";
-import Status from "./Status";
+import { InvoiceResult } from "types/types";
+import InvoiceStatus from "./InvoiceStatus";
 import arrowRight from "assets/icon-arrow-right.svg";
 
 const Invoice = ({
@@ -8,10 +8,10 @@ const Invoice = ({
   clientName,
   total,
   status,
-}: InvoiceResult): JSX.Element => {
+}: InvoiceResult): React.JSX.Element => {
   return (
-    <div className="flex justify-between rounded-lg bg-white">
-      <div className="m-4 grid w-full grid-cols-2 grid-rows-2 items-center justify-center gap-2 text-center sm:grid-cols-5 sm:grid-rows-none md:gap-4">
+    <div className="mx-auto flex w-full max-w-sm justify-between rounded-lg bg-white lg:max-w-2xl xl:max-w-4xl">
+      <div className="m-4 grid w-full grid-cols-2 grid-rows-2 items-center justify-center gap-2 text-center xl:grid-cols-5 xl:grid-rows-none ">
         <h3 className="heading-sm">
           <span className="paragraph">#</span>
           {id}
@@ -22,7 +22,7 @@ const Invoice = ({
           <span>$</span>
           {total}
         </h3>
-        <Status status={status} />
+        <InvoiceStatus status={status} />
       </div>
 
       <a

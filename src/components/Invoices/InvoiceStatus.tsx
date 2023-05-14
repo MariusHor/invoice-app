@@ -1,13 +1,13 @@
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
-import { capitalize } from "src/utils/utils";
-import { StatusClasses } from "src/types/types";
+import { capitalize } from "utils/utils";
+import { InvoiceStatusClasses } from "types/types";
 
-interface StatusProps {
+interface InvoiceStatusProps {
   status: string;
 }
 
-const Status = ({ status }: StatusProps): JSX.Element => {
-  const classes: StatusClasses = {
+const InvoiceStatus = ({ status }: InvoiceStatusProps): React.JSX.Element => {
+  const classes: InvoiceStatusClasses = {
     paid: {
       div: "bg-green-100",
       header: "text-green-500",
@@ -24,7 +24,7 @@ const Status = ({ status }: StatusProps): JSX.Element => {
 
   return (
     <div
-      className={`col-span-2 flex w-full max-w-xs items-center justify-center justify-self-center rounded-lg p-2 text-center sm:col-span-1 ${classes[status].div}`}
+      className={`col-span-2 flex w-full max-w-xs items-center justify-center justify-self-center rounded-lg p-2 text-center xl:col-span-1 ${classes[status].div}`}
     >
       <h3 className={`heading-sm ${classes[status].header}`}>
         <FiberManualRecordIcon style={{ fontSize: 12 }} />
@@ -34,4 +34,4 @@ const Status = ({ status }: StatusProps): JSX.Element => {
   );
 };
 
-export default Status;
+export default InvoiceStatus;
