@@ -1,20 +1,13 @@
-import { FC } from "react";
-import { capitalize } from "src/utils/utils";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+import { capitalize } from "src/utils/utils";
+import { StatusClasses } from "src/types/types";
 
-interface IProps {
+interface StatusProps {
   status: string;
 }
 
-interface IClasses {
-  [key: string]: {
-    div: string;
-    header: string;
-  };
-}
-
-const Status: FC<IProps> = ({ status }) => {
-  const classes: IClasses = {
+const Status = ({ status }: StatusProps): JSX.Element => {
+  const classes: StatusClasses = {
     paid: {
       div: "bg-green-100",
       header: "text-green-500",

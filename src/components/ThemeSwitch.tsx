@@ -1,7 +1,6 @@
-import { FC } from "react";
 import moon from "assets/icon-moon.svg";
 
-const ThemeSwitch: FC = () => {
+const ThemeSwitch = (): JSX.Element => {
   return (
     <button className="h-fit">
       <img
