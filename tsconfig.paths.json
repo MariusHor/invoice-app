@@ -5,10 +5,14 @@
       "api": ["./api"],
       "assets": ["./assets"],
       "context": ["./context"],
+      "features": ["./features"],
       "hooks": ["./hooks"],
+      "layouts": ["./layouts"],
       "types": ["./types"],
       "utils": ["./utils"],
       "pages": ["./pages"],
+      "providers": ["./providers"],
+      "routes": ["./routes"],
       "components": ["./components"]
     }
   }
