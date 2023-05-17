@@ -14,12 +14,12 @@ export const ErrorPage = () => {
         <LinkCustom to="/" title="Home" />
       </div>
     );
-  } else {
-    return (
-      <div className="col-span-full col-start-2 row-span-full flex flex-col items-center justify-center gap-4">
-        <h1>An error has occured</h1>
-        <LinkCustom to="/" title="Home" />
-      </div>
-    );
   }
+
+  return (
+    <div className="col-span-full col-start-2 row-span-full flex flex-col items-center justify-center gap-4">
+      <h1>An error has occured</h1>
+      <LinkCustom to="/" title="Home" />
+    </div>
+  );
 };
