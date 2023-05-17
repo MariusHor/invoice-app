@@ -1,6 +1,7 @@
 export { ErrorPage } from "./ErrorPage";
-export { Root } from "../pages/Root";
-export { Invoices } from "../pages/Invoices";
-export { InvoiceCreate } from "../pages/InvoiceCreate";
-export { InvoiceEdit } from "../pages/InvoiceEdit";
-export { InvoiceView } from "../pages/InvoiceView";
+export { Root } from "./Root";
+export { Invoices } from "./Invoices/Invoices";
+export { InvoiceCreate } from "./InvoiceCreate";
+export { InvoiceEdit } from "./InvoiceEdit";
+export { InvoiceView } from "./InvoiceView";
+export { invoicesLoader } from "./Invoices/loader";

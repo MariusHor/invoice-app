@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { LinkCustom } from "components";
 import { Filters } from "features";
-import { invoicesLoader } from "pages/Invoices";
+import { invoicesLoader } from "pages";
 import plusIcon from "assets/icon-plus.svg";
 
 export const ActionsBar = (): React.JSX.Element => {
