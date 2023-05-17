@@ -1,5 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ReactQueryProvider, FiltersProvider } from "providers";
+import { queryClient } from "lib";
+import { invoicesLoader } from "utils";
 import { LayoutInvoices, LayoutInvoice, LayoutShared } from "layouts";
 import {
   ErrorPage,
@@ -25,10 +27,12 @@ const router = createBrowserRouter([
       {
         path: "invoices",
         element: <LayoutInvoices />,
+        loader: invoicesLoader(queryClient),
         children: [
           {
             index: true,
             element: <Invoices />,
+            loader: invoicesLoader(queryClient),
           },
         ],
       },
