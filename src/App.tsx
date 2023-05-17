@@ -1,38 +1,69 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { QueryClient } from "@tanstack/react-query";
-import { Home } from "pages/Home";
-import { View } from "pages/View";
+import { ReactQueryProvider, FiltersProvider } from "providers";
+import { LayoutInvoices, LayoutInvoice, LayoutShared } from "layouts";
+import {
+  ErrorPage,
+  Root,
+  Invoices,
+  InvoiceEdit,
+  InvoiceCreate,
+  InvoiceView,
+} from "pages";
 
 import "./App.css";
-import Main from "pages/Main";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      useErrorBoundary: true,
-      staleTime: 1000 * 20,
-      cacheTime: Infinity,
-    },
-  },
-});
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/invoices",
-    element: <Main queryClient={queryClient} />,
-  },
-  {
-    path: "/invoices/:id",
-    element: <View queryClient={queryClient} />,
+    element: <LayoutShared />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        index: true,
+        element: <Root />,
+      },
+      {
+        path: "invoices",
+        element: <LayoutInvoices />,
+        children: [
+          {
+            index: true,
+            element: <Invoices />,
+          },
+        ],
+      },
+      {
+        path: "invoice",
+        element: <LayoutInvoice />,
+        children: [
+          {
+            index: true,
+            element: <InvoiceCreate />,
+          },
+          {
+            path: ":id",
+            element: <InvoiceView />,
+            children: [
+              {
+                path: "edit",
+                element: <InvoiceEdit />,
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
 ]);
 
 const App = (): React.JSX.Element => {
-  return <RouterProvider router={router} />;
+  return (
+    <ReactQueryProvider>
+      <FiltersProvider>
+        <RouterProvider router={router} />
+      </FiltersProvider>
+    </ReactQueryProvider>
+  );
 };
 
 export default App;
