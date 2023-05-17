@@ -8,6 +8,7 @@
       "features": ["./features"],
       "hooks": ["./hooks"],
       "layouts": ["./layouts"],
+      "lib": ["./lib"],
       "types": ["./types"],
       "utils": ["./utils"],
       "pages": ["./pages"],

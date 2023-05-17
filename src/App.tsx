@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ReactQueryProvider, FiltersProvider } from "providers";
+import { queryClient } from "lib";
 import { LayoutInvoices, LayoutInvoice, LayoutShared } from "layouts";
 import {
   ErrorPage,
@@ -8,6 +9,7 @@ import {
   InvoiceEdit,
   InvoiceCreate,
   InvoiceView,
+  invoicesLoader,
 } from "pages";
 
 import "./App.css";
@@ -25,10 +27,12 @@ const router = createBrowserRouter([
       {
         path: "invoices",
         element: <LayoutInvoices />,
+        loader: invoicesLoader(queryClient),
         children: [
           {
             index: true,
             element: <Invoices />,
+            loader: invoicesLoader(queryClient),
           },
         ],
       },
