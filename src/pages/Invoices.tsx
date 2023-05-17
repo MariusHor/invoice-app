@@ -1,32 +1,26 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import { InvoiceList, InvoiceListFallback, Pagination } from "features";
-import { filterInvoices, getTotalPages, paginateInvoices } from "utils";
 import { Spinner } from "components";
-import { useInvoices } from "hooks";
-import { FiltersContext } from "context";
+import { useFilters, useInvoices } from "hooks";
+import { filterInvoices, getTotalPages, paginateInvoices } from "utils";
 
 export const Invoices = (): React.JSX.Element => {
-  const invoices = useInvoices();
-  const context = useContext(FiltersContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [invoicesPerPage] = useState(6);
+  const { data, isLoading } = useInvoices();
+  const { filters } = useFilters();
 
   const handleCurrentPage = useCallback(
     (value: number) => setCurrentPage(value),
     []
   );
 
-  if (invoices.isLoading) {
+  if (isLoading) {
     return <Spinner />;
   }
 
-  if (!context) {
-    throw new Error("FiltersContext must be used within a FilterProvider");
-  }
-
-  const { filters } = context;
-
-  const filteredInvoices = filterInvoices(invoices.data, filters);
+  const filteredInvoices = filterInvoices(data, filters);
+  const totalPages = getTotalPages(filteredInvoices.length, invoicesPerPage);
 
   let currentInvoices = paginateInvoices(
     filteredInvoices,
@@ -44,20 +38,20 @@ export const Invoices = (): React.JSX.Element => {
     setCurrentPage(currentPage - 1);
   }
 
-  const totalPages = getTotalPages(filteredInvoices.length, invoicesPerPage);
-
-  if (!currentInvoices.length) {
-    return <InvoiceListFallback />;
-  }
-
   return (
     <div className="flex w-full grow flex-col justify-center gap-6 p-4">
-      <InvoiceList currentInvoices={currentInvoices} />
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        handleCurrentPage={handleCurrentPage}
-      />
+      {currentInvoices.length ? (
+        <>
+          <InvoiceList currentInvoices={currentInvoices} />
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            handleCurrentPage={handleCurrentPage}
+          />
+        </>
+      ) : (
+        <InvoiceListFallback />
+      )}
     </div>
   );
 };
