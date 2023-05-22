@@ -1,5 +1,5 @@
 const fetchInvoices = async () => {
-  const result = await fetch("data.json");
+  const result = await fetch("/data.json");
 
   if (!result.ok) {
     throw new Error(`fetch not ok`);

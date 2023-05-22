@@ -39,7 +39,7 @@ export default {
     fontSize: {
       "heading-lg": `2.25rem`,
       "heading-md": `1.5rem`,
-      "heading-sm": `0.938rem`,
+      "heading-sm": `1rem`,
       paragraph: `0.813rem`,
     },
     extend: {
@@ -56,6 +56,7 @@ export default {
         8: "2rem",
         14: "3.5rem",
         20: "5rem",
+        24: "6rem",
         42: "12rem",
       },
       minWidth: {

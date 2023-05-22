@@ -47,6 +47,7 @@ const router = createBrowserRouter([
           {
             path: ":id",
             element: <InvoiceView />,
+            loader: invoicesLoader(queryClient),
             children: [
               {
                 path: "edit",

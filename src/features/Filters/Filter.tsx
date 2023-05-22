@@ -1,6 +1,5 @@
-import { useContext } from "react";
 import { FiltersState } from "types";
-import { FiltersContext } from "context";
+import { useFilters } from "hooks";
 
 import "./Filter.css";
 
@@ -11,13 +10,7 @@ interface FilterProps {
 }
 
 export const Filter = ({ id, name, title }: FilterProps): React.JSX.Element => {
-  const context = useContext(FiltersContext);
-
-  if (!context) {
-    throw new Error("FilterContext must be used within a FilterProvider");
-  }
-
-  const { filters, setFilters } = context;
+  const { filters, setFilters } = useFilters();
 
   return (
     <li className="flex items-center">

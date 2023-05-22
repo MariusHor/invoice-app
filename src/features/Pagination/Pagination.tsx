@@ -1,7 +1,7 @@
 import { memo, useCallback } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
-import { ButtonPagination } from "./ButtonPagination";
+import { IconButton } from "@mui/material";
 
 interface PaginationProps {
   totalPages: number;
@@ -20,18 +20,22 @@ export const Pagination = memo(
     }, [currentPage, handleCurrentPage, totalPages]);
 
     return (
-      <div className="row-span-1 mx-auto flex h-fit w-fit gap-3">
-        <ButtonPagination
-          handleClick={() => {
+      <div className="row-span-1 mx-auto flex h-fit w-fit items-center justify-center gap-3">
+        <IconButton
+          style={{ color: "#7C5DFA" }}
+          onClick={() => {
             if (currentPage > 1) handleCurrentPage(currentPage - 1);
           }}
         >
           <NavigateBeforeIcon />
-        </ButtonPagination>
-        <span>{currentPage}</span>
-        <ButtonPagination handleClick={handlePaginationClick}>
+        </IconButton>
+        <span className="h-fit">{currentPage}</span>
+        <IconButton
+          onClick={handlePaginationClick}
+          style={{ color: "#7C5DFA" }}
+        >
           <NavigateNextIcon />
-        </ButtonPagination>
+        </IconButton>
       </div>
     );
   }

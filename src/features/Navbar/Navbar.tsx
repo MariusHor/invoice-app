@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Button, Avatar } from "components";
+import { IconButton } from "@mui/material";
+import { Avatar } from "components";
 import { Logo } from "./Logo";
 import moon from "assets/icon-moon.svg";
 
@@ -10,13 +11,13 @@ export const Navbar = (): React.JSX.Element => {
         <Logo />
       </Link>
       <div className="flex grow items-center justify-end px-6 lg:justify-center">
-        <Button>
+        <IconButton>
           <img
             src={moon}
             alt="switch theme"
             className="transition-primary hover:-rotate-45"
           />
-        </Button>
+        </IconButton>
       </div>
       <Link
         to="/user-dashboard"

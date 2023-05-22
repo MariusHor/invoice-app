@@ -1,25 +1,24 @@
 import { useCallback, useState } from "react";
 import { InvoiceList, InvoiceListFallback, Pagination } from "features";
-import { Spinner } from "components";
-import { useFilters, useInvoices } from "hooks";
+import { useFilters } from "hooks";
 import { filterInvoices, getTotalPages, paginateInvoices } from "utils";
+import { useLoaderData } from "react-router-dom";
+import { invoicesLoader } from "./loader";
 
 export const Invoices = (): React.JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
   const [invoicesPerPage] = useState(6);
-  const { data, isLoading } = useInvoices();
   const { filters } = useFilters();
+  const invoices = useLoaderData() as Awaited<
+    ReturnType<ReturnType<typeof invoicesLoader>>
+  >;
 
   const handleCurrentPage = useCallback(
     (value: number) => setCurrentPage(value),
     []
   );
 
-  if (isLoading) {
-    return <Spinner />;
-  }
-
-  const filteredInvoices = filterInvoices(data, filters);
+  const filteredInvoices = filterInvoices(invoices, filters);
   const totalPages = getTotalPages(filteredInvoices.length, invoicesPerPage);
 
   let currentInvoices = paginateInvoices(

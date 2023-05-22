@@ -16,7 +16,7 @@ export const ActionsBar = (): React.JSX.Element => {
         <p className="heading-md text-primary-600">{invoices?.length ?? 0}</p>
       </div>
       <Filters />
-      <LinkCustom to="/create" title="New">
+      <LinkCustom to="/invoice" title="New">
         <img
           src={plusIcon}
           alt="add new entry"

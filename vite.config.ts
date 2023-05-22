@@ -19,6 +19,7 @@ export default defineConfig({
       pages: path.resolve(__dirname, "./src/pages"),
       providers: path.resolve(__dirname, "./src/providers"),
       routes: path.resolve(__dirname, "./src/routes"),
+      schemas: path.resolve(__dirname, "./src/schemas"),
       components: path.resolve(__dirname, "./src/components"),
     },
   },
