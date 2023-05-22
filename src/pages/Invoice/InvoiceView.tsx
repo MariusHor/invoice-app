@@ -1,4 +1,5 @@
 import { useLoaderData, useParams } from "react-router-dom";
+import { Button } from "@mui/material";
 import { InvoiceStatus } from "components";
 import { InvoiceDetails } from "features/Invoices/InvoiceDetails";
 import { invoicesLoader } from "pages";
@@ -20,12 +21,32 @@ export const InvoiceView = () => {
       </div>
       <InvoiceDetails invoice={invoice} id={id} />
       <div className="flex h-20 items-center justify-center gap-2 bg-white p-6 lg:rounded-lg">
-        {/* <ButtonActions
-          title={"Edit"}
-          classes="bg-secondary-200 text-secondary-500"
-        />
-        <ButtonActions title={"Delete"} classes="bg-accent-500 text-white" />
-        <ButtonActions title={"Paid"} classes="bg-primary-600 text-white" /> */}
+        <Button
+          variant="outlined"
+          style={{ color: "#7C5DFA", borderColor: "#7C5DFA" }}
+        >
+          Edit
+        </Button>
+        <Button
+          variant="outlined"
+          style={{
+            color: "white",
+            background: "#EC5757",
+            borderColor: "#EC5757",
+          }}
+        >
+          Delete
+        </Button>
+        <Button
+          variant="outlined"
+          style={{
+            color: "white",
+            background: "#7C5DFA",
+            borderColor: "#7C5DFA",
+          }}
+        >
+          Paid
+        </Button>
       </div>
     </div>
   );
