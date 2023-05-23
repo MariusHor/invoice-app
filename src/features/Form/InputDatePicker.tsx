@@ -23,7 +23,7 @@ export const InputDatePicker = ({ label, id }: InputDatePickerProps) => {
 };
 
 const BasicDateCalendar = (label: string) => {
-  const [_, meta, helpers] = useField("invoiceDate");
+  const [_, meta, helpers] = useField("createdAt");
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>

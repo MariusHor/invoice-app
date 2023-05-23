@@ -10,19 +10,23 @@ import { ButtonNavigateBack } from "components";
 
 export const FormCustom = () => {
   const initialValues: FormValues = {
-    senderAddress: "",
-    senderCity: "",
-    senderPostCode: "",
-    senderCountry: "",
+    createdAt: "",
+    description: "",
+    paymentTerms: "",
     clientName: "",
     clientEmail: "",
-    clientAddress: "",
-    clientCity: "",
-    clientPostCode: "",
-    clientCountry: "",
-    invoiceDate: "",
-    paymentTerms: "",
-    projectDescription: "",
+    senderAddress: {
+      street: "",
+      city: "",
+      postCode: "",
+      country: "",
+    },
+    clientAddress: {
+      street: "",
+      city: "",
+      postCode: "",
+      country: "",
+    },
     items: [],
   };
 

@@ -46,19 +46,13 @@ export interface Item {
 }
 
 export interface FormValues {
-  senderAddress: string;
-  senderCity: string;
-  senderPostCode: string;
-  senderCountry: string;
+  createdAt: string;
+  description: string;
+  paymentTerms: string;
   clientName: string;
   clientEmail: string;
-  clientAddress: string;
-  clientCity: string;
-  clientPostCode: string;
-  clientCountry: string;
-  invoiceDate: string;
-  paymentTerms: string;
-  projectDescription: string;
+  senderAddress: Address;
+  clientAddress: Address;
   items: Item[];
-  [key: string]: string | Item[];
+  [key: string]: string | Item[] | Address;
 }
