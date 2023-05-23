@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import fetchInvoices from "api/fetchInvoices";
+import { fetchInvoices } from "api";
 
 export const invoicesQuery = () => ({
   queryKey: ["invoices"],

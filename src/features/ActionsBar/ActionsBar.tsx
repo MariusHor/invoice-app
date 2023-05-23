@@ -3,9 +3,10 @@ import { LinkCustom } from "components";
 import { Filters } from "features";
 import { invoicesLoader } from "pages";
 import plusIcon from "assets/icon-plus.svg";
+import { InvoiceResult } from "types";
 
 export const ActionsBar = (): React.JSX.Element => {
-  const invoices = useLoaderData() as Awaited<
+  const invoices: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
 

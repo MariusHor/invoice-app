@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Formik, Form, FormikHelpers } from "formik";
 import { Button } from "@mui/material";
 import { FormValues } from "types";
@@ -9,7 +11,8 @@ import { ItemList } from "./ItemList";
 import { ButtonNavigateBack } from "components";
 
 export const FormCustom = () => {
-  const initialValues: FormValues = {
+  const navigate = useNavigate();
+  const [values, setValues] = useState<FormValues>({
     createdAt: "",
     description: "",
     paymentTerms: "",
@@ -28,22 +31,24 @@ export const FormCustom = () => {
       country: "",
     },
     items: [],
-  };
+  });
 
   const handleSubmit = (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>
   ) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-
+    try {
+      console.log(values);
       setSubmitting(false);
-    }, 500);
+      navigate("/invoices");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={values}
       onSubmit={handleSubmit}
       validationSchema={validationSchema}
     >

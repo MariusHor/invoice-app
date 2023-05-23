@@ -5,15 +5,16 @@ import { InvoiceList, Pagination } from "features";
 import { useFilters } from "hooks";
 import { filterInvoices, getTotalPages, paginateInvoices } from "utils";
 import { invoicesLoader } from "./loader";
+import { InvoiceResult } from "types";
 
 export const Invoices = (): React.JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
   const [invoicesPerPage] = useState(6);
   const { filters } = useFilters();
-  const invoices = useLoaderData() as Awaited<
+  const invoices: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
-
+  console.log(invoices);
   const handleCurrentPage = useCallback(
     (value: number) => setCurrentPage(value),
     []
