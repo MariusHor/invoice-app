@@ -1,17 +1,20 @@
 import { useLoaderData, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
-import { InvoiceStatus } from "components";
-import { InvoiceDetails } from "features/Invoices/InvoiceDetails";
+import { InvoiceStatus, InvoiceDetails, InvoiceFallback } from "components";
 import { invoicesLoader } from "pages";
 import { InvoiceResult } from "types";
 
 export const InvoiceView = () => {
   const { id } = useParams();
-  const invoices = useLoaderData() as Awaited<
+  const invoices: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
 
   const invoice = invoices.find((item: InvoiceResult) => item.id === id);
+
+  if (!invoice || !id) {
+    return <InvoiceFallback />;
+  }
 
   return (
     <div className="flex w-full max-w-3xl flex-col justify-between gap-4">

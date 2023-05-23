@@ -2,7 +2,7 @@ import { InvoiceResult } from "types";
 
 interface InvoiceDetailsProps {
   invoice: InvoiceResult;
-  id: string | undefined;
+  id: string;
 }
 
 export const InvoiceDetails = ({
@@ -14,6 +14,7 @@ export const InvoiceDetails = ({
     senderAddress,
     clientAddress,
     createdAt,
+    clientEmail,
     items,
     total,
     clientName,
@@ -64,7 +65,7 @@ export const InvoiceDetails = ({
         </div>
         <div>
           <span className="paragraph">Send to</span>
-          <h2 className="heading-sm">{createdAt}</h2>
+          <h2 className="heading-sm">{clientEmail}</h2>
         </div>
       </div>
       <div className="overflow-hidden rounded-lg bg-secondary-300">

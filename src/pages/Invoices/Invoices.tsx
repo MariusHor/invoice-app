@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
-import { InvoiceList, InvoiceListFallback, Pagination } from "features";
+import { useLoaderData } from "react-router-dom";
+import { InvoiceFallback } from "components";
+import { InvoiceList, Pagination } from "features";
 import { useFilters } from "hooks";
 import { filterInvoices, getTotalPages, paginateInvoices } from "utils";
-import { useLoaderData } from "react-router-dom";
 import { invoicesLoader } from "./loader";
 
 export const Invoices = (): React.JSX.Element => {
@@ -49,7 +50,11 @@ export const Invoices = (): React.JSX.Element => {
           />
         </>
       ) : (
-        <InvoiceListFallback />
+        <InvoiceFallback>
+          <p className="paragraph-secondary mx-auto mt-6 max-w-42 text-center">
+            Create an invoice by clicking the New Invoice button and get started
+          </p>
+        </InvoiceFallback>
       )}
     </div>
   );

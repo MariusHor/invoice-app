@@ -7,9 +7,9 @@ export interface InvoiceResult {
   clientEmail?: string;
   createdAt?: string;
   description?: string;
-  items?: InvoiceItem[];
-  clientAddress?: Address;
-  senderAddress?: Address;
+  items: InvoiceItem[];
+  clientAddress: Address;
+  senderAddress: Address;
 }
 
 export interface InvoiceItem {
