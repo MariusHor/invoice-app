@@ -26,31 +26,32 @@ const router = createBrowserRouter([
       },
       {
         path: "invoices",
-        element: <LayoutInvoices />,
-        loader: invoicesLoader(queryClient),
         children: [
           {
-            index: true,
-            element: <Invoices />,
-            loader: invoicesLoader(queryClient),
-          },
-        ],
-      },
-      {
-        path: "invoice",
-        element: <LayoutInvoice />,
-        children: [
-          {
-            index: true,
-            element: <InvoiceCreate />,
-          },
-          {
-            path: ":id",
-            element: <InvoiceView />,
+            element: <LayoutInvoices />,
             loader: invoicesLoader(queryClient),
             children: [
               {
-                path: "edit",
+                index: true,
+                element: <Invoices />,
+                loader: invoicesLoader(queryClient),
+              },
+            ],
+          },
+          {
+            element: <LayoutInvoice />,
+            children: [
+              {
+                path: "create",
+                element: <InvoiceCreate />,
+              },
+              {
+                path: ":id",
+                element: <InvoiceView />,
+                loader: invoicesLoader(queryClient),
+              },
+              {
+                path: ":id/edit",
                 element: <InvoiceEdit />,
               },
             ],

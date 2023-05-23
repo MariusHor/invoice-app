@@ -25,7 +25,7 @@ export const Invoice = ({
       </div>
 
       <Link
-        to={`/invoice/${invoice.id}`}
+        to={`/invoices/${invoice.id}`}
         className="min-h-10 grid min-w-10 place-items-center border-l border-l-secondary-300 p-2"
       >
         <img src={arrowRight} alt="open invoice" className="" />
