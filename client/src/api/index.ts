@@ -1,11 +1,11 @@
 import axios from "axios";
-import { InvoiceResult } from "types";
+import { FormValues } from "types";
 
-const url = "http://localhost:8000/invoices";
+const url = "http://localhost:3000/invoices";
 
 export const fetchInvoices = async () => {
-  const response = await axios.get("/data.json");
+  const response = await axios.get(url);
   return response.data;
 };
 
-export const addInvoice = (invoice: InvoiceResult) => axios.post(url, invoice);
+export const addInvoice = (invoice: FormValues) => axios.post(url, invoice);

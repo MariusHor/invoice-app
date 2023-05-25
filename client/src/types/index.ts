@@ -1,5 +1,6 @@
 export interface InvoiceResult {
-  id: string;
+  _id: string;
+  invoiceId: string;
   paymentDue: string;
   clientName: string;
   total: number;

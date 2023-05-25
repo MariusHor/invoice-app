@@ -10,7 +10,7 @@ export const InvoiceView = () => {
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
 
-  const invoice = invoices.find((item: InvoiceResult) => item.id === id);
+  const invoice = invoices.find((item: InvoiceResult) => item.invoiceId === id);
 
   if (!invoice || !id) {
     return <InvoiceFallback />;

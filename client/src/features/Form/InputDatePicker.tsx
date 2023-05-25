@@ -3,6 +3,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import dayjs from "dayjs";
 
 interface InputDatePickerProps {
   label: string;
@@ -25,13 +26,22 @@ export const InputDatePicker = ({ label, id }: InputDatePickerProps) => {
 const BasicDateCalendar = (label: string) => {
   const [_, meta, helpers] = useField("createdAt");
 
+  const handleDateChange = (newValue: dayjs.Dayjs | null) => {
+    if (newValue) {
+      const formattedDate = newValue.format("YYYY-MM-DD");
+      return helpers.setValue(formattedDate);
+    }
+
+    helpers.setValue("");
+  };
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={["DatePicker"]}>
         <DatePicker
           label={label}
-          value={meta.value}
-          onChange={(newValue) => helpers.setValue(newValue)}
+          value={dayjs(meta.value)}
+          onChange={handleDateChange}
         />
       </DemoContainer>
     </LocalizationProvider>

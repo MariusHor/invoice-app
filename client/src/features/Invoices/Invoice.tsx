@@ -13,7 +13,7 @@ export const Invoice = ({
       <div className="m-4 grid w-full grid-cols-2 grid-rows-2 items-center justify-center gap-2 text-center xl:grid-cols-5 xl:grid-rows-none ">
         <h3 className="heading-sm">
           <span className="paragraph">#</span>
-          {invoice.id}
+          {invoice.invoiceId}
         </h3>
         <span className="paragraph">{invoice.paymentDue}</span>
         <span className="paragraph">{invoice.clientName}</span>
@@ -25,7 +25,7 @@ export const Invoice = ({
       </div>
 
       <Link
-        to={`/invoices/${invoice.id}`}
+        to={`/invoices/${invoice.invoiceId}`}
         className="min-h-10 grid min-w-10 place-items-center border-l border-l-secondary-300 p-2"
       >
         <img src={arrowRight} alt="open invoice" className="" />

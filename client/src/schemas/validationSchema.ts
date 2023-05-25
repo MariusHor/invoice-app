@@ -9,23 +9,13 @@ export const validationSchema = yup.object().shape({
   senderAddress: yup.object().shape({
     street: yup.string().required("Address is required"),
     city: yup.string().required("City is required"),
-    postCode: yup
-      .number()
-      .positive()
-      .integer()
-      .typeError("Must be a number")
-      .required("Post Code is required"),
+    postCode: yup.string().required("Post Code is required"),
     country: yup.string().required("Country is required"),
   }),
   clientAddress: yup.object().shape({
     street: yup.string().required("Address is required"),
     city: yup.string().required("City is required"),
-    postCode: yup
-      .number()
-      .positive()
-      .integer()
-      .typeError("Must be a number")
-      .required("Post Code is required"),
+    postCode: yup.string().required("Post Code is required"),
     country: yup.string().required("Country is required"),
   }),
   items: yup.array().of(

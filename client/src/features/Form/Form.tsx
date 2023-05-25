@@ -9,6 +9,8 @@ import { BillTo } from "./BillTo";
 import { InvoiceDetails } from "./InvoiceDetails";
 import { ItemList } from "./ItemList";
 import { ButtonNavigateBack } from "components";
+import { addInvoice } from "api";
+import { queryClient } from "lib";
 
 export const FormCustom = () => {
   const navigate = useNavigate();
@@ -33,17 +35,20 @@ export const FormCustom = () => {
     items: [],
   });
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>
   ) => {
-    try {
-      console.log(values);
-      setSubmitting(false);
-      navigate("/invoices");
-    } catch (error) {
-      console.log(error);
-    }
+    const newInvoice = {
+      ...values,
+      status: "pending",
+    };
+
+    await addInvoice(newInvoice);
+    queryClient.invalidateQueries({ queryKey: ["invoices"] });
+
+    setSubmitting(false);
+    return navigate("/invoices");
   };
 
   return (

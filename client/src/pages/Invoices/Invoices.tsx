@@ -6,19 +6,28 @@ import { useFilters } from "hooks";
 import { filterInvoices, getTotalPages, paginateInvoices } from "utils";
 import { invoicesLoader } from "./loader";
 import { InvoiceResult } from "types";
+import { useQuery } from "@tanstack/react-query";
+import { invoicesQuery } from "hooks/useInvoices";
 
 export const Invoices = (): React.JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1);
   const [invoicesPerPage] = useState(6);
   const { filters } = useFilters();
-  const invoices: InvoiceResult[] = useLoaderData() as Awaited<
+  const initialData: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
-  console.log(invoices);
+
+  const { data: invoices } = useQuery({
+    ...invoicesQuery(),
+    initialData,
+  });
+
   const handleCurrentPage = useCallback(
     (value: number) => setCurrentPage(value),
     []
   );
+
+  console.log(invoices);
 
   const filteredInvoices = filterInvoices(invoices, filters);
   const totalPages = getTotalPages(filteredInvoices.length, invoicesPerPage);
