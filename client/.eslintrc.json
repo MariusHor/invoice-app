@@ -15,20 +15,19 @@
       "jsx": true
     }
   },
-  "plugins": ["react-refresh"],
+  "plugins": ["import", "react-refresh"],
   "rules": {
-    "react-refresh/only-export-components": "warn"
+    "react-refresh/only-export-components": "warn",
+    "import/no-unresolved": "error"
   },
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
-      "typescript": {
-        "project": ["tsconfig.json", "package/tsconfig.json"]
-      },
       "node": {
-        "moduleDirectory": ["./"]
+        "extensions": [".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "src/"]
       }
     }
   }
