@@ -1,20 +1,28 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import { InvoiceStatus, InvoiceDetails, InvoiceFallback } from "components";
 import { invoicesLoader } from "pages";
 import { InvoiceResult } from "types";
+import { deleteInvoice } from "api";
+import { queryClient } from "lib";
 
 export const InvoiceView = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const invoices: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
-
   const invoice = invoices.find((item: InvoiceResult) => item.invoiceId === id);
 
   if (!invoice || !id) {
     return <InvoiceFallback />;
   }
+
+  const handleDelete = () => {
+    deleteInvoice(invoice._id);
+    queryClient.invalidateQueries({ queryKey: ["invoices"] });
+    return navigate("/invoices");
+  };
 
   return (
     <div className="flex w-full max-w-3xl flex-col justify-between gap-4">
@@ -31,21 +39,37 @@ export const InvoiceView = () => {
           Edit
         </Button>
         <Button
+          onClick={handleDelete}
           variant="outlined"
-          style={{
+          sx={{
             color: "white",
             background: "#EC5757",
             borderColor: "#EC5757",
+            "&:hover": {
+              backgroundColor: "white",
+              color: "#EC5757",
+              borderColor: "#EC5757",
+            },
           }}
         >
           Delete
         </Button>
         <Button
+          disabled={invoice.status === "paid"}
           variant="outlined"
-          style={{
+          sx={{
+            "&.Mui-disabled": {
+              background: "#eaeaea",
+              color: "#c0c0c0",
+            },
             color: "white",
             background: "#7C5DFA",
             borderColor: "#7C5DFA",
+            "&:hover": {
+              backgroundColor: "#fff",
+              color: "#7C5DFA",
+              borderColor: "#7C5DFA",
+            },
           }}
         >
           Paid

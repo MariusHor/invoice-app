@@ -12,4 +12,18 @@ export const fetchInvoices = async () => {
   }
 };
 
-export const addInvoice = (invoice: Invoice) => axios.post(url, invoice);
+export const addInvoice = (invoice: Invoice) => {
+  try {
+    axios.post(url, invoice);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteInvoice = (id: string) => {
+  try {
+    axios.delete(`${url}/${id}`);
+  } catch (error) {
+    console.error(error);
+  }
+};

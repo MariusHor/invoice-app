@@ -36,7 +36,7 @@ export const FormCustom = () => {
     items: [{ name: "", quantity: 0, price: 0, total: 0 }],
   });
 
-  const handleSubmit = async (
+  const handleSubmit = (
     values: Invoice,
     { setSubmitting }: FormikHelpers<Invoice>
   ) => {
@@ -55,7 +55,7 @@ export const FormCustom = () => {
       }, 0),
     };
 
-    await addInvoice(newInvoice);
+    addInvoice(newInvoice);
     queryClient.invalidateQueries({ queryKey: ["invoices"] });
 
     setSubmitting(false);
