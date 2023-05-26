@@ -27,8 +27,6 @@ export const Invoices = (): React.JSX.Element => {
     []
   );
 
-  console.log(invoices);
-
   const filteredInvoices = filterInvoices(invoices, filters);
   const totalPages = getTotalPages(filteredInvoices.length, invoicesPerPage);
 

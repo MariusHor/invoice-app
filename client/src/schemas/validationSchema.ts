@@ -3,7 +3,7 @@ import * as yup from "yup";
 export const validationSchema = yup.object().shape({
   createdAt: yup.string().required("Date is required"),
   description: yup.string().required("Description is required"),
-  paymentTerms: yup.string().required("Payment Terms are required"),
+  paymentTerms: yup.number().required("Payment Terms are required"),
   clientName: yup.string().required("Name is required"),
   clientEmail: yup.string().email().required("Email is required"),
   senderAddress: yup.object().shape({
@@ -20,14 +20,16 @@ export const validationSchema = yup.object().shape({
   }),
   items: yup.array().of(
     yup.object().shape({
-      itemName: yup.string().required("Name is required"),
+      name: yup.string().required("Name is required"),
       quantity: yup
         .number()
+        .positive("Must be a positive number")
+        .typeError("Must be a number")
         .required("Qty. is required")
-        .integer()
-        .typeError("Must be a number"),
+        .integer(),
       price: yup
         .number()
+        .positive("Must be a positive number")
         .required("Price is required")
         .typeError("Must be a number"),
     })

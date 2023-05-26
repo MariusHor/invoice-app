@@ -3,12 +3,14 @@ import { capitalize } from "utils";
 import { InvoiceStatusClasses } from "types";
 
 interface InvoiceStatusProps {
-  status: string;
+  status: string | undefined;
 }
 
 export const InvoiceStatus = ({
   status,
 }: InvoiceStatusProps): React.JSX.Element => {
+  if (status === undefined) status = "pending";
+
   const classes: InvoiceStatusClasses = {
     paid: {
       div: "bg-green-100",

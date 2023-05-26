@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, FormikHelpers } from "formik";
 import { Button } from "@mui/material";
-import { FormValues } from "types";
+import { Invoice } from "types";
 import { validationSchema } from "schemas";
 import { BillFrom } from "./BillFrom";
 import { BillTo } from "./BillTo";
@@ -11,13 +11,14 @@ import { ItemList } from "./ItemList";
 import { ButtonNavigateBack } from "components";
 import { addInvoice } from "api";
 import { queryClient } from "lib";
+import { parse, add, format } from "date-fns";
 
 export const FormCustom = () => {
   const navigate = useNavigate();
-  const [values, setValues] = useState<FormValues>({
+  const [values, setValues] = useState<Invoice>({
     createdAt: "",
     description: "",
-    paymentTerms: "",
+    paymentTerms: 1,
     clientName: "",
     clientEmail: "",
     senderAddress: {
@@ -32,16 +33,26 @@ export const FormCustom = () => {
       postCode: "",
       country: "",
     },
-    items: [],
+    items: [{ name: "", quantity: 0, price: 0, total: 0 }],
   });
 
   const handleSubmit = async (
-    values: FormValues,
-    { setSubmitting }: FormikHelpers<FormValues>
+    values: Invoice,
+    { setSubmitting }: FormikHelpers<Invoice>
   ) => {
+    const dateString = values.createdAt;
+    const originalDate = parse(dateString, "yyyy-MM-dd", new Date());
+    const newDate = add(originalDate, { days: values.paymentTerms });
+
+    const paymentDue = format(newDate, "yyyy-MM-dd");
+
     const newInvoice = {
       ...values,
+      paymentDue,
       status: "pending",
+      total: values.items.reduce((total, current) => {
+        return total + current.price * current.quantity;
+      }, 0),
     };
 
     await addInvoice(newInvoice);

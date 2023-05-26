@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import { FieldArray, useFormikContext } from "formik";
 import { Item } from "./Item";
-import { FormValues } from "types";
+import { Invoice, InvoiceItem } from "types";
 
 export const ItemList = () => {
-  const { values } = useFormikContext<FormValues>();
-  const emptyItem = { itemName: "", quantity: "", price: "" };
+  const { values } = useFormikContext<Invoice>();
+  const emptyItem: InvoiceItem = { name: "", quantity: 0, price: 0, total: 0 };
 
   return (
     <div className="flex flex-col gap-6">
