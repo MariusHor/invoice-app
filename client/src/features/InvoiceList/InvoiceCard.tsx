@@ -3,7 +3,7 @@ import { InvoiceResult } from "types";
 import { InvoiceStatus } from "components";
 import arrowRight from "assets/icon-arrow-right.svg";
 
-export const Invoice = ({
+export const InvoiceCard = ({
   invoice,
 }: {
   invoice: InvoiceResult;

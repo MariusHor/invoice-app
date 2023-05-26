@@ -1,27 +1,41 @@
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
-import { InvoiceStatus, InvoiceDetails, InvoiceFallback } from "components";
+import { InvoiceStatus, InvoiceDetails } from "components";
 import { invoicesLoader } from "pages";
 import { InvoiceResult } from "types";
-import { deleteInvoice } from "api";
+import { deleteInvoice, updateInvoice } from "api";
 import { queryClient } from "lib";
+import { invariant } from "utils/helpers";
 
 export const InvoiceView = () => {
   const { id } = useParams();
+  invariant(id);
   const navigate = useNavigate();
+
   const invoices: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
-  const invoice = invoices.find((item: InvoiceResult) => item.invoiceId === id);
 
-  if (!invoice || !id) {
-    return <InvoiceFallback />;
-  }
+  const invoice = invoices.find((item: InvoiceResult) => item.invoiceId === id);
+  invariant(invoice);
 
   const handleDelete = () => {
     deleteInvoice(invoice._id);
     queryClient.invalidateQueries({ queryKey: ["invoices"] });
     return navigate("/invoices");
+  };
+
+  const handleUpdateStatus = async () => {
+    updateInvoice(invoice._id, {
+      ...invoice,
+      status: "paid",
+    });
+    await queryClient.invalidateQueries({ queryKey: ["invoices"] });
+    return navigate("/invoices");
+  };
+
+  const handleEdit = () => {
+    return navigate(`/invoices/${id}/edit`);
   };
 
   return (
@@ -33,6 +47,7 @@ export const InvoiceView = () => {
       <InvoiceDetails invoice={invoice} id={id} />
       <div className="flex h-20 items-center justify-center gap-2 bg-white p-6 lg:rounded-lg">
         <Button
+          onClick={handleEdit}
           variant="outlined"
           style={{ color: "#7C5DFA", borderColor: "#7C5DFA" }}
         >
@@ -55,6 +70,7 @@ export const InvoiceView = () => {
           Delete
         </Button>
         <Button
+          onClick={handleUpdateStatus}
           disabled={invoice.status === "paid"}
           variant="outlined"
           sx={{

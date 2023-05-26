@@ -1,4 +1,13 @@
+import { parse, add, format } from "date-fns";
 import { FiltersState, InvoiceResult } from "types";
+
+export function invariant(value: unknown): asserts value {
+  if (value) {
+    return;
+  }
+
+  throw new Error("Invariant violation");
+}
 
 export const capitalize = (string: string) => {
   return string.slice(0, 1).toUpperCase() + string.slice(1);
@@ -37,3 +46,11 @@ export const getTotalPages = (
   filteredInvoices: number,
   invoicesPerPage: number
 ) => Math.ceil(filteredInvoices / invoicesPerPage);
+
+export const formatDate = (createdAt: string, paymentTerms: number) => {
+  const dateString = createdAt;
+  const originalDate = parse(dateString, "yyyy-MM-dd", new Date());
+  const newDate = add(originalDate, { days: paymentTerms });
+
+  return format(newDate, "yyyy-MM-dd");
+};

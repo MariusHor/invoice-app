@@ -32,3 +32,15 @@ export const deleteInvoice = async (req: Request, res: Response) => {
     const deletedInvoice = await Invoice.findByIdAndDelete(id);
     res.status(200).json(`Deleted invoice: ${deletedInvoice.description}`);
 };
+
+export const updateInvoice = async (req: Request, res: Response) => {
+    const {id} = req.params;
+    const updatedInvoice = req.body;
+
+    if (!Types.ObjectId.isValid(id)) {
+        res.status(400).json(`Could not find invoice with id: ${id}`);
+    }
+
+    await Invoice.findByIdAndUpdate(id, updatedInvoice, {new: true});
+    res.status(200).json(updatedInvoice);
+};

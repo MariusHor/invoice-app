@@ -27,3 +27,11 @@ export const deleteInvoice = (id: string) => {
     console.error(error);
   }
 };
+
+export const updateInvoice = (id: string, updatedInvoice: Invoice) => {
+  try {
+    axios.patch(`${url}/${id}`, updatedInvoice);
+  } catch (error) {
+    console.error(error);
+  }
+};

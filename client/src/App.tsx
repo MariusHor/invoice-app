@@ -53,6 +53,7 @@ const router = createBrowserRouter([
               {
                 path: ":id/edit",
                 element: <InvoiceEdit />,
+                loader: invoicesLoader(queryClient),
               },
             ],
           },
