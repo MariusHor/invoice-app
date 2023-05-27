@@ -5,6 +5,7 @@ import { IconButton } from "@mui/material";
 import { InputTextField } from "./inputTextField";
 import { InputNumericField } from "./inputNumericField";
 import { Invoice } from "types";
+import { useTheme } from "hooks";
 
 interface ItemProps {
   id: number;
@@ -12,6 +13,7 @@ interface ItemProps {
 }
 
 export const Item = ({ id, remove }: ItemProps) => {
+  const { isDarkTheme } = useTheme();
   const { values, setFieldValue } = useFormikContext<Invoice>();
   const { quantity, price } = values.items[id];
 
@@ -26,11 +28,20 @@ export const Item = ({ id, remove }: ItemProps) => {
       <InputNumericField label={"Qty."} id={`items.${id}.quantity`} />
       <InputNumericField label={"Price"} id={`items.${id}.price`} />
       <div className="flex items-center justify-between gap-8">
-        <div className="grid justify-center text-center">
+        <div
+          className={`${
+            isDarkTheme ? "text-secondary-300" : ""
+          } grid justify-center text-center`}
+        >
           <span>Total</span>
           <span className="font-bold">$ {values.items[id].total}</span>
         </div>
-        <IconButton aria-label="delete" size="small" onClick={() => remove(id)}>
+        <IconButton
+          aria-label="delete"
+          size="small"
+          onClick={() => remove(id)}
+          style={{ color: isDarkTheme ? "#7E88C3" : "" }}
+        >
           <DeleteIcon fontSize="medium" />
         </IconButton>
       </div>
