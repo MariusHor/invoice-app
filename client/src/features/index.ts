@@ -3,3 +3,4 @@ export { Filters } from "./Filters/Filters";
 export { InvoiceList } from "./InvoiceList/InvoiceList";
 export { Navbar } from "./Navbar/Navbar";
 export { Pagination } from "./Pagination/Pagination";
+export { FormCustom } from "./Form/Form";

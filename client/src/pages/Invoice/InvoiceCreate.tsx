@@ -1,34 +1,28 @@
 import { useNavigate } from "react-router-dom";
-import { FormCustom } from "features/Form/Form";
-import { addInvoice } from "api";
-import { queryClient } from "lib";
 import { FormikHelpers } from "formik";
+import { FormCustom } from "features";
 import { Invoice } from "types";
-import { formatDate } from "utils";
+import { useCreateInvoice, useGetInvoiceProps } from "hooks";
 
 export const InvoiceCreate = () => {
+  const getInvoiceProps = useGetInvoiceProps();
+  const createInvoice = useCreateInvoice();
   const navigate = useNavigate();
 
-  const handleSubmit = (
+  const handleSubmit = async (
     values: Invoice,
     { setSubmitting }: FormikHelpers<Invoice>
   ) => {
-    const { createdAt, paymentTerms, items } = values;
-    const paymentDue = formatDate(createdAt, paymentTerms);
-    const total = items.reduce((total, current) => {
-      return total + current.total;
-    }, 0);
-
+    const { paymentDue, total } = getInvoiceProps(values);
     const newInvoice = {
       ...values,
       paymentDue,
+      total,
       status: "pending",
-      total: total,
     };
 
-    addInvoice(newInvoice);
+    await createInvoice.mutateAsync({ newInvoice });
     setSubmitting(false);
-    queryClient.invalidateQueries({ queryKey: ["invoices"] });
 
     return navigate("/invoices");
   };

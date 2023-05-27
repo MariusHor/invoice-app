@@ -12,25 +12,34 @@ export const fetchInvoices = async () => {
   }
 };
 
-export const addInvoice = (invoice: Invoice) => {
+export const fetchInvoice = async (id: string) => {
   try {
-    axios.post(url, invoice);
+    const response = await axios.get(`${url}/${id}`);
+    return response.data;
   } catch (error) {
     console.error(error);
   }
 };
 
-export const deleteInvoice = (id: string) => {
+export const addInvoice = async (invoice: Invoice) => {
   try {
-    axios.delete(`${url}/${id}`);
+    await axios.post(url, invoice);
   } catch (error) {
     console.error(error);
   }
 };
 
-export const updateInvoice = (id: string, updatedInvoice: Invoice) => {
+export const deleteInvoice = async (id: string) => {
   try {
-    axios.patch(`${url}/${id}`, updatedInvoice);
+    await axios.delete(`${url}/${id}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateInvoice = async (id: string, updatedInvoice: Invoice) => {
+  try {
+    await axios.patch(`${url}/${id}`, updatedInvoice);
   } catch (error) {
     console.error(error);
   }

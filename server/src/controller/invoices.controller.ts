@@ -11,6 +11,17 @@ export const getInvoices = async (req: Request, res: Response) => {
     }
 };
 
+export const getInvoice = async (req: Request, res: Response) => {
+    const {id} = req.params;
+
+    try {
+        const invoice = await Invoice.findOne({invoiceId: id});
+        res.status(200).json(invoice);
+    } catch (error) {
+        res.status(404).json({message: error.message});
+    }
+};
+
 export const createInvoice = async (req: Request, res: Response) => {
     const newInvoice = new Invoice(req.body);
 

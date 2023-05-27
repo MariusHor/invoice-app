@@ -1,41 +1,39 @@
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import { InvoiceStatus, InvoiceDetails } from "components";
 import { invoicesLoader } from "pages";
 import { InvoiceResult } from "types";
-import { deleteInvoice, updateInvoice } from "api";
-import { queryClient } from "lib";
-import { invariant } from "utils/helpers";
+import { invariant } from "utils";
+import { useDeleteInvoice, useInvoices, useUpdateInvoice } from "hooks";
 
 export const InvoiceView = () => {
+  const deleteInvoice = useDeleteInvoice();
+  const updateInvoice = useUpdateInvoice();
+  const navigate = useNavigate();
   const { id } = useParams();
   invariant(id);
-  const navigate = useNavigate();
 
-  const invoices: InvoiceResult[] = useLoaderData() as Awaited<
+  const initialData: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
+  const { data: invoices } = useInvoices({ initialData });
+  const invoice: InvoiceResult = invoices.find(
+    (invoice: InvoiceResult) => invoice.invoiceId === id
+  );
 
-  const invoice = invoices.find((item: InvoiceResult) => item.invoiceId === id);
-  invariant(invoice);
-
-  const handleDelete = () => {
-    deleteInvoice(invoice._id);
-    queryClient.invalidateQueries({ queryKey: ["invoices"] });
+  const handleDelete = async () => {
+    await deleteInvoice.mutateAsync({ id: invoice._id });
     return navigate("/invoices");
   };
 
   const handleUpdateStatus = async () => {
-    updateInvoice(invoice._id, {
-      ...invoice,
-      status: "paid",
+    await updateInvoice.mutateAsync({
+      id: invoice._id,
+      updatedInvoice: {
+        ...invoice,
+        status: "paid",
+      },
     });
-    await queryClient.invalidateQueries({ queryKey: ["invoices"] });
-    return navigate("/invoices");
-  };
-
-  const handleEdit = () => {
-    return navigate(`/invoices/${id}/edit`);
   };
 
   return (
@@ -46,13 +44,13 @@ export const InvoiceView = () => {
       </div>
       <InvoiceDetails invoice={invoice} id={id} />
       <div className="flex h-20 items-center justify-center gap-2 bg-white p-6 lg:rounded-lg">
-        <Button
-          onClick={handleEdit}
-          variant="outlined"
+        <Link
+          to={`/invoices/${id}/edit`}
+          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
           style={{ color: "#7C5DFA", borderColor: "#7C5DFA" }}
         >
           Edit
-        </Button>
+        </Link>
         <Button
           onClick={handleDelete}
           variant="outlined"

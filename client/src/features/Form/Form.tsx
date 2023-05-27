@@ -1,6 +1,6 @@
 import { Formik, Form, FormikHelpers } from "formik";
 import { Button } from "@mui/material";
-import { Invoice } from "types";
+import { Invoice, InvoiceResult } from "types";
 import { validationSchema } from "schemas";
 import { ButtonNavigateBack } from "components";
 import { BillFrom } from "./BillFrom";
@@ -11,7 +11,7 @@ import { InputTextField } from "./inputTextField";
 import { ItemList } from "./ItemList";
 
 interface FormCustomProps {
-  invoice?: Invoice;
+  invoice?: InvoiceResult;
   isEditing?: boolean;
   onSubmit: (
     values: Invoice,

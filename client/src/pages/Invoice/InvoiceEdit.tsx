@@ -1,49 +1,39 @@
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { FormikHelpers } from "formik";
-import { updateInvoice } from "api";
-import { FormCustom } from "features/Form/Form";
-import { Invoice, InvoiceResult } from "types";
-import { invoicesQuery } from "hooks/useInvoices";
-import { formatDate } from "utils";
 import { invoicesLoader } from "pages";
-import { invariant } from "utils/helpers";
+import { FormCustom } from "features";
+import { Invoice, InvoiceResult } from "types";
+import { invariant } from "utils";
+import { useGetInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
 
 export const InvoiceEdit = () => {
-  const queryClient = useQueryClient();
+  const getInvoiceProps = useGetInvoiceProps();
+  const updateInvoice = useUpdateInvoice();
   const navigate = useNavigate();
   const { id } = useParams();
   invariant(id);
+
   const initialData: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
+  const { data: invoices } = useInvoices({ initialData });
+  const invoice: InvoiceResult = invoices.find(
+    (invoice: InvoiceResult) => invoice.invoiceId === id
+  );
 
-  const { data: invoices } = useQuery({
-    ...invoicesQuery(),
-    initialData,
-  });
-
-  const invoice = invoices.find((item: InvoiceResult) => item.invoiceId === id);
-
-  const handleSubmit = (
+  const handleSubmit = async (
     values: Invoice,
     { setSubmitting }: FormikHelpers<Invoice>
   ) => {
-    const { createdAt, paymentTerms, items } = values;
-    const paymentDue = formatDate(createdAt, paymentTerms);
-    const total = items.reduce((total, current) => {
-      return total + current.total;
-    }, 0);
-
+    const { paymentDue, total } = getInvoiceProps(values);
     const updatedInvoice = {
       ...values,
       paymentDue,
       total,
     };
 
-    updateInvoice(invoice._id, updatedInvoice);
+    await updateInvoice.mutateAsync({ id: invoice._id, updatedInvoice });
     setSubmitting(false);
-    queryClient.invalidateQueries({ queryKey: ["invoices"] });
 
     return navigate("/invoices");
   };

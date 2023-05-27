@@ -1,21 +1,16 @@
 import { useLoaderData } from "react-router-dom";
-import { LinkCustom } from "components";
-import { Filters } from "features";
 import { invoicesLoader } from "pages";
-import plusIcon from "assets/icon-plus.svg";
+import { Filters } from "features";
+import { LinkCustom } from "components";
 import { InvoiceResult } from "types";
-import { invoicesQuery } from "hooks/useInvoices";
-import { useQuery } from "@tanstack/react-query";
+import { useInvoices } from "hooks";
+import plusIcon from "assets/icon-plus.svg";
 
 export const ActionsBar = (): React.JSX.Element => {
   const initialData: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
-
-  const { data: invoices } = useQuery({
-    ...invoicesQuery(),
-    initialData,
-  });
+  const { data: invoices } = useInvoices({ initialData });
 
   return (
     <div className="max-h-18 container mx-auto mt-4 flex h-fit w-full items-center justify-between gap-4 p-4 lg:p-10">

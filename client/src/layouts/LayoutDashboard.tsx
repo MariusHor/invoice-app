@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { ActionsBar } from "features";
 
-export const LayoutInvoices = () => {
+export const LayoutDashboard = () => {
   return (
     <>
       <ActionsBar />
