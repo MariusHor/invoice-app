@@ -9,14 +9,10 @@ interface InputSelectFieldProps {
 }
 
 export const InputSelectField = ({ label, id }: InputSelectFieldProps) => {
-  const { isDarkTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
-    <div
-      className={`${
-        isDarkTheme ? "dark" : "light"
-      } field relative flex flex-col`}
-    >
+    <div className={`${theme} field relative flex flex-col`}>
       <Field component={Select} label={label} name={id} id={id}>
         <MenuItem value={1}>Next day</MenuItem>
         <MenuItem value={5}>Next 5 days</MenuItem>

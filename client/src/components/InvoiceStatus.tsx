@@ -13,22 +13,22 @@ export const InvoiceStatus = ({
 
   const classes: InvoiceStatusClasses = {
     paid: {
-      div: "bg-green-100",
-      header: "text-green-500",
+      div: "bg-skin-green",
+      header: "text-skin-green",
     },
     pending: {
-      div: "bg-orange-100",
-      header: "text-orange-600",
+      div: "bg-skin-orange",
+      header: "text-skin-orange",
     },
     draft: {
-      div: "bg-grey-100",
-      header: "text-grey-600",
+      div: "bg-skin-grey",
+      header: "text-skin-grey",
     },
   };
 
   return (
     <div
-      className={`col-span-2 flex w-full max-w-xs items-center justify-center justify-self-center rounded-lg p-2 text-center xl:col-span-1 ${classes[status].div}`}
+      className={`center col-span-2 w-fit justify-self-center rounded-lg px-4 py-2 xl:col-span-1 ${classes[status].div}`}
     >
       <h3 className={`heading-sm ${classes[status].header}`}>
         <FiberManualRecordIcon style={{ fontSize: 12 }} />

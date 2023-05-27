@@ -4,15 +4,9 @@ import { InvoiceStatus, InvoiceDetails } from "components";
 import { invoicesLoader } from "pages";
 import { InvoiceResult } from "types";
 import { invariant } from "utils";
-import {
-  useDeleteInvoice,
-  useInvoices,
-  useTheme,
-  useUpdateInvoice,
-} from "hooks";
+import { useDeleteInvoice, useInvoices, useUpdateInvoice } from "hooks";
 
 export const InvoiceView = () => {
-  const { isDarkTheme } = useTheme();
   const deleteInvoice = useDeleteInvoice();
   const updateInvoice = useUpdateInvoice();
   const navigate = useNavigate();
@@ -44,31 +38,19 @@ export const InvoiceView = () => {
 
   return (
     <div className="flex w-full max-w-3xl flex-col justify-between gap-4">
-      <div
-        className={`${
-          isDarkTheme ? "bg-secondary-600" : "bg-white"
-        } flex items-center justify-between gap-24 rounded-lg p-7`}
-      >
-        <span
-          className={`paragraph ${isDarkTheme ? "text-secondary-300" : ""}`}
-        >
-          Status
-        </span>
+      <div className="center-between rounded-lg bg-skin-fill-secondary p-7">
+        <span className="text-skin-base">Status</span>
         <InvoiceStatus status={invoice.status} />
       </div>
       <InvoiceDetails invoice={invoice} id={id} />
-      <div
-        className={`${
-          isDarkTheme ? "bg-secondary-600" : "bg-white"
-        } flex h-20 items-center justify-center gap-2 p-6 lg:rounded-lg`}
-      >
+      <div className="flex-center h-20 gap-2 bg-skin-fill-secondary p-7 lg:rounded-lg">
         <Link
           to={`/invoices/${id}/edit`}
           className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
-          style={{
-            color: isDarkTheme ? "white" : "#7C5DFA",
-            borderColor: isDarkTheme ? "#494E6E" : "#7C5DFA",
-          }}
+          // style={{
+          //   color: isDarkTheme ? "white" : "#7C5DFA",
+          //   borderColor: isDarkTheme ? "#494E6E" : "#7C5DFA",
+          // }}
         >
           Edit
         </Link>

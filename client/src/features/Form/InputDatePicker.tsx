@@ -12,14 +12,10 @@ interface InputDatePickerProps {
 }
 
 export const InputDatePicker = ({ label, id }: InputDatePickerProps) => {
-  const { isDarkTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
-    <div
-      className={`${
-        isDarkTheme ? "dark" : "light"
-      } field flex items-center justify-center`}
-    >
+    <div className={`${theme} field flex items-center justify-center`}>
       <Field
         component={() => BasicDateCalendar(label)}
         label={label}

@@ -9,14 +9,10 @@ interface InputNumericFieldProps {
 }
 
 export const InputNumericField = ({ label, id }: InputNumericFieldProps) => {
-  const { isDarkTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
-    <div
-      className={`${
-        isDarkTheme ? "dark" : "light"
-      } field relative flex flex-col`}
-    >
+    <div className={`${theme} field relative flex flex-col`}>
       <Field
         component={TextField}
         label={label}
@@ -26,7 +22,7 @@ export const InputNumericField = ({ label, id }: InputNumericFieldProps) => {
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
-              <span>$</span>
+              <span className="text-skin-muted">$</span>
             </InputAdornment>
           ),
         }}

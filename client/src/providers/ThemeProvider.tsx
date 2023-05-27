@@ -2,10 +2,10 @@ import { ReactNode, useState } from "react";
 import { ThemeContext } from "context";
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [isDarkTheme, toggleTheme] = useState<boolean>(false);
+  const [theme, setTheme] = useState<string>("light");
 
   return (
-    <ThemeContext.Provider value={{ isDarkTheme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {children}
     </ThemeContext.Provider>
   );

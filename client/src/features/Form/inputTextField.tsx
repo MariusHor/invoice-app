@@ -8,14 +8,10 @@ interface InputTextFieldProps {
 }
 
 export const InputTextField = ({ label, id }: InputTextFieldProps) => {
-  const { isDarkTheme } = useTheme();
+  const { theme } = useTheme();
 
   return (
-    <div
-      className={`${
-        isDarkTheme ? "dark" : "light"
-      } field relative flex flex-col rounded-md`}
-    >
+    <div className={`${theme} field relative flex flex-col rounded-md`}>
       <Field
         component={TextField}
         label={label}

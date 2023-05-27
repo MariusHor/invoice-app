@@ -3,10 +3,8 @@ import { CSSTransition } from "react-transition-group";
 import { Button } from "@mui/material";
 import { Filter } from "./Filter";
 import arrowDownIcon from "assets/icon-arrow-down.svg";
-import { useTheme } from "hooks";
 
 export const Filters = (): React.JSX.Element => {
-  const { isDarkTheme } = useTheme();
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = useCallback(() => {
@@ -14,12 +12,11 @@ export const Filters = (): React.JSX.Element => {
   }, [open]);
 
   return (
-    <div className="relative flex grow items-center justify-end">
+    <div className="center-end relative grow ">
       <Button
         onClick={handleOpen}
         style={{
           textTransform: "none",
-          color: isDarkTheme ? "white" : "#494E6E",
         }}
       >
         <>
@@ -28,7 +25,7 @@ export const Filters = (): React.JSX.Element => {
             alt=""
             className={`transition-primary mr-2 ${open ? "rotate-180" : ""}`}
           />
-          <span>Filters</span>
+          <span className="heading-sm text-skin-base">Filters</span>
         </>
       </Button>
       <CSSTransition
@@ -38,7 +35,7 @@ export const Filters = (): React.JSX.Element => {
         unmountOnExit
         mountOnEnter
       >
-        <ul className="transition-primary absolute -bottom-36 right-0 flex w-40 flex-col gap-2 rounded-lg bg-white p-6 shadow-xl">
+        <ul className="transition-primary absolute -bottom-36 right-0 flex w-40 flex-col gap-2 rounded-lg bg-skin-fill-secondary p-6 shadow-xl">
           <Filter id="draft" name="draft" title="Draft" />
           <Filter id="pending" name="pending" title="Pending" />
           <Filter id="paid" name="paid" title="Paid" />

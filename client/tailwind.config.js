@@ -37,14 +37,42 @@ export default {
       },
     },
     fontSize: {
-      "heading-lg": `2.25rem`,
-      "heading-md": `1.5rem`,
-      "heading-sm": `1rem`,
-      paragraph: `0.813rem`,
+      "font-xl": `2.25rem`,
+      "font-lg": `1.5rem`,
+      "font-md": `0.935rem`,
+      "font-sm": `0.813rem`,
     },
     extend: {
+      textColor: {
+        skin: {
+          base: "var(--color-text-base)",
+          muted: "var(--color-text-muted)",
+          accent: "var(--color-text-accent)",
+          inverted: "var(--color-text-inverted)",
+          orange: "var(--color-text-orange)",
+          green: "var(--color-text-green)",
+          grey: "var(--color-text-grey)",
+          white: "var(--color-text-white)",
+        },
+      },
+      backgroundColor: {
+        skin: {
+          static: "var(--color-bg-static)",
+          fill: "var(--color-fill)",
+          "fill-secondary": "var(--color-fill-secondary)",
+          box: "var(--color-box)",
+          "box-secondary": "var(--color-box-secondary)",
+          inverted: "var(--color-inverted)",
+          orange: "var(--color-bg-orange)",
+          green: "var(--color-bg-green)",
+          grey: "var(--color-bg-grey)",
+        },
+      },
+      borderColor: {
+        base: "var(--color-border-base)",
+      },
       fontFamily: {
-        "league-spartan": ["League Spartan", "sans-serif"],
+        main: "var(--font-main)",
       },
       height: {
         18: "4.5rem",

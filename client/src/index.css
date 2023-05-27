@@ -4,6 +4,58 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-text-white: white;
+    --color-text-accent: #7c5dfa;
+    --color-text-orange: rgb(234 88 12);
+    --color-text-green: rgb(16 185 129);
+    --color-text-grey: rgb(75 85 99);
+    --color-box-secondary: #1e2139;
+    --color-bg-static: #252945;
+    --color-bg-orange: rgb(255 237 213);
+    --color-bg-green: rgb(220 252 231);
+    --color-bg-grey: rgb(243 244 246);
+    --font-main: "League Spartan", "sans-serif";
+  }
+  .theme-dark {
+    --color-text-base: #ffffff;
+    --color-text-muted: #dfe3fa;
+    --color-text-inverted: #000000;
+    --color-fill: #1e2139;
+    --color-fill-secondary: #252945;
+    --color-box: #2d3252;
+    --color-inverted: #f8f8fb;
+    --color-border-base: #494e6e;
+  }
+  .theme-light {
+    --color-text-base: #000000;
+    --color-text-muted: #888eb0;
+    --color-text-inverted: #ffffff;
+    --color-fill: #f8f8fb;
+    --color-fill-secondary: #ffffff;
+    --color-box: #dfe3fa;
+    --color-inverted: #1e2139;
+    --color-border-base: #dfe3fa;
+  }
+}
+
+@layer utilities {
+  .center {
+    @apply grid place-items-center;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .center-between {
+    @apply flex items-center justify-between;
+  }
+
+  .center-end {
+    @apply flex items-center justify-end;
+  }
+
   .transition-primary {
     @apply transition duration-300 ease-in-out;
   }
@@ -11,44 +63,44 @@
   .heading-lg,
   .heading-md,
   .heading-sm,
-  .heading-sm-secondary {
+  .heading-sm-variant {
     @apply font-bold;
   }
 
   .heading-lg {
     line-height: 33px;
     letter-spacing: -1px;
-    @apply text-heading-lg;
+    @apply text-font-lg;
   }
 
   .heading-md {
     line-height: 22px;
     letter-spacing: -0.75px;
-    @apply text-heading-md;
+    @apply text-font-lg;
   }
 
   .heading-sm,
-  .heading-sm-secondary {
+  .heading-sm-variant {
     letter-spacing: 0.25px;
-    @apply text-heading-sm;
+    @apply text-font-md;
   }
 
   .heading-sm,
-  .paragraph {
+  .heading.md {
     line-height: 24px;
   }
 
-  .heading-sm-secondary {
+  .heading-md-variant {
     line-height: 15px;
   }
 
-  .paragraph,
-  .paragraph-secondary {
+  .text-sm,
+  .text-sm-variant {
     letter-spacing: -0.1px;
-    @apply text-paragraph text-secondary-500;
+    @apply text-font-sm;
   }
 
-  .paragraph-secondary {
+  .text-sm-variant {
     line-height: 18px;
   }
 }

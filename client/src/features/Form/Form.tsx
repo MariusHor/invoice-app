@@ -54,16 +54,16 @@ export const FormCustom = ({
       validationSchema={validationSchema}
     >
       {({ isSubmitting }) => (
-        <Form className="paragraph flex flex-col gap-10">
+        <Form className="flex flex-col gap-10">
           <BillFrom />
           <BillTo />
-          <div className="paragraph flex flex-col gap-5">
+          <div className="flex flex-col gap-5">
             <InputDatePicker label={"Invoice Date"} id={"createdAt"} />
             <InputSelectField label={"Payment Terms"} id={"paymentTerms"} />
             <InputTextField label={"Project Description"} id={"description"} />
           </div>
           <ItemList />
-          <div className="flex items-center justify-center gap-3 rounded-md  p-4 text-white">
+          <div className="flex-center gap-3 rounded-md p-4">
             <ButtonNavigateBack title="Discard" />
             <Button
               variant="contained"

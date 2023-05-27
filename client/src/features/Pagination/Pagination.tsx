@@ -2,7 +2,6 @@ import { memo } from "react";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore";
 import { IconButton } from "@mui/material";
-import { useTheme } from "hooks";
 
 interface PaginationProps {
   totalPages: number;
@@ -16,10 +15,8 @@ export const Pagination = memo(
     currentPage,
     handleCurrentPage,
   }: PaginationProps): React.JSX.Element => {
-    const { isDarkTheme } = useTheme();
-
     return (
-      <div className="row-span-1 mx-auto flex h-fit w-fit items-center justify-center gap-3">
+      <div className="center row-span-1 mx-auto h-fit w-fit grid-cols-3 gap-3">
         <div>
           <IconButton
             disabled={currentPage === 1}
@@ -29,10 +26,7 @@ export const Pagination = memo(
             <NavigateBeforeIcon />
           </IconButton>
         </div>
-
-        <span className={`${isDarkTheme ? "text-white" : ""} h-fit`}>
-          {currentPage}
-        </span>
+        <span className="text-skin-base">{currentPage}</span>
         <IconButton
           disabled={totalPages === currentPage}
           onClick={() => handleCurrentPage(currentPage + 1)}

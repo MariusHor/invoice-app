@@ -1,5 +1,4 @@
-import { useTheme } from "hooks";
-import { InvoiceResult } from "types";
+import { Address, InvoiceItem, InvoiceResult } from "types";
 
 interface InvoiceDetailsProps {
   invoice: InvoiceResult;
@@ -10,8 +9,6 @@ export const InvoiceDetails = ({
   invoice,
   id,
 }: InvoiceDetailsProps): React.JSX.Element => {
-  const { isDarkTheme } = useTheme();
-
   const {
     description,
     senderAddress,
@@ -25,146 +22,43 @@ export const InvoiceDetails = ({
   } = invoice;
 
   return (
-    <div
-      className={`${
-        isDarkTheme ? "bg-secondary-600" : "bg-white"
-      } flex flex-col gap-6 rounded-lg p-7`}
-    >
+    <div className="flex flex-col gap-6 rounded-lg bg-skin-fill-secondary p-7">
       <div className="flex justify-between">
         <div>
-          <h1 className={`${isDarkTheme ? "text-white" : ""} font-bold`}>
-            <span className="text-secondary-400">#</span>
+          <h1 className="heading-md text-skin-base">
+            <span className="text-skin-muted">#</span>
             {id}
           </h1>
-          <span
-            className={`paragraph ${isDarkTheme ? "text-secondary-300" : ""}`}
-          >
-            {description}
-          </span>
+          <span className="text-sm text-skin-muted">{description}</span>
         </div>
-        <ul
-          className={`paragraph flex flex-col ${
-            isDarkTheme ? "text-secondary-300" : ""
-          }`}
-        >
-          <li>{senderAddress.street}</li>
-          <li>{senderAddress.city}</li>
-          <li>{senderAddress.postCode}</li>
-          <li>{senderAddress.country}</li>
-        </ul>
+        <AddressInfo address={senderAddress} />
       </div>
       <div className="grid grid-cols-1 gap-y-6 text-center md:grid-cols-2 lg:grid-cols-3">
         <div className="flex items-center justify-between gap-4 md:flex-col">
-          <div>
-            <span
-              className={`paragraph ${isDarkTheme ? "text-secondary-300" : ""}`}
-            >
-              Invoice date
-            </span>
-            <h2 className={`heading-sm ${isDarkTheme ? "text-white" : ""}`}>
-              {createdAt}
-            </h2>
-          </div>
-          <div>
-            <span
-              className={`paragraph ${isDarkTheme ? "text-secondary-300" : ""}`}
-            >
-              Payment due
-            </span>
-            <h2 className={`heading-sm ${isDarkTheme ? "text-white" : ""}`}>
-              {paymentDue}
-            </h2>
-          </div>
+          <InvoiceInfo title={createdAt} text={"Invoice date"} />
+          <InvoiceInfo title={paymentDue} text={"Payment due"} />
         </div>
-
         <div className="lg:order-none lg:col-span-1">
-          <div>
-            <span
-              className={`paragraph ${isDarkTheme ? "text-secondary-300" : ""}`}
-            >
-              Bill to
-            </span>
-            <h2 className={`heading-sm ${isDarkTheme ? "text-white" : ""}`}>
-              {clientName}
-            </h2>
-          </div>
-
-          <ul
-            className={`paragraph mt-4 flex flex-col ${
-              isDarkTheme ? "text-secondary-300" : ""
-            }`}
-          >
-            <li>{clientAddress.street}</li>
-            <li>{clientAddress.city}</li>
-            <li>{clientAddress.postCode}</li>
-            <li>{clientAddress.country}</li>
-          </ul>
+          <InvoiceInfo title={clientName} text={"Bill to"} />
+          <AddressInfo address={clientAddress} />
         </div>
-        <div className="md:col-span-2 lg:col-span-1">
-          <span
-            className={`paragraph ${isDarkTheme ? "text-secondary-300" : ""}`}
-          >
-            Send to
-          </span>
-          <h2 className={`heading-sm ${isDarkTheme ? "text-white" : ""}`}>
-            {clientEmail}
-          </h2>
-        </div>
+        <InvoiceInfo
+          title={clientEmail}
+          text={"Send to"}
+          classes={"md:col-span-2 lg:col-span-1"}
+        />
       </div>
-      <div
-        className={`overflow-hidden rounded-lg ${
-          isDarkTheme ? "bg-secondary-550" : "bg-secondary-300"
-        }`}
-      >
-        <div className="p-6">
-          <div
-            className={`paragraph mb-4 hidden grid-cols-5 sm:grid ${
-              isDarkTheme ? "text-secondary-300" : ""
-            }`}
-          >
+      <div className="overflow-hidden rounded-lg">
+        <div className="bg-skin-box p-6 ">
+          <div className="mb-4 hidden grid-cols-5 text-skin-muted sm:grid">
             <span className="col-span-2">Item Name</span>
             <span className="text-center">QTY.</span>
             <span className="text-center">Price</span>
             <span className="text-end">Total</span>
           </div>
-          <ul className="flex flex-col gap-4">
-            {items.map((item, index) => (
-              <li className="grid grid-cols-6 sm:grid-cols-5" key={index}>
-                <h3
-                  className={`heading-sm col-span-6 sm:col-span-2 ${
-                    isDarkTheme ? "text-white" : ""
-                  }`}
-                >
-                  {item.name}
-                </h3>
-                <span
-                  className={`paragraph text-left sm:text-center ${
-                    isDarkTheme ? "text-secondary-300" : ""
-                  }`}
-                >
-                  {item.quantity}
-                </span>
-                <span className="text-left sm:hidden sm:text-center">x</span>
-                <span
-                  className={`paragraph text-left sm:text-center ${
-                    isDarkTheme ? "text-secondary-300" : ""
-                  }`}
-                >
-                  $ {item.price}
-                </span>
-                <h3
-                  className={`heading-sm col-start-6 text-end sm:col-start-auto ${
-                    isDarkTheme ? "text-white" : ""
-                  }`}
-                >
-                  $ {item.total}
-                </h3>
-              </li>
-            ))}
-          </ul>
+          <InvoiceItemsList items={items} />
         </div>
-
-        <div className="flex justify-between bg-secondary-600 px-6 py-8 text-white">
+        <div className="flex justify-between bg-skin-box-secondary px-6 py-8 text-skin-white">
           <span>Grand Total</span>
           <h2 className="heading-sm sm:heading-md">$ {total}</h2>
         </div>
@@ -172,3 +66,53 @@ export const InvoiceDetails = ({
     </div>
   );
 };
+
+const AddressInfo = ({ address }: { address: Address }) => (
+  <ul className="text-sm mt-4 text-skin-muted">
+    <li>{address.street}</li>
+    <li>{address.city}</li>
+    <li>{address.postCode}</li>
+    <li>{address.country}</li>
+  </ul>
+);
+
+const InvoiceInfo = ({
+  title,
+  text,
+  classes,
+}: {
+  title: string;
+  text: string;
+  classes?: string;
+}) => (
+  <div className={classes}>
+    <span className="text-sm text-skin-muted">{text}</span>
+    <h2 className="heading-sm text-skin-base">{title}</h2>
+  </div>
+);
+
+const InvoiceItemsList = ({ items }: { items: InvoiceItem[] }) => (
+  <ul className="flex flex-col gap-4">
+    {items.map((item: InvoiceItem, index: number) => (
+      <li className="grid grid-cols-6 sm:grid-cols-5" key={index}>
+        <h3 className="heading-sm col-span-6 text-skin-base sm:col-span-2">
+          {item.name}
+        </h3>
+        <span className="text-left  text-skin-muted sm:text-center">
+          {item.quantity}
+        </span>
+        <span className="text-left text-skin-base sm:hidden sm:text-center">
+          x
+        </span>
+        <span className="text-left text-skin-muted sm:text-center">
+          $ {item.price}
+        </span>
+        <h3 className="heading-sm col-start-6 text-end text-skin-base sm:col-start-auto">
+          $ {item.total}
+        </h3>
+      </li>
+    ))}
+  </ul>
+);
+
+export default InvoiceDetails;
