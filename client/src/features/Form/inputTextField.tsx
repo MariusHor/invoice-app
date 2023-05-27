@@ -1,5 +1,6 @@
 import { Field } from "formik";
 import { TextField } from "formik-mui";
+import { useTheme } from "hooks";
 
 interface InputTextFieldProps {
   label: string;
@@ -7,9 +8,21 @@ interface InputTextFieldProps {
 }
 
 export const InputTextField = ({ label, id }: InputTextFieldProps) => {
+  const { isDarkTheme } = useTheme();
+
   return (
-    <div className="relative flex flex-col">
-      <Field component={TextField} label={label} name={id} id={id} />
+    <div
+      className={`${
+        isDarkTheme ? "dark" : "light"
+      } field relative flex flex-col rounded-md`}
+    >
+      <Field
+        component={TextField}
+        label={label}
+        name={id}
+        id={id}
+        className="text-white"
+      />
     </div>
   );
 };

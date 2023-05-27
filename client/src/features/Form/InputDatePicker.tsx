@@ -4,6 +4,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
+import { useTheme } from "hooks";
 
 interface InputDatePickerProps {
   label: string;
@@ -11,8 +12,14 @@ interface InputDatePickerProps {
 }
 
 export const InputDatePicker = ({ label, id }: InputDatePickerProps) => {
+  const { isDarkTheme } = useTheme();
+
   return (
-    <div className="flex items-center justify-center">
+    <div
+      className={`${
+        isDarkTheme ? "dark" : "light"
+      } field flex items-center justify-center`}
+    >
       <Field
         component={() => BasicDateCalendar(label)}
         label={label}

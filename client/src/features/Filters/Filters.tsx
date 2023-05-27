@@ -3,8 +3,10 @@ import { CSSTransition } from "react-transition-group";
 import { Button } from "@mui/material";
 import { Filter } from "./Filter";
 import arrowDownIcon from "assets/icon-arrow-down.svg";
+import { useTheme } from "hooks";
 
 export const Filters = (): React.JSX.Element => {
+  const { isDarkTheme } = useTheme();
   const [open, setOpen] = useState<boolean>(false);
 
   const handleOpen = useCallback(() => {
@@ -15,7 +17,10 @@ export const Filters = (): React.JSX.Element => {
     <div className="relative flex grow items-center justify-end">
       <Button
         onClick={handleOpen}
-        style={{ textTransform: "none", color: "#494E6E" }}
+        style={{
+          textTransform: "none",
+          color: isDarkTheme ? "white" : "#494E6E",
+        }}
       >
         <>
           <img

@@ -63,7 +63,7 @@ export const FormCustom = ({
             <InputTextField label={"Project Description"} id={"description"} />
           </div>
           <ItemList />
-          <div className="flex items-center justify-center gap-3 rounded-md  bg-white p-4 text-white">
+          <div className="flex items-center justify-center gap-3 rounded-md  p-4 text-white">
             <ButtonNavigateBack title="Discard" />
             <Button
               variant="contained"

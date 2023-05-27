@@ -1,6 +1,7 @@
 import { Field } from "formik";
 import { MenuItem } from "@mui/material";
 import { Select } from "formik-mui";
+import { useTheme } from "hooks";
 
 interface InputSelectFieldProps {
   label: string;
@@ -8,8 +9,14 @@ interface InputSelectFieldProps {
 }
 
 export const InputSelectField = ({ label, id }: InputSelectFieldProps) => {
+  const { isDarkTheme } = useTheme();
+
   return (
-    <div className="relative flex grow flex-col">
+    <div
+      className={`${
+        isDarkTheme ? "dark" : "light"
+      } field relative flex flex-col`}
+    >
       <Field component={Select} label={label} name={id} id={id}>
         <MenuItem value={1}>Next day</MenuItem>
         <MenuItem value={5}>Next 5 days</MenuItem>

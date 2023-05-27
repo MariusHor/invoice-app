@@ -9,7 +9,7 @@ export const ItemList = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="heading-sm text-secondary-550">Item List</h1>
+      <h1 className="heading-sm text-primary-600">Item List</h1>
 
       <FieldArray name="items">
         {({ push, remove }) => (

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ReactQueryProvider, FiltersProvider } from "providers";
+import { ReactQueryProvider, FiltersProvider, ThemeProvider } from "providers";
 import { queryClient } from "lib";
 import { LayoutInvoice, LayoutShared, LayoutDashboard } from "layouts";
 import {
@@ -66,9 +66,11 @@ const router = createBrowserRouter([
 const App = (): React.JSX.Element => {
   return (
     <ReactQueryProvider>
-      <FiltersProvider>
-        <RouterProvider router={router} />
-      </FiltersProvider>
+      <ThemeProvider>
+        <FiltersProvider>
+          <RouterProvider router={router} />
+        </FiltersProvider>
+      </ThemeProvider>
     </ReactQueryProvider>
   );
 };
