@@ -1,8 +1,7 @@
 import { Formik, Form, FormikHelpers } from "formik";
-import { Button } from "@mui/material";
 import { Invoice, InvoiceResult } from "types";
 import { validationSchema } from "schemas";
-import { ButtonNavigateBack } from "components";
+import { ButtonBack, Button } from "components";
 import { BillFrom } from "./BillFrom";
 import { BillTo } from "./BillTo";
 import { InputDatePicker } from "./InputDatePicker";
@@ -27,6 +26,8 @@ export const FormCustom = ({
   const initialValues = invoice
     ? invoice
     : {
+        status: "draft",
+        isDraft: true,
         createdAt: "",
         description: "",
         paymentTerms: 1,
@@ -44,6 +45,7 @@ export const FormCustom = ({
           postCode: "",
           country: "",
         },
+        total: 0,
         items: [{ name: "", quantity: 0, price: 0, total: 0 }],
       };
 
@@ -51,9 +53,10 @@ export const FormCustom = ({
     <Formik
       initialValues={initialValues}
       onSubmit={onSubmit}
+      enableReinitialize={true}
       validationSchema={validationSchema}
     >
-      {({ isSubmitting }) => (
+      {({ handleSubmit, isSubmitting, setFieldValue }) => (
         <Form className="flex flex-col gap-10">
           <BillFrom />
           <BillTo />
@@ -63,16 +66,29 @@ export const FormCustom = ({
             <InputTextField label={"Project Description"} id={"description"} />
           </div>
           <ItemList />
-          <div className="flex-center gap-3 rounded-md p-4">
-            <ButtonNavigateBack title="Discard" />
+          <div className="flex-center flex-wrap gap-3 rounded-md p-4">
+            <ButtonBack>Discard</ButtonBack>
+            {!isEditing ? (
+              <Button
+                intent="secondary"
+                onClick={() => {
+                  setFieldValue("isDraft", true);
+                  handleSubmit();
+                }}
+                disabled={isSubmitting}
+              >
+                Save as Draft
+              </Button>
+            ) : null}
             <Button
-              variant="contained"
-              size="medium"
-              type="submit"
+              intent="primary"
+              onClick={() => {
+                setFieldValue("isDraft", false);
+                handleSubmit();
+              }}
               disabled={isSubmitting}
-              style={{ background: "#7C5DFA", borderColor: "#7C5DFA" }}
             >
-              {isEditing ? "Edit" : "Submit"}
+              {isEditing ? "Save changes" : "Save"}
             </Button>
           </div>
         </Form>

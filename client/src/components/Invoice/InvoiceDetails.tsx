@@ -22,7 +22,7 @@ export const InvoiceDetails = ({
   } = invoice;
 
   return (
-    <div className="flex flex-col gap-6 rounded-lg bg-skin-fill-secondary p-7">
+    <div className="flex flex-col gap-6 rounded-lg bg-skin-fill-secondary p-4">
       <div className="flex justify-between">
         <div>
           <h1 className="heading-md text-skin-base">
@@ -50,12 +50,12 @@ export const InvoiceDetails = ({
       </div>
       <div className="overflow-hidden rounded-lg">
         <div className="bg-skin-box p-6 ">
-          <div className="mb-4 hidden grid-cols-5 text-skin-muted sm:grid">
-            <span className="col-span-2">Item Name</span>
-            <span className="text-center">QTY.</span>
-            <span className="text-center">Price</span>
-            <span className="text-end">Total</span>
-          </div>
+          <ul className="mb-4 hidden grid-cols-5 text-font-sm text-skin-muted sm:grid">
+            <li className="col-span-2">Item Name</li>
+            <li className="text-center">QTY.</li>
+            <li className="text-center">Price</li>
+            <li className="text-end">Total</li>
+          </ul>
           <InvoiceItemsList items={items} />
         </div>
         <div className="flex justify-between bg-skin-box-secondary px-6 py-8 text-skin-white">
@@ -68,7 +68,7 @@ export const InvoiceDetails = ({
 };
 
 const AddressInfo = ({ address }: { address: Address }) => (
-  <ul className="text-sm mt-4 text-skin-muted">
+  <ul className="mt-4 text-sm text-skin-muted">
     <li>{address.street}</li>
     <li>{address.city}</li>
     <li>{address.postCode}</li>
@@ -94,21 +94,17 @@ const InvoiceInfo = ({
 const InvoiceItemsList = ({ items }: { items: InvoiceItem[] }) => (
   <ul className="flex flex-col gap-4">
     {items.map((item: InvoiceItem, index: number) => (
-      <li className="grid grid-cols-6 sm:grid-cols-5" key={index}>
-        <h3 className="heading-sm col-span-6 text-skin-base sm:col-span-2">
-          {item.name}
-        </h3>
-        <span className="text-left  text-skin-muted sm:text-center">
+      <li className="heading-sm grid grid-cols-6 sm:grid-cols-5" key={index}>
+        <h3 className="col-span-6 text-skin-base sm:col-span-2">{item.name}</h3>
+        <h3 className="text-left  text-skin-muted sm:text-center">
           {item.quantity}
-        </span>
-        <span className="text-left text-skin-base sm:hidden sm:text-center">
-          x
-        </span>
-        <span className="text-left text-skin-muted sm:text-center">
-          $ {item.price}
-        </span>
-        <h3 className="heading-sm col-start-6 text-end text-skin-base sm:col-start-auto">
-          $ {item.total}
+        </h3>
+        <h3 className="text-left text-skin-base sm:hidden sm:text-center">x</h3>
+        <h3 className="text-left text-skin-muted sm:text-center">
+          ${item.price}
+        </h3>
+        <h3 className="col-start-6 text-end text-skin-base sm:col-start-auto">
+          ${item.total}
         </h3>
       </li>
     ))}

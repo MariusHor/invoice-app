@@ -1,6 +1,5 @@
-import { Link, useLoaderData, useNavigate, useParams } from "react-router-dom";
-import { Button } from "@mui/material";
-import { InvoiceStatus, InvoiceDetails } from "components";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { InvoiceStatus, InvoiceDetails, LinkButton, Button } from "components";
 import { invoicesLoader } from "pages";
 import { InvoiceResult } from "types";
 import { invariant } from "utils";
@@ -38,59 +37,23 @@ export const InvoiceView = () => {
 
   return (
     <div className="flex w-full max-w-3xl flex-col justify-between gap-4">
-      <div className="center-between rounded-lg bg-skin-fill-secondary p-7">
+      <div className="center-between rounded-lg bg-skin-fill-secondary p-4">
         <span className="text-skin-base">Status</span>
-        <InvoiceStatus status={invoice.status} />
+        <InvoiceStatus
+          size={"medium"}
+          intent={invoice.status as "paid" | "pending" | "draft"}
+          statusType={invoice.status}
+        />
       </div>
       <InvoiceDetails invoice={invoice} id={id} />
-      <div className="flex-center h-20 gap-2 bg-skin-fill-secondary p-7 lg:rounded-lg">
-        <Link
-          to={`/invoices/${id}/edit`}
-          className="MuiButtonBase-root MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButton-root MuiButton-outlined MuiButton-outlinedPrimary MuiButton-sizeMedium MuiButton-outlinedSizeMedium css-1rwt2y5-MuiButtonBase-root-MuiButton-root"
-          // style={{
-          //   color: isDarkTheme ? "white" : "#7C5DFA",
-          //   borderColor: isDarkTheme ? "#494E6E" : "#7C5DFA",
-          // }}
-        >
+      <div className="flex-center h-20 gap-2 bg-skin-fill-secondary p-4 lg:rounded-lg">
+        <LinkButton to={`/invoices/${id}/edit`} intent={"outlined"}>
           Edit
-        </Link>
-        <Button
-          onClick={handleDelete}
-          variant="outlined"
-          sx={{
-            color: "white",
-            background: "#EC5757",
-            borderColor: "#EC5757",
-            "&:hover": {
-              backgroundColor: "white",
-              color: "#EC5757",
-              borderColor: "#EC5757",
-            },
-          }}
-        >
+        </LinkButton>
+        <Button intent={"accent"} onClick={handleDelete}>
           Delete
         </Button>
-        <Button
-          onClick={handleUpdateStatus}
-          disabled={invoice.status === "paid"}
-          variant="outlined"
-          sx={{
-            "&.Mui-disabled": {
-              background: "#eaeaea",
-              color: "#c0c0c0",
-            },
-            color: "white",
-            background: "#7C5DFA",
-            borderColor: "#7C5DFA",
-            "&:hover": {
-              backgroundColor: "#fff",
-              color: "#7C5DFA",
-              borderColor: "#7C5DFA",
-            },
-          }}
-        >
-          Paid
-        </Button>
+        <Button onClick={handleUpdateStatus}>Paid</Button>
       </div>
     </div>
   );

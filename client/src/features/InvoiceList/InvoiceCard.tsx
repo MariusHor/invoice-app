@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ReactNode } from "react";
 import { InvoiceResult } from "types";
 import { InvoiceStatus } from "components";
 import arrowRight from "assets/icon-arrow-right.svg";
@@ -11,23 +12,18 @@ export const InvoiceCard = ({
   return (
     <div className="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg bg-skin-fill-secondary text-skin-muted shadow-xl lg:max-w-2xl xl:max-w-4xl">
       <div className="center m-4 w-full grid-cols-2 grid-rows-2 gap-2 text-center xl:grid-cols-5 xl:grid-rows-none">
-        <h3 className="heading-sm w-full text-left text-skin-base xl:text-center">
+        <CardHeading text={invoice.invoiceId} position="left">
           <span className="text-skin-muted">#</span>
-          {invoice.invoiceId}
-        </h3>
-        <span className={`text-sm w-full text-right xl:text-center`}>
-          {invoice.paymentDue}
-        </span>
-        <span className={`text-sm w-full text-left xl:text-center`}>
-          {invoice.clientName}
-        </span>
-        <h3
-          className={`heading-sm w-full text-right text-skin-base xl:text-center`}
-        >
+        </CardHeading>
+        <CardSpan position="right" text={invoice.paymentDue} />
+        <CardSpan position="left" text={invoice.clientName} />
+        <CardHeading position="right" text={invoice.total}>
           <span>$</span>
-          {invoice.total}
-        </h3>
-        <InvoiceStatus status={invoice.status} />
+        </CardHeading>
+        <InvoiceStatus
+          intent={invoice.status as "draft" | "paid" | "pending"}
+          statusType={invoice.status}
+        />
       </div>
       <div className="grow">
         <Link
@@ -38,5 +34,32 @@ export const InvoiceCard = ({
         </Link>
       </div>
     </div>
+  );
+};
+
+const CardSpan = ({ text, position }: { text: string; position: string }) => {
+  return (
+    <span className={`w-full text-${position} text-sm xl:text-center`}>
+      {text}
+    </span>
+  );
+};
+
+const CardHeading = ({
+  children,
+  text,
+  position,
+}: {
+  children: ReactNode;
+  text: string | number;
+  position: string;
+}) => {
+  return (
+    <h3
+      className={`heading-sm w-full text-${position} text-skin-base xl:text-center`}
+    >
+      {children}
+      {text}
+    </h3>
   );
 };

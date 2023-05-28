@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import { invoicesLoader } from "pages";
 import { Filters } from "features";
-import { LinkCustom } from "components";
+import { LinkButton } from "components";
 import { InvoiceResult } from "types";
 import { useInvoices } from "hooks";
 import plusIcon from "assets/icon-plus.svg";
@@ -19,13 +19,16 @@ export const ActionsBar = (): React.JSX.Element => {
         <p className="heading-md text-skin-accent">{invoices?.length ?? 0}</p>
       </div>
       <Filters />
-      <LinkCustom to="/invoices/create" title="New">
-        <img
-          src={plusIcon}
-          alt="add new entry"
-          className="transition-primary rounded-full bg-white p-2 hover:rotate-180"
-        />
-      </LinkCustom>
+      <LinkButton to="/invoices/create">
+        <div className="flex-center gap-2">
+          <img
+            src={plusIcon}
+            alt="add new entry"
+            className="transition-primary hidden rounded-full bg-white p-2 hover:rotate-180 sm:block"
+          />
+          <span>New</span>
+        </div>
+      </LinkButton>
     </div>
   );
 };

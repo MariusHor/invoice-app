@@ -15,6 +15,14 @@
     --color-bg-orange: rgb(255 237 213);
     --color-bg-green: rgb(220 252 231);
     --color-bg-grey: rgb(243 244 246);
+    --color-button-primary: #7c5dfa;
+    --color-button-primary-hover: #9277ff;
+    --color-button-secondary: #373b53;
+    --color-button-secondary-hover: #1e2139;
+    --color-button-accent: #ec5757;
+    --color-button-accent-hover: #ff9797;
+    --color-button-outlined: #f9fafe;
+    --color-button-outlined-hover: #dfe3fa;
     --font-main: "League Spartan", "sans-serif";
   }
   .theme-dark {
