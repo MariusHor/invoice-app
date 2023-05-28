@@ -14,11 +14,12 @@ export const InvoiceCreate = () => {
     { setSubmitting }: FormikHelpers<Invoice>
   ) => {
     const { paymentDue, total } = getInvoiceProps(values);
+    const status = values.isDraft ? "draft" : "pending";
     const newInvoice = {
       ...values,
       paymentDue,
       total,
-      status: "pending",
+      status,
     };
 
     await createInvoice.mutateAsync({ newInvoice });

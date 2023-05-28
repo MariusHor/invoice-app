@@ -18,28 +18,18 @@ export interface Invoice {
   createdAt: string;
   description: string;
   paymentTerms: number;
-  items: InvoiceItem[];
   clientAddress: Address;
   senderAddress: Address;
-  total?: number;
-  status?: string;
+  status: string;
+  isDraft: boolean;
+  total: number;
+  items: InvoiceItem[];
 }
 
 export interface InvoiceResult extends Invoice {
   _id: string;
   invoiceId: string;
   paymentDue: string;
-}
-
-// export interface FormValues extends Invoice {
-//   [key: string]: string | InvoiceItem[] | Address | number;
-// }
-
-export interface InvoiceStatusClasses {
-  [key: string]: {
-    div: string;
-    header: string;
-  };
 }
 
 export interface FiltersState {
