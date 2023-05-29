@@ -53,7 +53,12 @@ export const InvoiceView = () => {
         <Button intent={"accent"} onClick={handleDelete}>
           Delete
         </Button>
-        <Button onClick={handleUpdateStatus}>Paid</Button>
+        <Button
+          onClick={handleUpdateStatus}
+          disabled={invoice.status === "paid"}
+        >
+          Paid
+        </Button>
       </div>
     </div>
   );

@@ -11,13 +11,13 @@ export const InvoiceCard = ({
 }): React.JSX.Element => {
   return (
     <div className="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg bg-skin-fill-secondary text-skin-muted shadow-xl lg:max-w-2xl xl:max-w-4xl">
-      <div className="center m-4 w-full grid-cols-2 grid-rows-2 gap-2 text-center xl:grid-cols-5 xl:grid-rows-none">
+      <div className="center m-4 w-full grid-cols-2 grid-rows-2 gap-2 xl:grid-cols-5 xl:grid-rows-none">
         <CardHeading text={invoice.invoiceId} position="left">
           <span className="text-skin-muted">#</span>
         </CardHeading>
-        <CardSpan position="right" text={invoice.paymentDue} />
+        <CardSpan position="end" text={invoice.paymentDue} />
         <CardSpan position="left" text={invoice.clientName} />
-        <CardHeading position="right" text={invoice.total}>
+        <CardHeading position="end" text={invoice.total}>
           <span>$</span>
         </CardHeading>
         <InvoiceStatus
@@ -28,7 +28,7 @@ export const InvoiceCard = ({
       <div className="grow">
         <Link
           to={`/invoices/${invoice.invoiceId}`}
-          className="min-h-10 center h-full min-w-10 border-l border-base p-2 transition-all ease-in-out hover:bg-secondary-200"
+          className="min-h-10 center h-full min-w-10 border-l border-base p-2 transition-all ease-in-out hover:bg-skin-box"
         >
           <img src={arrowRight} alt="view invoice" className="" />
         </Link>

@@ -38,7 +38,7 @@ export const InvoiceDetails = ({
           <InvoiceInfo title={createdAt} text={"Invoice date"} />
           <InvoiceInfo title={paymentDue} text={"Payment due"} />
         </div>
-        <div className="lg:order-none lg:col-span-1">
+        <div className="flex flex-col gap-4 lg:order-none lg:col-span-1">
           <InvoiceInfo title={clientName} text={"Bill to"} />
           <AddressInfo address={clientAddress} />
         </div>
@@ -68,7 +68,7 @@ export const InvoiceDetails = ({
 };
 
 const AddressInfo = ({ address }: { address: Address }) => (
-  <ul className="mt-4 text-sm text-skin-muted">
+  <ul className="text-sm text-skin-muted">
     <li>{address.street}</li>
     <li>{address.city}</li>
     <li>{address.postCode}</li>

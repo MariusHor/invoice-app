@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
 import { FieldArray, useFormikContext } from "formik";
 import { Item } from "./Item";
 import { Invoice, InvoiceItem } from "types";
+import { Button } from "components";
 
 export const ItemList = () => {
   const { values } = useFormikContext<Invoice>();
@@ -21,11 +21,9 @@ export const ItemList = () => {
             ))}
 
             <Button
-              className="bg-primary-600"
-              variant="contained"
+              intent="primary"
               size="medium"
               onClick={() => push(emptyItem)}
-              style={{ background: "#7C5DFA", borderColor: "#7C5DFA" }}
             >
               Add new item
             </Button>

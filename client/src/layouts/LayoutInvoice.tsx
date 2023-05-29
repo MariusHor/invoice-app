@@ -5,7 +5,7 @@ import arrowLeft from "assets/icon-arrow-left.svg";
 export const LayoutInvoice = () => {
   return (
     <>
-      <div className="container mx-auto h-fit w-full p-4 lg:p-10">
+      <div className="container mx-auto h-fit w-full py-4 lg:p-10">
         <ButtonBack>
           <div className="flex-center">
             <div className="mr-2">
