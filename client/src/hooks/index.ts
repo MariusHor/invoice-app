@@ -6,3 +6,4 @@ export { useFilters } from "./useFilters";
 export { useTheme } from "./useTheme";
 export { useGetInvoiceProps } from "./useGetInvoiceProps";
 export { useFilterInvoices } from "./useFilterInvoices";
+export { useLocalStorage } from "./useLocalStorage";
