@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Invoice } from "types";
 
-const url = "http://localhost:3000/invoices";
+const url = "https://invoice-app-server-ogo2.onrender.com/invoices";
 
 export const fetchInvoices = async () => {
   try {
