@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { FormikHelpers } from "formik";
 import { Invoice } from "types";
 import { useCreateInvoice, useGetInvoiceProps } from "hooks";
-import { LayoutForm } from "layouts/LayoutForm";
+import { LayoutForm } from "layouts/LayoutInvoiceForm";
 
 export const InvoiceCreate = () => {
   const getInvoiceProps = useGetInvoiceProps();

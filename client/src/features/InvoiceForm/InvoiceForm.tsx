@@ -1,6 +1,6 @@
 import { Formik, Form, FormikHelpers } from "formik";
 import { Invoice, InvoiceResult } from "types";
-import { validationSchema } from "schemas";
+import { invoiceSchema } from "schemas";
 import { ButtonBack, Button } from "components";
 import { BillFrom } from "./BillFrom";
 import { BillTo } from "./BillTo";
@@ -9,7 +9,7 @@ import { InputSelectField } from "./InputSelectField";
 import { InputTextField } from "./inputTextField";
 import { ItemList } from "./ItemList";
 
-interface FormCustomProps {
+interface InvoiceFormProps {
   invoice?: InvoiceResult;
   isEditing?: boolean;
   onSubmit: (
@@ -18,11 +18,11 @@ interface FormCustomProps {
   ) => void;
 }
 
-export const FormCustom = ({
+export const InvoiceForm = ({
   isEditing,
   invoice,
   onSubmit,
-}: FormCustomProps) => {
+}: InvoiceFormProps) => {
   const initialValues = invoice
     ? invoice
     : {
@@ -54,7 +54,7 @@ export const FormCustom = ({
       initialValues={initialValues}
       onSubmit={onSubmit}
       enableReinitialize={true}
-      validationSchema={validationSchema}
+      validationSchema={invoiceSchema}
     >
       {({ handleSubmit, isSubmitting, setFieldValue }) => (
         <Form className="flex flex-col gap-10">

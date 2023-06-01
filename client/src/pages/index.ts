@@ -1,5 +1,5 @@
 export { ErrorPage } from "./ErrorPage";
-export { Root } from "./Root";
+export { Login } from "./Login";
 export { Home } from "./Home";
 export { Dashboard } from "./Dashboard/Dashboard";
 export { InvoiceCreate } from "./Invoice/InvoiceCreate";

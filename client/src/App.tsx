@@ -16,19 +16,22 @@ import {
   invoicesLoader,
   Dashboard,
   Home,
+  Login,
 } from "pages";
 
 import "./App.css";
 import { LayoutPublic } from "layouts/LayourPublic";
+import { Register } from "pages/Register";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" errorElement={<ErrorPage />}>
       <Route element={<LayoutPublic />}>
         <Route index element={<Home />} />
-        <Route path="login" element={<Home />} />
-        <Route path="register" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
       </Route>
+
       <Route path="invoices" element={<LayoutPrivate />}>
         <Route
           index
