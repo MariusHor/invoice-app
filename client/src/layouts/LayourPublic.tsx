@@ -1,10 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import { Navbar } from "features";
 import { useTheme } from "hooks";
+import { Hamburger } from "features/Hamburger";
 import { LinkButton } from "components";
 
 export const LayoutPublic = () => {
   const { theme } = useTheme();
+  const { pathname } = useLocation();
 
   return (
     <div
@@ -13,20 +15,26 @@ export const LayoutPublic = () => {
       } flex min-h-screen flex-col bg-skin-fill font-main`}
     >
       <Navbar intent={"public"}>
-        <div className="flex-center gap-2 px-4">
+        <div className="md:hidden">
+          <Hamburger />
+        </div>
+        <div className="md:flex-center hidden gap-4">
           <LinkButton
-            to="login"
+            to={pathname === "/" ? "login" : "/"}
             intent={"outlined"}
+            size={"fixed"}
             className="hover:text-skin-grey"
           >
-            Log in
+            {pathname === "/" ? "Log In" : "Home"}
           </LinkButton>
+
           <LinkButton
-            to="register"
+            to={pathname === "/register" ? "login" : "register"}
             intent={"primary"}
+            size={"fixed"}
             className="hover:bg-skin-btn-primary-hover"
           >
-            Sign up
+            {pathname === "/register" ? "Log in" : "Register"}
           </LinkButton>
         </div>
       </Navbar>
