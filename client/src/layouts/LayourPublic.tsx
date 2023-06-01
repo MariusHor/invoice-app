@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "features";
 import { useTheme } from "hooks";
-import { Button, LinkButton } from "components";
+import { LinkButton } from "components";
 
 export const LayoutPublic = () => {
   const { theme } = useTheme();
@@ -17,7 +17,7 @@ export const LayoutPublic = () => {
           <LinkButton
             to="login"
             intent={"outlined"}
-            className="text-skin-white hover:text-skin-grey"
+            className="hover:text-skin-grey"
           >
             Log in
           </LinkButton>
@@ -30,7 +30,7 @@ export const LayoutPublic = () => {
           </LinkButton>
         </div>
       </Navbar>
-      <main className="flex grow flex-col items-center p-4 lg:col-span-11 lg:col-start-2 lg:row-span-full lg:h-screen">
+      <main className="flex grow flex-col items-center p-4">
         <Outlet />
       </main>
     </div>

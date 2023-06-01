@@ -5,15 +5,15 @@ import { Logo } from "./Logo";
 import { useTheme } from "hooks";
 import moon from "assets/icon-moon.svg";
 
-const navbar = cva("flex h-16 justify-between gap-6 bg-skin-static", {
+const navbar = cva("flex h-16 justify-between gap-6 ", {
   variants: {
     intent: {
       private: [
         "lg:row-span-6 lg:flex-col",
         "lg:min-h-screen lg:w-20",
-        "lg:rounded-r-3xl",
+        "lg:rounded-r-3xl bg-skin-static",
       ],
-      public: [],
+      public: ["container mx-auto py-2"],
     },
     defaultVariants: {
       intent: "public",

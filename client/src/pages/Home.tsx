@@ -1,16 +1,20 @@
-import fallbackImg from "assets/illustration-empty.svg";
 import { LinkButton } from "components";
 
 export const Home = (): React.JSX.Element => {
   return (
     <div className="flex grow flex-col items-center justify-center gap-3 text-center lg:col-span-11 lg:col-start-2 lg:row-span-5 lg:row-start-1">
-      <img src={fallbackImg} alt="invoice list is empty" />
-      <h1 className="heading-md text-skin-base">Welcome</h1>
-      <p className="mt-2 max-w-42 text-sm text-skin-muted">
-        You can use this app to store your invoices. Give it a try!
+      <h1 className="text-8xl font-bold text-skin-base">
+        Create<span className="text-skin-accent">.</span>Store
+        <span className="text-skin-accent">.</span>Edit
+        <span className="text-skin-accent">.</span>
+      </h1>
+      <p className="max-w-3xl text-xl text-skin-muted">
+        Simplify Your Invoicing Journey, Effortlessly Store and Manage Invoices
+        for Individuals and Small Businesses, and Take Control of Your Finances
+        with Ease.
       </p>
       <LinkButton to="invoices" className="hover:bg-skin-btn-primary-hover">
-        Invoices
+        Try a Demo
       </LinkButton>
     </div>
   );

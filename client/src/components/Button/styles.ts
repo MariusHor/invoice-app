@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const button = cva(
-  "button rounded-xl h-fit font-bold transition-primary disabled:opacity-40 center",
+  "button rounded-xl h-fit font-bold transition-primary disabled:opacity-40 center shadow-lg",
   {
     variants: {
       intent: {
@@ -18,7 +18,7 @@ export const button = cva(
           "enabled:hover:bg-skin-btn-accent-hover",
         ],
         outlined: [
-          "text-skin-grey",
+          "text-skin-base",
           "border border-slate-500",
           "hover:bg-skin-btn-outlined-hover",
         ],
