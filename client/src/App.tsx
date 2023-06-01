@@ -20,7 +20,7 @@ import {
 } from "pages";
 
 import "./App.css";
-import { LayoutPublic } from "layouts/LayourPublic";
+import { LayoutPublic } from "layouts/LayoutPublic";
 import { Register } from "pages/Register";
 
 const router = createBrowserRouter(

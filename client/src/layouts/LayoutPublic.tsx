@@ -1,12 +1,11 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Navbar } from "features";
 import { useTheme } from "hooks";
 import { Hamburger } from "features/Hamburger";
-import { LinkButton, NavLinks } from "components";
+import { NavLinks } from "components";
 
 export const LayoutPublic = () => {
   const { theme } = useTheme();
-  const { pathname } = useLocation();
 
   return (
     <div
