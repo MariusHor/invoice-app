@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const button = cva(
-  "button rounded-xl h-fit font-bold transition-primary disabled:opacity-40 center shadow-lg",
+  "button rounded-lg h-fit font-bold transition-primary disabled:opacity-40 center shadow-lg",
   {
     variants: {
       intent: {
@@ -27,6 +27,7 @@ export const button = cva(
       size: {
         small: ["text-sm", "py-1", "px-2"],
         medium: ["text-base", "py-2", "px-5"],
+        fixed: ["w-28 py-2 px-5"],
       },
     },
     compoundVariants: [

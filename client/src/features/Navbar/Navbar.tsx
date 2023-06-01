@@ -32,6 +32,7 @@ export const Navbar = ({
   ...props
 }: NavbarProps) => {
   const { theme, setTheme } = useTheme();
+
   return (
     <nav className={navbar({ intent, className })} {...props}>
       <Link to="/">
