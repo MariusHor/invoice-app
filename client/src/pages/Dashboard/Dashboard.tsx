@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { InvoiceList, Pagination } from "features";
+import { ActionsBar, InvoiceList, Pagination } from "features";
 import { InvoiceFallback } from "components";
 import { useFilters, useInvoices, useFilterInvoices } from "hooks";
 import { InvoiceResult } from "types";
@@ -13,6 +13,7 @@ export const Dashboard = (): React.JSX.Element => {
   const initialData: InvoiceResult[] = useLoaderData() as Awaited<
     ReturnType<ReturnType<typeof invoicesLoader>>
   >;
+
   const { data: invoices } = useInvoices({ initialData });
 
   const { totalPages, currentInvoices } = useFilterInvoices({
@@ -28,23 +29,25 @@ export const Dashboard = (): React.JSX.Element => {
     []
   );
 
-  if (!currentInvoices.length)
-    return (
-      <InvoiceFallback>
-        <p className="paragraph-secondary mx-auto mt-6 max-w-42 text-center">
-          Create an invoice by clicking the New Invoice button and get started
-        </p>
-      </InvoiceFallback>
-    );
-
   return (
-    <div className="flex w-full grow flex-col justify-center gap-6 p-4">
-      <InvoiceList currentInvoices={currentInvoices} />
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        handleCurrentPage={handleCurrentPage}
-      />
-    </div>
+    <>
+      <ActionsBar />
+      {currentInvoices.length ? (
+        <div className="flex w-full grow flex-col justify-center gap-6 p-4">
+          <InvoiceList currentInvoices={currentInvoices} />
+          <Pagination
+            totalPages={totalPages}
+            currentPage={currentPage}
+            handleCurrentPage={handleCurrentPage}
+          />
+        </div>
+      ) : (
+        <InvoiceFallback>
+          <p className="paragraph-secondary mx-auto mt-6 max-w-42 text-center">
+            Create an invoice by clicking the New Invoice button and get started
+          </p>
+        </InvoiceFallback>
+      )}
+    </>
   );
 };

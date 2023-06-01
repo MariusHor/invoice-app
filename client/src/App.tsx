@@ -1,67 +1,57 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import { ReactQueryProvider, FiltersProvider, ThemeProvider } from "providers";
 import { queryClient } from "lib";
-import { LayoutInvoice, LayoutShared, LayoutDashboard } from "layouts";
+import { LayoutInvoice, LayoutPrivate } from "layouts";
+
 import {
   ErrorPage,
-  Root,
   InvoiceEdit,
   InvoiceCreate,
   InvoiceView,
   invoicesLoader,
   Dashboard,
+  Home,
 } from "pages";
 
 import "./App.css";
+import { LayoutPublic } from "layouts/LayourPublic";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LayoutShared />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        index: true,
-        element: <Root />,
-      },
-      {
-        path: "invoices",
-        children: [
-          {
-            element: <LayoutDashboard />,
-            loader: invoicesLoader(queryClient),
-            children: [
-              {
-                index: true,
-                element: <Dashboard />,
-                loader: invoicesLoader(queryClient),
-              },
-            ],
-          },
-          {
-            element: <LayoutInvoice />,
-            children: [
-              {
-                path: "create",
-                element: <InvoiceCreate />,
-              },
-              {
-                path: ":id",
-                element: <InvoiceView />,
-                loader: invoicesLoader(queryClient),
-              },
-              {
-                path: ":id/edit",
-                element: <InvoiceEdit />,
-                loader: invoicesLoader(queryClient),
-              },
-            ],
-          },
-        ],
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" errorElement={<ErrorPage />}>
+      <Route element={<LayoutPublic />}>
+        <Route index element={<Home />} />
+        <Route path="login" element={<Home />} />
+        <Route path="register" element={<Home />} />
+      </Route>
+      <Route path="invoices" element={<LayoutPrivate />}>
+        <Route
+          index
+          element={<Dashboard />}
+          loader={invoicesLoader(queryClient)}
+        />
+        <Route element={<LayoutInvoice />}>
+          <Route path="create" element={<InvoiceCreate />} />
+          <Route
+            path=":id"
+            element={<InvoiceView />}
+            loader={invoicesLoader(queryClient)}
+          />
+          <Route
+            path=":id/edit"
+            element={<InvoiceEdit />}
+            loader={invoicesLoader(queryClient)}
+          />
+        </Route>
+      </Route>
+    </Route>
+  )
+);
 
 const App = (): React.JSX.Element => {
   return (
