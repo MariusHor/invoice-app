@@ -3,6 +3,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:import/errors",
+    "plugin:jsx-a11y/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react-hooks/recommended",
     "prettier"

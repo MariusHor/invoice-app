@@ -1,7 +1,7 @@
 import { cva } from "class-variance-authority";
 
 export const button = cva(
-  "button rounded-3xl font-bold transition-primary disabled:opacity-40",
+  "button rounded-xl h-fit font-bold transition-primary disabled:opacity-40 center shadow-lg",
   {
     variants: {
       intent: {
@@ -18,16 +18,15 @@ export const button = cva(
           "enabled:hover:bg-skin-btn-accent-hover",
         ],
         outlined: [
-          "bg-skin-btn-outlined",
-          "text-skin-grey",
-          "border border-slate-200",
+          "text-skin-base",
+          "border border-slate-500",
           "hover:bg-skin-btn-outlined-hover",
         ],
       },
 
       size: {
         small: ["text-sm", "py-1", "px-2"],
-        medium: ["text-base", "py-3", "px-5"],
+        medium: ["text-base", "py-2", "px-5"],
       },
     },
     compoundVariants: [

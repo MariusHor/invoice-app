@@ -1,19 +1,47 @@
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
-import { Avatar } from "components";
+import { VariantProps, cva } from "class-variance-authority";
 import { Logo } from "./Logo";
-import moon from "assets/icon-moon.svg";
 import { useTheme } from "hooks";
+import moon from "assets/icon-moon.svg";
 
-export const Navbar = (): React.JSX.Element => {
+const navbar = cva("flex h-16 justify-between gap-6 ", {
+  variants: {
+    intent: {
+      private: [
+        "lg:row-span-6 lg:flex-col",
+        "lg:min-h-screen lg:w-20",
+        "lg:rounded-r-3xl bg-skin-static",
+      ],
+      public: ["container mx-auto py-2"],
+    },
+    defaultVariants: {
+      intent: "public",
+    },
+  },
+});
+
+export interface NavbarProps
+  extends React.AllHTMLAttributes<HTMLElement>,
+    VariantProps<typeof navbar> {}
+
+export const Navbar = ({
+  className,
+  intent,
+  children,
+  ...props
+}: NavbarProps) => {
   const { theme, setTheme } = useTheme();
-
   return (
-    <nav className="flex h-16 justify-between gap-6 bg-skin-static lg:row-span-6 lg:min-h-screen lg:w-20 lg:flex-col lg:rounded-r-3xl">
+    <nav className={navbar({ intent, className })} {...props}>
       <Link to="/">
-        <Logo />
+        <Logo intent={intent} />
       </Link>
-      <div className="flex grow items-center justify-end lg:justify-center">
+      <div
+        className={`flex grow items-center justify-end ${
+          intent === "private" ? "lg:justify-center" : ""
+        }`}
+      >
         <IconButton
           onClick={() => setTheme(() => (theme === "light" ? "dark" : "light"))}
         >
@@ -24,12 +52,7 @@ export const Navbar = (): React.JSX.Element => {
           />
         </IconButton>
       </div>
-      <Link
-        to="/user-dashboard"
-        className="center w-20 border-l border-l-secondary-550 lg:h-20 lg:border-t lg:border-t-secondary-550"
-      >
-        <Avatar />
-      </Link>
+      {children}
     </nav>
   );
 };
