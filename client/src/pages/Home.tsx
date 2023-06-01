@@ -11,7 +11,7 @@ export const Home = (): React.JSX.Element => {
       <p className="max-w-3xl text-xl text-skin-muted">
         Simplify Your Invoicing Journey, Effortlessly Store and Manage Invoices
         for Individuals and Small Businesses, and Take Control of Your Finances
-        with Ease.
+        with <span className="font-bold text-skin-accent">Paperless</span>.
       </p>
       <LinkButton to="invoices" className="hover:bg-skin-btn-primary-hover">
         Try a Demo

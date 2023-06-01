@@ -37,3 +37,12 @@ export interface FiltersState {
   pending: boolean;
   draft: boolean;
 }
+
+export interface LoginValues {
+  username: string;
+  password: string;
+}
+
+export interface RegisterValues extends LoginValues {
+  passwordConfirm?: string;
+}

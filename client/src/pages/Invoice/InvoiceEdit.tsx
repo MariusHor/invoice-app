@@ -4,7 +4,7 @@ import { invoicesLoader } from "pages";
 import { Invoice, InvoiceResult } from "types";
 import { invariant } from "utils";
 import { useGetInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
-import { LayoutForm } from "layouts/LayoutForm";
+import { LayoutForm } from "layouts/LayoutInvoiceForm";
 
 export const InvoiceEdit = () => {
   const getInvoiceProps = useGetInvoiceProps();

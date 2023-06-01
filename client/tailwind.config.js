@@ -99,6 +99,7 @@ export default {
         8: "2rem",
         10: "2.5rem",
         28: "7rem",
+        80: "20rem",
       },
     },
   },
