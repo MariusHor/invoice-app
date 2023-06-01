@@ -1,13 +1,11 @@
-import { LinkButton } from "components";
 import { useState } from "react";
-
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import { useLocation } from "react-router-dom";
+
+import { NavLinks } from "components";
 
 export const Hamburger = () => {
-  const { pathname } = useLocation();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,8 +29,8 @@ export const Hamburger = () => {
       <Menu
         PaperProps={{
           style: {
-            padding: 20,
-            width: "20rem",
+            padding: 30,
+            width: "15rem",
           },
         }}
         id="basic-menu"
@@ -41,25 +39,15 @@ export const Hamburger = () => {
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 10,
+          },
         }}
       >
-        <LinkButton
-          onClick={handleClose}
-          to={pathname === "/" ? "login" : "/"}
-          intent={"outlined"}
-          className="mb-4 hover:text-skin-grey"
-        >
-          {pathname === "/" ? "Log In" : "Home"}
-        </LinkButton>
-
-        <LinkButton
-          onClick={handleClose}
-          to={pathname === "/register" ? "login" : "register"}
-          intent={"primary"}
-          className="hover:bg-skin-btn-primary-hover"
-        >
-          {pathname === "/register" ? "Log in" : "Register"}
-        </LinkButton>
+        <NavLinks handleClose={handleClose} />
       </Menu>
     </div>
   );

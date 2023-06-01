@@ -2,7 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Navbar } from "features";
 import { useTheme } from "hooks";
 import { Hamburger } from "features/Hamburger";
-import { LinkButton } from "components";
+import { LinkButton, NavLinks } from "components";
 
 export const LayoutPublic = () => {
   const { theme } = useTheme();
@@ -19,23 +19,7 @@ export const LayoutPublic = () => {
           <Hamburger />
         </div>
         <div className="md:flex-center hidden gap-4">
-          <LinkButton
-            to={pathname === "/" ? "login" : "/"}
-            intent={"outlined"}
-            size={"fixed"}
-            className="hover:text-skin-grey"
-          >
-            {pathname === "/" ? "Log In" : "Home"}
-          </LinkButton>
-
-          <LinkButton
-            to={pathname === "/register" ? "login" : "register"}
-            intent={"primary"}
-            size={"fixed"}
-            className="hover:bg-skin-btn-primary-hover"
-          >
-            {pathname === "/register" ? "Log in" : "Register"}
-          </LinkButton>
+          <NavLinks />
         </div>
       </Navbar>
       <main className="flex grow flex-col items-center p-4">
