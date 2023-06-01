@@ -58,10 +58,10 @@ export const Form = ({
       <div className="flex-center mt-4 gap-2">
         {isLogin ? (
           <>
-            <p>Not a member?</p>
+            <p>Don't have an account?</p>
             <Link
               to="/register"
-              className="transition-primary hover:text-skin-accent"
+              className="transition-primary text-skin-accent"
             >
               Sign up
             </Link>
@@ -69,10 +69,7 @@ export const Form = ({
         ) : (
           <>
             <p>Already a member?</p>
-            <Link
-              to="/login"
-              className="transition-primary hover:text-skin-accent"
-            >
+            <Link to="/login" className="transition-primary text-skin-accent">
               Log in
             </Link>
           </>

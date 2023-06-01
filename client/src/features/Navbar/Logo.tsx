@@ -7,7 +7,7 @@ interface LogoProps {
 export const Logo = ({ intent }: LogoProps): React.JSX.Element => {
   return (
     <div
-      className={`relative grid h-full w-18 place-items-center overflow-hidden rounded-r-3xl bg-primary-600 ${
+      className={`relative z-50 grid h-full w-18 place-items-center overflow-hidden rounded-r-3xl bg-primary-600 ${
         intent === "private" ? "lg:h-20 lg:w-full" : ""
       }`}
     >
