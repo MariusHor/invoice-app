@@ -1,17 +1,10 @@
 import axios from "axios";
-import { Invoice } from "types";
+import { Invoice, LoginValues } from "types";
 
-interface postAuthProps {
-  username: string;
-  password: string;
-}
+const baseUrl = "https://invoice-app-server-ogo2.onrender.com/";
 
-// const url = "https://invoice-app-server-ogo2.onrender.com/invoices";
-const baseUrl = "http://localhost:3000/";
-
-export const postRegister = async ({ username, password }: postAuthProps) => {
+export const postRegister = async ({ username, password }: LoginValues) => {
   try {
-    console.log(username, password);
     await axios.post(
       `${baseUrl}api/auth/register`,
       JSON.stringify({ username, password }),
@@ -26,9 +19,8 @@ export const postRegister = async ({ username, password }: postAuthProps) => {
   }
 };
 
-export const postLogin = async ({ username, password }: postAuthProps) => {
+export const postLogin = async ({ username, password }: LoginValues) => {
   try {
-    console.log(username, password);
     const response = await axios.post(
       `${baseUrl}api/auth/login`,
       JSON.stringify({ username, password }),
@@ -46,39 +38,35 @@ export const postLogin = async ({ username, password }: postAuthProps) => {
   }
 };
 
-export const fetchRefreshToken = async () => {
-  const response = await axios.get(`${baseUrl}api/auth/refresh`, {
-    withCredentials: true,
-  });
-  console.log(response);
-  return response;
+export const getRefreshToken = async () => {
+  try {
+    const response = await axios.get(`${baseUrl}api/auth/refresh`, {
+      withCredentials: true,
+    });
+
+    return response;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
 };
 
-export const fetchInvoices = async () => {
+export const getInvoices = async () => {
   try {
     const response = await axios.get(`${baseUrl}api/invoices/public`);
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
-export const fetchInvoice = async (id: string) => {
-  try {
-    const response = await axios.get(
-      `${`${baseUrl}api/invoices/public`}/${id}`
-    );
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-export const addInvoice = async (invoice: Invoice) => {
+export const postInvoice = async (invoice: Invoice) => {
   try {
     await axios.post(`${baseUrl}api/invoices/public`, invoice);
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -87,6 +75,7 @@ export const deleteInvoice = async (id: string) => {
     await axios.delete(`${`${baseUrl}api/invoices/public`}/${id}`);
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };
 
@@ -98,5 +87,6 @@ export const updateInvoice = async (id: string, updatedInvoice: Invoice) => {
     );
   } catch (error) {
     console.error(error);
+    throw error;
   }
 };

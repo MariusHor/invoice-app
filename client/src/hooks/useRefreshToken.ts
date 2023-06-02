@@ -1,15 +1,11 @@
+import { getRefreshToken } from "api";
 import { useAuth } from "./useAuth";
-import axios from "axios";
-
-const baseUrl = "http://localhost:3000/";
 
 export const useRefreshToken = () => {
   const { setAuth } = useAuth();
 
   const refresh = async () => {
-    const response = await axios.get(`${baseUrl}api/auth/refresh`, {
-      withCredentials: true,
-    });
+    const response = await getRefreshToken();
 
     setAuth((prev) => {
       return { ...prev, accessToken: response.data.accessToken };
