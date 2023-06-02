@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-const getLocalValue = (key: string, initValue: boolean | (() => void)) => {
+type InitValue = boolean | string | (() => void);
+
+const getLocalValue = (key: string, initValue: InitValue) => {
   if (typeof window === "undefined") return initValue;
 
   const localValue = JSON.parse(localStorage.getItem(key) as string);
@@ -11,7 +13,7 @@ const getLocalValue = (key: string, initValue: boolean | (() => void)) => {
   return initValue;
 };
 
-export const useLocalStorage = (key: string, initValue: boolean) => {
+export const useLocalStorage = (key: string, initValue: InitValue) => {
   const [value, setValue] = useState(() => {
     return getLocalValue(key, initValue);
   });
