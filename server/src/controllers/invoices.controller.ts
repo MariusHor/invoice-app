@@ -1,6 +1,6 @@
 import {Request, Response} from 'express';
 import {Types} from 'mongoose';
-import Invoice from '../models/invoices.model';
+import {Invoice} from '../models';
 
 export const getInvoices = async (req: Request, res: Response) => {
     try {
