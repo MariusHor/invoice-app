@@ -3,7 +3,7 @@ import { isAxiosError } from "axios";
 import { Form } from "features/Form";
 import { InputTextField } from "features/InvoiceForm/inputTextField";
 import { FormikHelpers } from "formik";
-import { LayoutLoginRegister } from "layouts/layoutLoginRegister";
+import { LayoutLoginRegister } from "layouts/LayoutLoginRegister";
 import { RegisterValues } from "types";
 import { useNavigate } from "react-router-dom";
 
@@ -20,15 +20,16 @@ export const Register = (): React.JSX.Element => {
     { setSubmitting, setFieldError }: FormikHelpers<RegisterValues>
   ) => {
     const { username, password } = values;
+
     try {
       await postRegister({ username, password });
+      setSubmitting(false);
       navigate("/login");
     } catch (error) {
       if (isAxiosError(error) && error.response?.status === 409) {
         setFieldError("username", error.response.data.message);
       }
     }
-    setSubmitting(false);
   };
 
   return (

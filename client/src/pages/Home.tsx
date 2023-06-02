@@ -17,7 +17,7 @@ export const Home = (): React.JSX.Element => {
         .
       </p>
       <LinkButton
-        to="invoices"
+        to="dashboard"
         className="mt-4 hover:bg-skin-btn-primary-hover"
       >
         Try a Demo

@@ -25,7 +25,7 @@ export const InvoiceCreate = () => {
     await createInvoice.mutateAsync({ newInvoice });
     setSubmitting(false);
 
-    return navigate("/invoices");
+    return navigate("/dashboard");
   };
 
   return <LayoutForm title="New Invoice" handleSubmit={handleSubmit} />;

@@ -1,6 +1,9 @@
+export { AuthGuard } from "./AuthGuard";
 export { ErrorPage } from "./ErrorPage";
 export { Login } from "./Login";
+export { Register } from "./Register";
 export { Home } from "./Home";
+export { PersistLogin } from "./PersistLogin";
 export { Dashboard } from "./Dashboard/Dashboard";
 export { InvoiceCreate } from "./Invoice/InvoiceCreate";
 export { InvoiceEdit } from "./Invoice/InvoiceEdit";

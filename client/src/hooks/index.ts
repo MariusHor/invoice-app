@@ -4,6 +4,8 @@ export { useCreateInvoice } from "./useCreateInvoice";
 export { useDeleteInvoice } from "./useDeleteInvoice";
 export { useFilters } from "./useFilters";
 export { useTheme } from "./useTheme";
+export { useAuth } from "./useAuth";
+export { useRefreshToken } from "./useRefreshToken";
 export { useGetInvoiceProps } from "./useGetInvoiceProps";
 export { useFilterInvoices } from "./useFilterInvoices";
 export { useLocalStorage } from "./useLocalStorage";

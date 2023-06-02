@@ -26,6 +26,34 @@ export const postRegister = async ({ username, password }: postAuthProps) => {
   }
 };
 
+export const postLogin = async ({ username, password }: postAuthProps) => {
+  try {
+    console.log(username, password);
+    const response = await axios.post(
+      `${baseUrl}api/auth/login`,
+      JSON.stringify({ username, password }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
+
+    const accessToken = response?.data?.accessToken;
+    return { accessToken };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const fetchRefreshToken = async () => {
+  const response = await axios.get(`${baseUrl}api/auth/refresh`, {
+    withCredentials: true,
+  });
+  console.log(response);
+  return response;
+};
+
 export const fetchInvoices = async () => {
   try {
     const response = await axios.get(`${baseUrl}api/invoices/public`);
