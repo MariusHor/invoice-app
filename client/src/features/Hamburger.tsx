@@ -7,43 +7,39 @@ import { motion, AnimatePresence } from "framer-motion";
 import { LinkButton } from "components";
 
 export const Hamburger = () => {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { pathname } = useLocation();
-
-  const item = {
-    exit: {
-      opacity: 0,
-      transition: {
-        ease: "easeInOut",
-        duration: 0.5,
-        delay: 1,
-      },
-    },
-  };
 
   return (
     <div className="center">
       <Button
         id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
+        aria-controls={isOpen ? "basic-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={() => setOpen(!open)}
+        aria-expanded={isOpen ? "true" : undefined}
+        onClick={() => setIsOpen((isOpen) => !isOpen)}
         className="z-50"
       >
         <MenuRoundedIcon sx={{ fontSize: 40, color: "#7c5dfa" }} />
       </Button>
       <AnimatePresence>
-        {open && (
-          <motion.div
+        {isOpen && (
+          <motion.ul
+            key="hamburger"
             className="flex-center absolute left-0 top-0 z-10 h-full w-full flex-col gap-4 bg-skin-fill text-skin-base"
-            variants={item}
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "100vh", opacity: 1 }}
             transition={{ duration: 0.8 }}
-            exit="exit"
+            exit={{
+              opacity: 0,
+              transition: {
+                ease: "easeInOut",
+                duration: 0.5,
+                delay: 1,
+              },
+            }}
           >
-            <motion.div
+            <motion.li
               initial={{ y: 60, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 1 }}
@@ -57,7 +53,7 @@ export const Hamburger = () => {
               }}
             >
               <LinkButton
-                onClick={() => setOpen(!open)}
+                onClick={() => setIsOpen((isOpen) => !isOpen)}
                 to={pathname === "/" ? "login" : "/"}
                 intent={"outlined"}
                 size={"fixed"}
@@ -65,8 +61,8 @@ export const Hamburger = () => {
               >
                 {pathname === "/" ? "Log In" : "Home"}
               </LinkButton>
-            </motion.div>
-            <motion.div
+            </motion.li>
+            <motion.li
               initial={{ y: 60, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.8 }}
@@ -80,7 +76,7 @@ export const Hamburger = () => {
               }}
             >
               <LinkButton
-                onClick={() => setOpen(!open)}
+                onClick={() => setIsOpen((isOpen) => !isOpen)}
                 to={pathname === "/register" ? "login" : "register"}
                 intent={"primary"}
                 size={"fixed"}
@@ -88,8 +84,8 @@ export const Hamburger = () => {
               >
                 {pathname === "/register" ? "Log in" : "Register"}
               </LinkButton>
-            </motion.div>
-          </motion.div>
+            </motion.li>
+          </motion.ul>
         )}
       </AnimatePresence>
     </div>
