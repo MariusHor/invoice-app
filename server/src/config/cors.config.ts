@@ -1,10 +1,4 @@
-const allowedOrigins = [
-    'https://www.yoursite.com',
-    'http://127.0.0.1:5500',
-    'http://localhost:3500',
-    'http://localhost:4000',
-    'http://localhost:5173',
-];
+const allowedOrigins = ['https://invoice-app-mariushor.netlify.app', 'http://localhost:5173'];
 
 export const corsConfig = {
     origin: (origin, callback) => {
