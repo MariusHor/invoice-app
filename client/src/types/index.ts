@@ -1,3 +1,6 @@
+import { Auth } from "providers/AuthProvider";
+import { Dispatch, SetStateAction } from "react";
+
 export interface Address {
   city: string;
   country: string;
@@ -45,4 +48,9 @@ export interface LoginValues {
 
 export interface RegisterValues extends LoginValues {
   passwordConfirm?: string;
+}
+
+export interface AuthContextInterface {
+  auth: Auth | object;
+  setAuth: Dispatch<SetStateAction<Auth | object>>;
 }

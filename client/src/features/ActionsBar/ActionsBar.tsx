@@ -19,7 +19,7 @@ export const ActionsBar = (): React.JSX.Element => {
         <p className="heading-md text-skin-accent">{invoices?.length ?? 0}</p>
       </div>
       <Filters />
-      <LinkButton to="/invoices/create">
+      <LinkButton to="/dashboard/create">
         <div className="flex-center gap-2">
           <img
             src={plusIcon}

@@ -27,7 +27,7 @@ export const InvoiceCard = ({
       </div>
       <div className="grow">
         <Link
-          to={`/invoices/${invoice.invoiceId}`}
+          to={`/dashboard/${invoice.invoiceId}`}
           className="min-h-10 center h-full min-w-10 border-l border-base p-2 transition-all ease-in-out hover:bg-skin-box"
         >
           <img src={arrowRight} alt="view invoice" className="" />

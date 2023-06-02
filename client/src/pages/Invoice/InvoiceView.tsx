@@ -23,7 +23,7 @@ export const InvoiceView = () => {
 
   const handleDelete = async () => {
     await deleteInvoice.mutateAsync({ id: invoice._id });
-    return navigate("/invoices");
+    return navigate("/dashboard");
   };
 
   const handleUpdateStatus = async () => {
@@ -62,7 +62,7 @@ export const InvoiceView = () => {
         </div>
         <InvoiceDetails invoice={invoice} id={id} />
         <div className="flex-center h-20 gap-2 bg-skin-fill-secondary p-4 lg:rounded-lg">
-          <LinkButton to={`/invoices/${id}/edit`} intent={"outlined"}>
+          <LinkButton to={`/dashboard/${id}/edit`} intent={"outlined"}>
             Edit
           </LinkButton>
           <Button intent={"accent"} onClick={handleDelete}>
