@@ -1,16 +1,10 @@
-import { useLoaderData } from "react-router-dom";
-import { invoicesLoader } from "pages";
 import { Filters } from "features";
 import { LinkButton } from "components";
-import { InvoiceResult } from "types";
 import { useInvoices } from "hooks";
 import plusIcon from "assets/icon-plus.svg";
 
 export const ActionsBar = (): React.JSX.Element => {
-  const initialData: InvoiceResult[] = useLoaderData() as Awaited<
-    ReturnType<ReturnType<typeof invoicesLoader>>
-  >;
-  const { data: invoices } = useInvoices({ initialData });
+  const { data: invoices } = useInvoices();
 
   return (
     <div className="center-between container h-fit w-full gap-4 p-4 lg:p-10">

@@ -6,7 +6,8 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import {errorLogger, errorResponder} from './middlewares';
 import {dbConfig, corsConfig} from './config';
-import {publicInvoicesRoutes, registerRoutes, loginRoutes, refreshTokenRoutes} from './routes';
+import {publicInvoicesRoutes, registerRoutes, loginRoutes, refreshTokenRoutes, signoutUser} from './routes';
+import {verifyJWT} from './middlewares/verifyJWT';
 
 dotenv.config();
 
@@ -22,16 +23,17 @@ app.use(cookieParser());
 
 dbConfig();
 
-app.use(errorLogger);
-app.use(errorResponder);
-
 app.use('/api/auth/register', registerRoutes);
 app.use('/api/auth/login', loginRoutes);
 app.use('/api/auth/refresh', refreshTokenRoutes);
-// app.use('/api/auth/logout', invoicesRoutes);
+app.use('/api/auth/signout', signoutUser);
 
+app.use(verifyJWT);
 app.use('/api/invoices/public', publicInvoicesRoutes);
 // app.use('/api/invoices/private', invoicesRoutes);
+
+app.use(errorLogger);
+app.use(errorResponder);
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);

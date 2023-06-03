@@ -10,7 +10,6 @@ import {
   FiltersProvider,
   ThemeProvider,
 } from "providers";
-import { queryClient } from "lib";
 import { LayoutInvoice, LayoutPrivate, LayoutPublic } from "layouts";
 
 import {
@@ -18,7 +17,6 @@ import {
   InvoiceEdit,
   InvoiceCreate,
   InvoiceView,
-  invoicesLoader,
   Dashboard,
   Home,
   Login,
@@ -41,23 +39,11 @@ const router = createBrowserRouter(
       <Route element={<PersistLogin />}>
         <Route element={<AuthGuard />}>
           <Route path="dashboard" element={<LayoutPrivate />}>
-            <Route
-              index
-              element={<Dashboard />}
-              loader={invoicesLoader(queryClient)}
-            />
+            <Route index element={<Dashboard />} />
             <Route element={<LayoutInvoice />}>
               <Route path="create" element={<InvoiceCreate />} />
-              <Route
-                path=":id"
-                element={<InvoiceView />}
-                loader={invoicesLoader(queryClient)}
-              />
-              <Route
-                path=":id/edit"
-                element={<InvoiceEdit />}
-                loader={invoicesLoader(queryClient)}
-              />
+              <Route path=":id" element={<InvoiceView />} />
+              <Route path=":id/edit" element={<InvoiceEdit />} />
             </Route>
           </Route>
         </Route>

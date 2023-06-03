@@ -1,14 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
-import { getInvoices } from "api";
-import { InvoiceResult } from "types";
+import { useAxiosPrivate } from "./useAxiosPrivate";
 
-export const invoicesQuery = () => ({
-  queryKey: ["invoices"],
-  queryFn: getInvoices,
-});
+const baseURL = "http://localhost:4500/";
 
-export const useInvoices = ({
-  initialData,
-}: {
-  initialData?: InvoiceResult[];
-}) => useQuery({ ...invoicesQuery(), initialData });
+export const useInvoices = () => {
+  const axiosPrivate = useAxiosPrivate();
+
+  return useQuery({
+    queryKey: ["invoices"],
+    queryFn: async () => {
+      const response = await axiosPrivate.get(`${baseURL}api/invoices/public`);
+      return response.data;
+    },
+  });
+};

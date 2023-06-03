@@ -1,6 +1,5 @@
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { InvoiceStatus, InvoiceDetails, LinkButton, Button } from "components";
-import { invoicesLoader } from "pages";
 import { InvoiceResult } from "types";
 import { invariant } from "utils";
 import { useDeleteInvoice, useInvoices, useUpdateInvoice } from "hooks";
@@ -13,10 +12,8 @@ export const InvoiceView = () => {
   const { id } = useParams();
   invariant(id);
 
-  const initialData: InvoiceResult[] = useLoaderData() as Awaited<
-    ReturnType<ReturnType<typeof invoicesLoader>>
-  >;
-  const { data: invoices } = useInvoices({ initialData });
+  const { data: invoices } = useInvoices();
+
   const invoice: InvoiceResult = invoices.find(
     (invoice: InvoiceResult) => invoice.invoiceId === id
   );

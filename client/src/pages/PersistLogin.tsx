@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useAuth, useRefreshToken } from "hooks";
-import { Spinner } from "components";
+import { useAuth, useLocalStorage, useRefreshToken } from "hooks";
 
 export const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { refresh } = useRefreshToken();
   const { auth } = useAuth();
+  const [persist] = useLocalStorage("persist", true);
 
   const hasAccessToken = "accessToken" in auth;
 
@@ -23,14 +23,13 @@ export const PersistLogin = () => {
       }
     };
 
-    !hasAccessToken ? verifyRefreshToken() : setIsLoading(false);
+    !hasAccessToken && persist ? verifyRefreshToken() : setIsLoading(false);
 
     return () => {
       isMounted = false;
     };
-  }, [hasAccessToken, refresh]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  if (isLoading) return <Spinner />;
-
-  return <Outlet />;
+  return <>{isLoading ? null : <Outlet />}</>;
 };
