@@ -1,14 +1,16 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
 import Button from "@mui/material/Button";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { LinkButton } from "components";
+import { useAuth } from "hooks";
+import { ButtonSignout } from "components/Button/ButtonSignout";
 
 export const Hamburger = () => {
+  const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const { pathname } = useLocation();
+  const isLoggedIn = "accessToken" in auth;
 
   return (
     <div className="center">
@@ -54,12 +56,12 @@ export const Hamburger = () => {
             >
               <LinkButton
                 onClick={() => setIsOpen((isOpen) => !isOpen)}
-                to={pathname === "/" ? "login" : "/"}
+                to={isLoggedIn ? "dashboard" : "login"}
                 intent={"outlined"}
                 size={"fixed"}
                 className="hover:text-skin-grey"
               >
-                {pathname === "/" ? "Log In" : "Home"}
+                {isLoggedIn ? "Dashboard" : "Log In"}
               </LinkButton>
             </motion.li>
             <motion.li
@@ -75,15 +77,21 @@ export const Hamburger = () => {
                 },
               }}
             >
-              <LinkButton
-                onClick={() => setIsOpen((isOpen) => !isOpen)}
-                to={pathname === "/register" ? "login" : "register"}
-                intent={"primary"}
-                size={"fixed"}
-                className="hover:bg-skin-btn-primary-hover"
-              >
-                {pathname === "/register" ? "Log in" : "Register"}
-              </LinkButton>
+              {isLoggedIn ? (
+                <ButtonSignout
+                  signoutCallback={() => setIsOpen((isOpen) => !isOpen)}
+                />
+              ) : (
+                <LinkButton
+                  onClick={() => setIsOpen((isOpen) => !isOpen)}
+                  to={"register"}
+                  intent={"primary"}
+                  size={"fixed"}
+                  className="hover:bg-skin-btn-primary-hover"
+                >
+                  Register
+                </LinkButton>
+              )}
             </motion.li>
           </motion.ul>
         )}

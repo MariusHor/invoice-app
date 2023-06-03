@@ -1,6 +1,5 @@
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FormikHelpers } from "formik";
-import { invoicesLoader } from "pages";
 import { Invoice, InvoiceResult } from "types";
 import { invariant } from "utils";
 import { useGetInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
@@ -13,10 +12,7 @@ export const InvoiceEdit = () => {
   const { id } = useParams();
   invariant(id);
 
-  const initialData: InvoiceResult[] = useLoaderData() as Awaited<
-    ReturnType<ReturnType<typeof invoicesLoader>>
-  >;
-  const { data: invoices } = useInvoices({ initialData });
+  const { data: invoices } = useInvoices();
   const invoice: InvoiceResult = invoices.find(
     (invoice: InvoiceResult) => invoice.invoiceId === id
   );

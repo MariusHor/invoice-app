@@ -3,6 +3,7 @@ import { LinkButton } from "components";
 
 export const ErrorPage = () => {
   const error = useRouteError();
+  console.log(error);
 
   if (isRouteErrorResponse(error)) {
     return (
@@ -17,9 +18,11 @@ export const ErrorPage = () => {
   }
 
   return (
-    <div className="col-span-full col-start-2 row-span-full flex flex-col items-center justify-center gap-4">
+    <div className="col-span-full col-start-2 row-span-full flex h-screen flex-col items-center justify-center gap-4">
       <h1>An error has occured</h1>
-      <LinkButton to="/">Home</LinkButton>
+      <LinkButton className="hover:bg-skin-btn-primary-hover" to="/">
+        Home
+      </LinkButton>
     </div>
   );
 };
