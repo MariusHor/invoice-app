@@ -1,14 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { useState, useLayoutEffect } from "react";
-import { useAuth, useLocalStorage, useRefreshToken } from "hooks";
+import { useAuth, useRefreshToken, usePersist } from "hooks";
 
 export const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { refresh } = useRefreshToken();
   const { auth } = useAuth();
-  const [persist] = useLocalStorage("persist", true);
+  const { persist } = usePersist();
 
-  const hasAccessToken = "accessToken" in auth;
+  const hasAccessToken = auth.accessToken;
 
   useLayoutEffect(() => {
     let isMounted = true;
@@ -23,6 +23,8 @@ export const PersistLogin = () => {
       }
     };
 
+    console.log(auth, hasAccessToken);
+
     !hasAccessToken && persist ? verifyRefreshToken() : setIsLoading(false);
 
     return () => {
@@ -30,6 +32,8 @@ export const PersistLogin = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  console.log(persist);
 
   return <>{isLoading ? null : <Outlet />}</>;
 };

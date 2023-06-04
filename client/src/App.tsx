@@ -9,6 +9,7 @@ import {
   ReactQueryProvider,
   FiltersProvider,
   ThemeProvider,
+  PersistProvider,
 } from "providers";
 import { LayoutInvoice, LayoutPrivate, LayoutPublic } from "layouts";
 
@@ -57,9 +58,11 @@ const App = (): React.JSX.Element => {
     <ReactQueryProvider>
       <ThemeProvider>
         <FiltersProvider>
-          <AuthProvider>
-            <RouterProvider router={router} />
-          </AuthProvider>
+          <PersistProvider>
+            <AuthProvider>
+              <RouterProvider router={router} />
+            </AuthProvider>
+          </PersistProvider>
         </FiltersProvider>
       </ThemeProvider>
     </ReactQueryProvider>

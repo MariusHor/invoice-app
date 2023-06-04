@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 type InitValue = boolean | string | (() => void);
 
-const getLocalValue = (key: string, initValue: InitValue) => {
+const getLocalValue = (key: string, initValue?: InitValue) => {
   if (typeof window === "undefined") return initValue;
 
   const localValue = JSON.parse(localStorage.getItem(key) as string);
@@ -13,7 +13,7 @@ const getLocalValue = (key: string, initValue: InitValue) => {
   return initValue;
 };
 
-export const useLocalStorage = (key: string, initValue: InitValue) => {
+export const useLocalStorage = (key: string, initValue?: InitValue) => {
   const [value, setValue] = useState(() => {
     return getLocalValue(key, initValue);
   });

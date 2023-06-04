@@ -1,5 +1,5 @@
 import { Field } from "formik";
-import { Checkbox } from "formik-mui";
+import { CheckboxWithLabel } from "formik-mui";
 import { useTheme } from "hooks";
 
 interface InputSelectFieldProps {
@@ -13,12 +13,12 @@ export const InputCheckboxField = ({ label, id }: InputSelectFieldProps) => {
   return (
     <div className={`${theme} field relative flex flex-col`}>
       <Field
-        component={Checkbox}
-        label={label}
+        component={CheckboxWithLabel}
         name={id}
         id={id}
         type={"checkbox"}
-      ></Field>
+        Label={{ label }}
+      />
     </div>
   );
 };

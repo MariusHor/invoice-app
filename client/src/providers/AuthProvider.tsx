@@ -1,16 +1,19 @@
 import { AuthContext } from "context";
 import { ReactNode, useEffect, useState } from "react";
 import { Auth } from "types";
-import Cookies from "js-cookie";
 import { getRefreshToken } from "api";
+import { usePersist } from "hooks";
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+  const { persist } = usePersist();
+
+  // also check if valid refreshToken
   const [auth, setAuth] = useState<Auth>(() => {
-    return { isLoggedIn: Cookies.get("isLoggedIn") === "true" };
+    return { isLoggedIn: persist };
   });
 
   useEffect(() => {

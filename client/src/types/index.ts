@@ -41,6 +41,7 @@ export interface FiltersState {
 export interface LoginValues {
   username: string;
   password: string;
+  rememberMe?: boolean;
 }
 
 export interface RegisterValues extends LoginValues {
