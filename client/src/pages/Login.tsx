@@ -4,12 +4,14 @@ import { Form } from "features/Form";
 import { FormikHelpers } from "formik";
 import { useAuth } from "hooks";
 import { LayoutLoginRegister } from "layouts/LayoutLoginRegister";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginValues } from "types";
 
 export const Login = (): React.JSX.Element => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
+  const [_, setState] = useState();
 
   const initialValues = {
     username: "",
@@ -24,23 +26,31 @@ export const Login = (): React.JSX.Element => {
 
     try {
       const { accessToken } = await postLogin({ password, username });
-
-      setAuth({ username, password, accessToken: accessToken });
+      setAuth({
+        isLoggedIn: true,
+        username,
+        password,
+        accessToken,
+      });
       setSubmitting(false);
       navigate("/dashboard");
     } catch (error) {
       if (isAxiosError(error)) {
         switch (error.response?.status) {
           case 404:
-            setFieldError("username", error.response.data.message);
-            break;
+            return setFieldError("username", error.response.data.message);
           case 401:
-            setFieldError("password", error.response.data.message);
-            break;
+            return setFieldError("password", error.response.data.message);
           default:
-            throw error;
+            setState(() => {
+              throw error;
+            });
         }
       }
+
+      return setState(() => {
+        throw error;
+      });
     }
   };
 

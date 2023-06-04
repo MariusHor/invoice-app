@@ -3,7 +3,6 @@ import { LinkButton } from "components";
 
 export const ErrorPage = () => {
   const error = useRouteError();
-  console.log(error);
 
   if (isRouteErrorResponse(error)) {
     return (

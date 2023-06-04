@@ -10,7 +10,7 @@ import { ButtonSignout } from "components/Button/ButtonSignout";
 export const Hamburger = () => {
   const { auth } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
-  const isLoggedIn = "accessToken" in auth;
+  const isLoggedIn = "isLoggedIn" in auth && auth.isLoggedIn;
 
   return (
     <div className="center">

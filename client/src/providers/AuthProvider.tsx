@@ -1,33 +1,16 @@
-import { getRefreshToken } from "api";
-import { Spinner } from "components";
 import { AuthContext } from "context";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { Auth } from "types";
+import Cookies from "js-cookie";
 
 interface AuthProviderProps {
   children: ReactNode;
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [auth, setAuth] = useState<Auth | object>({});
-
-  useEffect(() => {
-    const isAuth = async () => {
-      try {
-        const { data } = await getRefreshToken();
-        setAuth((prev) => ({ ...prev, accessToken: data.accessToken }));
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-        setIsLoading(false);
-      }
-    };
-
-    isAuth();
-  }, []);
-
-  if (isLoading) return <Spinner />;
+  const [auth, setAuth] = useState<Auth | object>(() => {
+    return { isLoggedIn: Cookies.get("isLoggedIn") === "true" };
+  });
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>

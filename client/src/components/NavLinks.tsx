@@ -4,7 +4,7 @@ import { ButtonSignout } from "./Button/ButtonSignout";
 
 export const NavLinks = (): React.JSX.Element => {
   const { auth } = useAuth();
-  const isLoggedIn = "accessToken" in auth;
+  const isLoggedIn = "isLoggedIn" in auth && auth.isLoggedIn;
 
   return (
     <>

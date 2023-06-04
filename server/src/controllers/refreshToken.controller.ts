@@ -5,7 +5,6 @@ import {User} from '../models';
 export const refreshToken = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const cookies = req.cookies;
-
         if (!cookies?.jwt) return res.sendStatus(401);
 
         const refreshToken = cookies.jwt;

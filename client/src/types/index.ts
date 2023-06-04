@@ -51,4 +51,5 @@ export interface Auth {
   username: string;
   password: string;
   accessToken: string;
+  isLoggedIn: boolean;
 }

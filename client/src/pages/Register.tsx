@@ -6,8 +6,10 @@ import { FormikHelpers } from "formik";
 import { LayoutLoginRegister } from "layouts/LayoutLoginRegister";
 import { RegisterValues } from "types";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 export const Register = (): React.JSX.Element => {
+  const [_, setState] = useState();
   const navigate = useNavigate();
   const initialValues = {
     username: "",
@@ -26,9 +28,20 @@ export const Register = (): React.JSX.Element => {
       setSubmitting(false);
       navigate("/login");
     } catch (error) {
-      if (isAxiosError(error) && error.response?.status === 409) {
-        setFieldError("username", error.response.data.message);
+      if (isAxiosError(error)) {
+        switch (error.response?.status) {
+          case 409:
+            return setFieldError("username", error.response.data.message);
+          default:
+            setState(() => {
+              throw error;
+            });
+        }
       }
+
+      return setState(() => {
+        throw error;
+      });
     }
   };
 
