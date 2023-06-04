@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { useAuth, useLocalStorage, useRefreshToken } from "hooks";
 
 export const PersistLogin = () => {
@@ -10,7 +10,7 @@ export const PersistLogin = () => {
 
   const hasAccessToken = "accessToken" in auth;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let isMounted = true;
 
     const verifyRefreshToken = async () => {

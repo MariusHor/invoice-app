@@ -1,6 +1,9 @@
 import { LinkButton } from "components";
+import { useOutletContext } from "react-router-dom";
 
 export const Home = (): React.JSX.Element => {
+  const { isLoggedIn } = useOutletContext<{ isLoggedIn: boolean }>();
+
   return (
     <div className="flex grow flex-col items-center justify-center gap-3 text-center lg:col-span-11 lg:col-start-2 lg:row-span-5 lg:row-start-1">
       <h1 className="text-4xl font-bold text-skin-base sm:text-5xl md:text-6xl lg:text-8xl">
@@ -17,10 +20,10 @@ export const Home = (): React.JSX.Element => {
         .
       </p>
       <LinkButton
-        to="dashboard"
-        className="mt-4 hover:bg-skin-btn-primary-hover"
+        to={isLoggedIn ? "dashboard" : "demo"}
+        intent={"primary-link"}
       >
-        Try a Demo
+        {isLoggedIn ? "Dashboard" : "Try a Demo"}
       </LinkButton>
     </div>
   );

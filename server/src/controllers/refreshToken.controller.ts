@@ -24,7 +24,7 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
                 {expiresIn: '10s'}
             );
 
-            res.json({accessToken});
+            res.json({accessToken, username: decoded.username});
         });
     } catch (error) {
         next(error);

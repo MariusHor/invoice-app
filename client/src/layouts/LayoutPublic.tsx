@@ -1,11 +1,14 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "features";
-import { useTheme } from "hooks";
+import { useAuth, useTheme } from "hooks";
 import { Hamburger } from "features/Hamburger";
 import { NavLinks } from "components";
 
 export const LayoutPublic = () => {
   const { theme } = useTheme();
+  const {
+    auth: { isLoggedIn },
+  } = useAuth();
 
   return (
     <div
@@ -14,15 +17,15 @@ export const LayoutPublic = () => {
       } flex min-h-screen flex-col bg-skin-fill font-main`}
     >
       <Navbar intent={"public"}>
-        <div className="md:hidden">
+        <div className={!isLoggedIn ? "md:hidden" : ""}>
           <Hamburger />
         </div>
-        <div className="md:flex-center hidden gap-4">
+        <div className={isLoggedIn ? "hidden" : "md:flex-center hidden gap-4 "}>
           <NavLinks />
         </div>
       </Navbar>
       <main className="flex grow flex-col items-center p-4">
-        <Outlet />
+        <Outlet context={{ isLoggedIn }} />
       </main>
     </div>
   );

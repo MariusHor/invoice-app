@@ -3,16 +3,16 @@ import { useAuth } from "hooks";
 import { ButtonSignout } from "./Button/ButtonSignout";
 
 export const NavLinks = (): React.JSX.Element => {
-  const { auth } = useAuth();
-  const isLoggedIn = "isLoggedIn" in auth && auth.isLoggedIn;
+  const {
+    auth: { isLoggedIn },
+  } = useAuth();
 
   return (
     <>
       <LinkButton
         to={isLoggedIn ? "dashboard" : "login"}
-        intent={"outlined"}
+        intent={"outlined-link"}
         size={"fixed"}
-        className="hover:text-skin-grey"
       >
         {isLoggedIn ? "Dashboard" : "Log In"}
       </LinkButton>
@@ -20,12 +20,7 @@ export const NavLinks = (): React.JSX.Element => {
       {isLoggedIn ? (
         <ButtonSignout />
       ) : (
-        <LinkButton
-          to={"register"}
-          intent={"primary"}
-          size={"fixed"}
-          className="hover:bg-skin-btn-primary-hover"
-        >
+        <LinkButton to={"register"} intent={"primary-link"} size={"fixed"}>
           Register
         </LinkButton>
       )}

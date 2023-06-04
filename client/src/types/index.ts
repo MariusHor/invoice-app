@@ -48,8 +48,8 @@ export interface RegisterValues extends LoginValues {
 }
 
 export interface Auth {
-  username: string;
-  password: string;
-  accessToken: string;
-  isLoggedIn: boolean;
+  username?: string;
+  password?: string;
+  accessToken?: string;
+  isLoggedIn?: boolean;
 }

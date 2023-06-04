@@ -10,6 +10,7 @@
     --color-text-orange: rgb(234 88 12);
     --color-text-green: rgb(16 185 129);
     --color-text-grey: rgb(75 85 99);
+    --color-text-dark: #252945;
     --color-box-secondary: #1e2139;
     --color-bg-static: #252945;
     --color-bg-orange: rgb(255 237 213);
@@ -21,7 +22,6 @@
     --color-button-secondary-hover: #1e2139;
     --color-button-accent: #ec5757;
     --color-button-accent-hover: #ff9797;
-    --color-button-outlined: #f9fafe;
     --color-button-outlined-hover: #dfe3fa;
     --font-main: "League Spartan", "sans-serif";
   }
@@ -34,6 +34,7 @@
     --color-box: #2d3252;
     --color-inverted: #f8f8fb;
     --color-border-base: #494e6e;
+    --color-button-outlined: #2d3252;
   }
   .theme-light {
     --color-text-base: #000000;
@@ -44,6 +45,7 @@
     --color-box: #dfe3fa;
     --color-inverted: #1e2139;
     --color-border-base: #dfe3fa;
+    --color-button-outlined: #f9fafe;
   }
 }
 

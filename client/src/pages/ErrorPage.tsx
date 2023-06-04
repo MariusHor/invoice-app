@@ -11,7 +11,9 @@ export const ErrorPage = () => {
         <p>
           <i>{error.statusText}</i>
         </p>
-        <LinkButton to="/">Home</LinkButton>
+        <LinkButton intent={"primary-link"} to="/">
+          Home
+        </LinkButton>
       </div>
     );
   }
@@ -19,7 +21,7 @@ export const ErrorPage = () => {
   return (
     <div className="col-span-full col-start-2 row-span-full flex h-screen flex-col items-center justify-center gap-4">
       <h1>An error has occured</h1>
-      <LinkButton className="hover:bg-skin-btn-primary-hover" to="/">
+      <LinkButton intent={"primary-link"} to="/">
         Home
       </LinkButton>
     </div>

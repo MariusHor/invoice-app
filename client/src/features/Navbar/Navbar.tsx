@@ -5,7 +5,7 @@ import { Logo } from "./Logo";
 import { useTheme } from "hooks";
 import moon from "assets/icon-moon.svg";
 
-const navbar = cva("flex h-16 justify-between gap-6 ", {
+const navbar = cva("flex h-fit justify-between gap-6 ", {
   variants: {
     intent: {
       private: [

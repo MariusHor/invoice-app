@@ -53,6 +53,7 @@ export default {
           green: "var(--color-text-green)",
           grey: "var(--color-text-grey)",
           white: "var(--color-text-white)",
+          dark: "var(--color-text-dark)",
         },
       },
       backgroundColor: {
@@ -78,6 +79,14 @@ export default {
       },
       borderColor: {
         base: "var(--color-border-base)",
+        "btn-primary": "var(--color-button-primary)",
+        "btn-primary-hover": "var(--color-button-primary-hover)",
+        "btn-secondary": "var(--color-button-secondary)",
+        "btn-secondary-hover": "var(--color-button-secondary-hover)",
+        "btn-accent": "var(--color-button-accent)",
+        "btn-accent-hover": "var(--color-button-accent-hover)",
+        "btn-outlined": "var(--color-button-outlined)",
+        "btn-outlined-hover": "var(--color-button-outlined-hover)",
       },
       fontFamily: {
         main: "var(--font-main)",

@@ -2,7 +2,7 @@ import userAvatar from "assets/image-avatar.jpg";
 
 export const Avatar = (): React.JSX.Element => {
   return (
-    <div className="max-h-8 max-w-8 overflow-hidden rounded-full">
+    <div className="h-10 w-10 overflow-hidden rounded-full md:h-12 md:w-12">
       <img src={userAvatar} alt="" />
     </div>
   );

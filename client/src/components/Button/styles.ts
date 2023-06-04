@@ -1,39 +1,52 @@
 import { cva } from "class-variance-authority";
 
 export const button = cva(
-  "button rounded-lg h-fit font-bold transition-primary disabled:opacity-40 center shadow-lg",
+  "button rounded-lg h-fit transition-primary disabled:opacity-40 center shadow-lg",
   {
     variants: {
       intent: {
         primary: [
-          "bg-skin-btn-primary",
-          "enabled:hover:bg-skin-btn-primary-hover",
+          "enabled:hover:bg-skin-btn-primary-hover enabled:hover:border-btn-primary-hover",
+        ],
+        "primary-link": [
+          "hover:bg-skin-btn-primary-hover hover:border-btn-primary-hover",
         ],
         secondary: [
           "bg-skin-btn-secondary",
-          "enabled:hover:bg-skin-btn-secondary-hover",
+          "border border-btn-secondary",
+          "enabled:hover:bg-skin-btn-secondary-hover enabled:hover:border-btn-secondary-hover",
         ],
         accent: [
           "bg-skin-btn-accent",
-          "enabled:hover:bg-skin-btn-accent-hover",
+          "border border-btn-accent",
+          "enabled:hover:bg-skin-btn-accent-hover enabled:hover:border-btn-accent-hover",
         ],
         outlined: [
-          "text-skin-base",
-          "border border-slate-500",
-          "hover:bg-skin-btn-outlined-hover",
+          "enabled:hover:border-btn-outlined-hover enabled:hover:bg-skin-btn-outlined-hover",
+        ],
+        "outlined-link": [
+          "hover:border-btn-outlined-hover hover:bg-skin-btn-outlined-hover",
         ],
       },
 
       size: {
         small: ["text-sm", "py-1", "px-2"],
-        medium: ["text-base", "py-2", "px-5"],
-        fixed: ["w-28 py-2 px-5"],
+        medium: ["text-base", "py-1.5", "px-4"],
+        fixed: ["w-28 py-1.5 px-4"],
       },
     },
     compoundVariants: [
       {
-        intent: ["primary", "secondary", "accent"],
-        class: "border-transparent text-white",
+        intent: ["primary", "primary-link", "secondary", "accent"],
+        class: "text-white",
+      },
+      {
+        intent: ["primary", "primary-link"],
+        class: "bg-skin-btn-primary border border-btn-primary",
+      },
+      {
+        intent: ["outlined", "outlined-link"],
+        class: "text-skin-base hover:text-skin-dark border border-btn-outlined",
       },
     ],
     defaultVariants: {
