@@ -1,11 +1,12 @@
 import { Formik, Form as FormikForm, FormikHelpers } from "formik";
 import { loginSchema } from "schemas";
 import { Button } from "components";
-import { InputTextField } from "features/InvoiceForm/inputTextField";
 import { Link } from "react-router-dom";
 import { ReactNode } from "react";
 import { registerSchema } from "schemas/registerSchema";
 import { RegisterValues } from "types";
+import { InputPasswordField } from "../components/Inputs/InputPasswordField";
+import { InputTextField } from "components/Inputs/inputTextField";
 
 interface FormProps {
   initialValues: RegisterValues;
@@ -38,11 +39,7 @@ export const Form = ({
         {({ isSubmitting }) => (
           <FormikForm className="flex w-full flex-col gap-5">
             <InputTextField label={"Username"} id={"username"} />
-            <InputTextField
-              label={"Password"}
-              id={"password"}
-              type="password"
-            />
+            <InputPasswordField label="Password" id="password" />
             {children}
             <Button
               intent="primary"

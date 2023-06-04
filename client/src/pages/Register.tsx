@@ -1,12 +1,12 @@
 import { postRegister } from "api";
 import { isAxiosError } from "axios";
 import { Form } from "features/Form";
-import { InputTextField } from "features/InvoiceForm/inputTextField";
 import { FormikHelpers } from "formik";
 import { LayoutLoginRegister } from "layouts/LayoutLoginRegister";
 import { RegisterValues } from "types";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { InputPasswordField } from "components/Inputs/InputPasswordField";
 
 export const Register = (): React.JSX.Element => {
   const [_, setState] = useState();
@@ -52,11 +52,7 @@ export const Register = (): React.JSX.Element => {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <InputTextField
-          label={"Confirm Password"}
-          id={"passwordConfirm"}
-          type="password"
-        />
+        <InputPasswordField label="Confirm Password" id="passwordConfirm" />
       </Form>
     </LayoutLoginRegister>
   );

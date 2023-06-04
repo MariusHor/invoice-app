@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useFormikContext } from "formik";
 import { IconButton } from "@mui/material";
-import { InputTextField } from "./inputTextField";
-import { InputNumericField } from "./inputNumericField";
 import { Invoice } from "types";
 import { useTheme } from "hooks";
+import { InputNumericField } from "components/Inputs/inputNumericField";
+import { InputTextField } from "components/Inputs/inputTextField";
 
 interface ItemProps {
   id: number;

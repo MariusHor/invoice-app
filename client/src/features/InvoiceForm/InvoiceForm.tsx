@@ -4,10 +4,10 @@ import { invoiceSchema } from "schemas";
 import { ButtonBack, Button } from "components";
 import { BillFrom } from "./BillFrom";
 import { BillTo } from "./BillTo";
-import { InputDatePicker } from "./InputDatePicker";
-import { InputSelectField } from "./InputSelectField";
-import { InputTextField } from "./inputTextField";
 import { ItemList } from "./ItemList";
+import { InputDatePicker } from "components/Inputs/InputDatePicker";
+import { InputSelectField } from "components/Inputs/InputSelectField";
+import { InputTextField } from "components/Inputs/inputTextField";
 
 interface InvoiceFormProps {
   invoice?: InvoiceResult;

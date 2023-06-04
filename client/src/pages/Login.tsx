@@ -1,5 +1,6 @@
 import { postLogin } from "api";
 import { isAxiosError } from "axios";
+import { InputCheckboxField } from "components/Inputs/InputCheckboxField";
 import { Form } from "features/Form";
 import { FormikHelpers } from "formik";
 import { useAuth } from "hooks";
@@ -60,7 +61,9 @@ export const Login = (): React.JSX.Element => {
         isLogin={true}
         initialValues={initialValues}
         onSubmit={handleSubmit}
-      />
+      >
+        <InputCheckboxField id={"remember-me"}></InputCheckboxField>
+      </Form>
     </LayoutLoginRegister>
   );
 };
