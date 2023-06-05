@@ -13,7 +13,9 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
         if (!foundUser) return res.sendStatus(403);
 
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-            if (err || foundUser.username !== decoded.username) return res.sendStatus(403);
+            if (err || foundUser._id.toString() !== decoded._id) {
+                return res.sendStatus(403);
+            }
             const accessToken = jwt.sign(
                 {
                     UserInfo: {

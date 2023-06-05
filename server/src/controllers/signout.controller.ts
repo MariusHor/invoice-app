@@ -3,10 +3,9 @@ import {User} from '../models';
 
 export const signoutUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const cookies = req.cookies;
+        const refreshToken = req?.cookies?.jwt;
 
-        if (!cookies?.jwt) return res.status(204);
-        const refreshToken = cookies.jwt;
+        if (!refreshToken) return res.status(204);
 
         const foundUser = await User.findOne({refreshToken}).exec();
 

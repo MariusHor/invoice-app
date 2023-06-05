@@ -20,15 +20,20 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
                 {
                     UserInfo: {
                         username: foundUser.username,
+                        _id: foundUser._id,
                     },
                 },
                 process.env.ACCESS_TOKEN_SECRET,
                 {expiresIn: '10s'}
             );
 
-            const refreshToken = jwt.sign({username: foundUser.username}, process.env.REFRESH_TOKEN_SECRET, {
-                expiresIn: '1d',
-            });
+            const refreshToken = jwt.sign(
+                {username: foundUser.username, _id: foundUser._id},
+                process.env.REFRESH_TOKEN_SECRET,
+                {
+                    expiresIn: '1d',
+                }
+            );
 
             foundUser.refreshToken = refreshToken;
             await foundUser.save();
@@ -39,7 +44,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
                 sameSite: 'none',
                 maxAge: 24 * 60 * 60 * 1000,
             });
-            res.json({accessToken});
+            res.status(200).json({accessToken});
         }
 
         if (!match) {
