@@ -1,33 +1,31 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "hooks";
-import { Avatar, LinkButton } from "components";
+import { Avatar, LinkButton, Spinner } from "components";
 import { capitalize } from "utils";
+import { useUser } from "hooks/useInvoices";
 
 export const LayoutAccount = () => {
-  const {
-    auth: { username },
-  } = useAuth();
+  const { data: user, isLoading } = useUser();
+
+  if (isLoading) return <Spinner intent={"inner"} />;
+
+  const paths = {
+    "/account": "General",
+    profile: "Edit Profile",
+    password: "Password",
+  };
 
   return (
-    <div className="mt-20 flex grow flex-col gap-10 text-center">
-      <AccountHeader username={username ?? "User"} />
-      <div>
+    <div className="mt-20 flex grow flex-col gap-10 text-start">
+      <AccountHeader username={user.username} />
+      <div className="flex gap-10">
         <ul className="flex w-20 flex-col gap-3">
-          <li>
-            <NavLink to={"/account"} end>
-              General
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"profile"} end>
-              Edit Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to={"password"} end>
-              Password
-            </NavLink>
-          </li>
+          {Object.entries(paths).map((entry) => (
+            <li key={`path: ${entry[0]}`}>
+              <NavLink to={entry[0]} end>
+                {entry[1]}
+              </NavLink>
+            </li>
+          ))}
         </ul>
         <Outlet />
       </div>
@@ -44,14 +42,14 @@ export const AccountHeader = ({
   let title = "";
 
   switch (location.pathname.slice(1)) {
-    case "account":
-      title = "General";
+    case "account/profile":
+      title = "Edit Profile";
       break;
     case "account/password":
       title = "Password";
       break;
     default:
-      title = "Edit Profile";
+      title = "General";
   }
 
   return (
@@ -70,7 +68,11 @@ export const AccountHeader = ({
         </div>
       </div>
       <div className="hidden md:block">
-        <LinkButton to="/subscribe" intent={"primary-link"}>
+        <LinkButton
+          to="/subscribe"
+          intent={"outlined-link"}
+          className="border-slate-300"
+        >
           Go PRO
         </LinkButton>
       </div>

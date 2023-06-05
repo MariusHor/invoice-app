@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-const getCharacterValidationError = (str: string) => {
+export const getCharacterValidationError = (str: string) => {
   return `Password must have at least 1 ${str} character`;
 };
 

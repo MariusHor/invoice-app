@@ -49,6 +49,7 @@ export interface RegisterValues extends LoginValues {
 }
 
 export interface Auth {
+  email?: string;
   username?: string;
   password?: string;
   accessToken?: string;

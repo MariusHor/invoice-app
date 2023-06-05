@@ -12,3 +12,19 @@ export const useInvoices = () => {
     },
   });
 };
+
+export const useUser = () => {
+  const axiosPrivate = useAxiosPrivate();
+
+  return useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      try {
+        const response = await axiosPrivate.get("/user/account");
+        return response.data;
+      } catch (error) {
+        return {};
+      }
+    },
+  });
+};

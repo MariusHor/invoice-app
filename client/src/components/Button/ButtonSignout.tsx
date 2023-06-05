@@ -1,7 +1,5 @@
-import { getSignout } from "api";
+import { useSignout } from "hooks";
 import { Button } from "./Button";
-import { useAuth, usePersist } from "hooks";
-import { useNavigate } from "react-router-dom";
 
 interface ButtonSignoutProps {
   signoutCallback?: () => void;
@@ -10,17 +8,11 @@ interface ButtonSignoutProps {
 export const ButtonSignout = ({
   signoutCallback,
 }: ButtonSignoutProps): React.JSX.Element => {
-  const navigate = useNavigate();
-  const { setAuth } = useAuth();
-  const { persist, setPersist } = usePersist();
+  const signout = useSignout();
 
   const handleSignOut = async () => {
-    if (persist) setPersist(false);
-    setAuth({});
-    navigate("/");
     try {
-      await getSignout();
-
+      await signout();
       if (signoutCallback) signoutCallback();
     } catch (err) {
       console.error(err);

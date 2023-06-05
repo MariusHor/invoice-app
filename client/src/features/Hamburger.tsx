@@ -7,11 +7,13 @@ import { ButtonSignout } from "components/Button/ButtonSignout";
 import { capitalize } from "utils";
 import { useAuth } from "hooks";
 import { IconButton } from "@mui/material";
+import { useUser } from "hooks/useInvoices";
 
 export const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { data: user } = useUser();
   const {
-    auth: { isLoggedIn, username },
+    auth: { isLoggedIn },
   } = useAuth();
 
   return (
@@ -64,7 +66,7 @@ export const Hamburger = () => {
                 }}
               >
                 <Avatar />
-                {username ? <span>{capitalize(username)}</span> : null}
+                <span>{capitalize(user.username)}</span>
               </motion.li>
             ) : null}
             <motion.li
