@@ -10,3 +10,4 @@ export { useGetInvoiceProps } from "./useGetInvoiceProps";
 export { useFilterInvoices } from "./useFilterInvoices";
 export { useLocalStorage } from "./useLocalStorage";
 export { usePersist } from "./usePersist";
+export { useAxiosPrivate } from "./useAxiosPrivate";

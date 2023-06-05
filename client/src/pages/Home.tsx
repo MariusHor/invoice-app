@@ -5,7 +5,7 @@ export const Home = (): React.JSX.Element => {
   const { isLoggedIn } = useOutletContext<{ isLoggedIn: boolean }>();
 
   return (
-    <div className="flex grow flex-col items-center justify-center gap-3 text-center lg:col-span-11 lg:col-start-2 lg:row-span-5 lg:row-start-1">
+    <div className="flex grow flex-col items-center justify-center gap-3 text-center">
       <h1 className="text-4xl font-bold text-skin-base sm:text-5xl md:text-6xl lg:text-8xl">
         Create<span className="text-skin-accent">.</span>Store
         <span className="text-skin-accent">.</span>Edit

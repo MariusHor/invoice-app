@@ -1,13 +1,11 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../hooks";
+import { useAuth } from "hooks";
 
 export const AuthGuard = () => {
-  const { auth } = useAuth();
   const location = useLocation();
+  const { auth } = useAuth();
 
-  const hasAccessToken = "accessToken" in auth;
-
-  if (hasAccessToken) {
+  if (auth.accessToken) {
     return <Outlet />;
   }
 

@@ -29,3 +29,7 @@ input.input-error {
 .field.dark fieldset {
   border-color: #41434b;
 }
+
+.active {
+  font-weight: bold;
+}

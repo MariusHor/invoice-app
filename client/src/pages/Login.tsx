@@ -6,12 +6,13 @@ import { FormikHelpers } from "formik";
 import { useAuth, usePersist } from "hooks";
 import { LayoutLoginRegister } from "layouts/LayoutLoginRegister";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { LoginValues } from "types";
 
 export const Login = (): React.JSX.Element => {
   const { setAuth } = useAuth();
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [_, setState] = useState();
   const { setPersist } = usePersist();
 
@@ -41,7 +42,7 @@ export const Login = (): React.JSX.Element => {
 
       if (rememberMe !== undefined) setPersist(rememberMe);
 
-      navigate("/dashboard");
+      navigate(state?.from || "/dashboard");
     } catch (error) {
       if (isAxiosError(error)) {
         switch (error.response?.status) {

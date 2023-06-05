@@ -105,11 +105,11 @@ export const Hamburger = () => {
               >
                 <LinkButton
                   onClick={() => setIsOpen((isOpen) => !isOpen)}
-                  to="settings"
+                  to="account"
                   intent={"outlined-link"}
                   size={"fixed"}
                 >
-                  Settings
+                  My Account
                 </LinkButton>
               </motion.li>
             ) : null}

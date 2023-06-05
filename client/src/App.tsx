@@ -11,7 +11,12 @@ import {
   ThemeProvider,
   PersistProvider,
 } from "providers";
-import { LayoutInvoice, LayoutPrivate, LayoutPublic } from "layouts";
+import {
+  LayoutInvoice,
+  LayoutPrivate,
+  LayoutPublic,
+  LayoutAccount,
+} from "layouts";
 
 import {
   ErrorPage,
@@ -24,9 +29,12 @@ import {
   Register,
   AuthGuard,
   PersistLogin,
+  AccountGeneral,
 } from "pages";
 
 import "./App.css";
+import { AccountProfile } from "pages/Account/AccountProfile";
+import { AccountPassword } from "pages/Account/AccountPassword";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -39,12 +47,19 @@ const router = createBrowserRouter(
         </Route>
 
         <Route element={<AuthGuard />}>
-          <Route path="dashboard" element={<LayoutPrivate />}>
-            <Route index element={<Dashboard />} />
-            <Route element={<LayoutInvoice />}>
-              <Route path="create" element={<InvoiceCreate />} />
-              <Route path=":id" element={<InvoiceView />} />
-              <Route path=":id/edit" element={<InvoiceEdit />} />
+          <Route element={<LayoutPrivate />}>
+            <Route path="account" element={<LayoutAccount />}>
+              <Route index element={<AccountGeneral />} />
+              <Route path="profile" element={<AccountProfile />} />
+              <Route path="password" element={<AccountPassword />} />
+            </Route>
+            <Route path="dashboard">
+              <Route index element={<Dashboard />} />
+              <Route element={<LayoutInvoice />}>
+                <Route path="create" element={<InvoiceCreate />} />
+                <Route path=":id" element={<InvoiceView />} />
+                <Route path=":id/edit" element={<InvoiceEdit />} />
+              </Route>
             </Route>
           </Route>
         </Route>
