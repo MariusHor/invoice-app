@@ -12,7 +12,6 @@ export const signoutUser = async (req: Request, res: Response, next: NextFunctio
 
         if (!foundUser) {
             res.clearCookie('jwt', {httpOnly: true, sameSite: 'none', secure: true});
-            res.clearCookie('isLoggedIn', {sameSite: 'none', secure: true});
             return res.status(204);
         }
 
@@ -20,7 +19,6 @@ export const signoutUser = async (req: Request, res: Response, next: NextFunctio
         await foundUser.save();
 
         res.clearCookie('jwt', {httpOnly: true, sameSite: 'none', secure: true});
-        res.clearCookie('isLoggedIn', {sameSite: 'none', secure: true});
         res.sendStatus(204);
     } catch (error) {
         next(error);

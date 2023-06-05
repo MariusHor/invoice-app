@@ -39,11 +39,6 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
                 sameSite: 'none',
                 maxAge: 24 * 60 * 60 * 1000,
             });
-            res.cookie('isLoggedIn', true, {
-                secure: true,
-                sameSite: 'none',
-                maxAge: 24 * 60 * 60 * 1000,
-            });
             res.json({accessToken});
         }
 

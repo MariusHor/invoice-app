@@ -16,7 +16,7 @@ export const Dashboard = (): React.JSX.Element => {
 
   const { data: invoices, isLoading } = useInvoices();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner intent={"inner"} />;
 
   const filteredInvoices = filterInvoices(invoices, filters);
   const totalPages = getTotalPages(filteredInvoices.length, invoicesPerPage);

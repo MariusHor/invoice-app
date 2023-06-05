@@ -30,14 +30,14 @@ import "./App.css";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" errorElement={<ErrorPage />}>
-      <Route element={<LayoutPublic />}>
-        <Route index element={<Home />} />
-        <Route path="login" element={<Login />} />
-        <Route path="register" element={<Register />} />
-      </Route>
+    <Route element={<PersistLogin />}>
+      <Route path="/" errorElement={<ErrorPage />}>
+        <Route element={<LayoutPublic />}>
+          <Route index element={<Home />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+        </Route>
 
-      <Route element={<PersistLogin />}>
         <Route element={<AuthGuard />}>
           <Route path="dashboard" element={<LayoutPrivate />}>
             <Route index element={<Dashboard />} />

@@ -1,39 +1,38 @@
 import { Outlet } from "react-router-dom";
-import { useState, useLayoutEffect } from "react";
-import { useAuth, useRefreshToken, usePersist } from "hooks";
+import { useState, useEffect } from "react";
+import { useAuth, usePersist } from "hooks";
+import { getRefreshToken } from "api";
+import { Spinner } from "components";
 
 export const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { refresh } = useRefreshToken();
-  const { auth } = useAuth();
-  const { persist } = usePersist();
+  const { setAuth } = useAuth();
+  const { persist, setPersist } = usePersist();
 
-  const hasAccessToken = auth.accessToken;
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     let isMounted = true;
-
-    const verifyRefreshToken = async () => {
+    const refreshAuth = async () => {
       try {
-        await refresh();
+        const {
+          data: { username, accessToken },
+        } = await getRefreshToken();
+
+        setAuth((prev) => {
+          return { ...prev, accessToken, username, isLoggedIn: true };
+        });
       } catch (err) {
-        console.error(err);
+        setPersist(false);
       } finally {
         isMounted && setIsLoading(false);
       }
     };
 
-    console.log(auth, hasAccessToken);
-
-    !hasAccessToken && persist ? verifyRefreshToken() : setIsLoading(false);
-
+    persist ? refreshAuth() : setIsLoading(false);
     return () => {
       isMounted = false;
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(persist);
-
-  return <>{isLoading ? null : <Outlet />}</>;
+  return <>{isLoading ? <Spinner /> : <Outlet />}</>;
 };

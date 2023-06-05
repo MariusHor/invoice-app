@@ -14,10 +14,6 @@ export const Hamburger = () => {
     auth: { isLoggedIn, username },
   } = useAuth();
 
-  const { auth } = useAuth();
-
-  console.log(auth);
-
   return (
     <div className="center">
       <IconButton
