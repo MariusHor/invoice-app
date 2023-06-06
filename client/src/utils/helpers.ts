@@ -54,3 +54,7 @@ export const formatDate = (createdAt: string, paymentTerms: number) => {
 
   return format(newDate, "yyyy-MM-dd");
 };
+
+export const getCharacterValidationError = (str: string) => {
+  return `Password must have at least 1 ${str} character`;
+};

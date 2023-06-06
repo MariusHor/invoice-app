@@ -1,12 +1,10 @@
-import { Formik, Form as FormikForm, FormikHelpers } from "formik";
-import { loginSchema } from "schemas";
-import { Button } from "components";
-import { Link } from "react-router-dom";
 import { ReactNode } from "react";
-import { registerSchema } from "schemas/registerSchema";
+import { Link } from "react-router-dom";
+import { Formik, Form as FormikForm, FormikHelpers } from "formik";
+
+import { Button, InputTextField, InputPasswordField } from "components";
+import { loginSchema, registerSchema } from "schemas";
 import { RegisterValues } from "types";
-import { InputPasswordField } from "../components/Inputs/InputPasswordField";
-import { InputTextField } from "components/Inputs/inputTextField";
 
 interface FormProps {
   initialValues: RegisterValues;

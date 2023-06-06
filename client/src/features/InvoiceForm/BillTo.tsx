@@ -1,5 +1,5 @@
 import { BillSection } from "./BillSection";
-import { InputTextField } from "../../components/Inputs/inputTextField";
+import { InputTextField } from "components";
 
 export const BillTo = () => {
   return (

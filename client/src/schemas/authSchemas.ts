@@ -1,8 +1,10 @@
 import * as yup from "yup";
+import { getCharacterValidationError } from "utils";
 
-export const getCharacterValidationError = (str: string) => {
-  return `Password must have at least 1 ${str} character`;
-};
+export const loginSchema = yup.object().shape({
+  username: yup.string().required("Username is required"),
+  password: yup.string().required("Password is required"),
+});
 
 export const registerSchema = yup
   .object({

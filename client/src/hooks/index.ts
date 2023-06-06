@@ -1,4 +1,4 @@
-export { useInvoices } from "./useInvoices";
+export { useInvoices } from "./useQueries";
 export { useUpdateInvoice } from "./useUpdateInvoice";
 export { useCreateInvoice } from "./useCreateInvoice";
 export { useDeleteInvoice } from "./useDeleteInvoice";

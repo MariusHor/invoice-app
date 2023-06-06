@@ -7,7 +7,7 @@ import { ButtonSignout } from "components/Button/ButtonSignout";
 import { capitalize } from "utils";
 import { useAuth } from "hooks";
 import { IconButton } from "@mui/material";
-import { useUser } from "hooks/useInvoices";
+import { useUser } from "hooks/useQueries";
 
 export const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);

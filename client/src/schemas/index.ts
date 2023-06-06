@@ -1,2 +1,6 @@
 export { invoiceSchema } from "./invoiceSchema";
-export { loginSchema } from "./loginSchema";
+export { loginSchema, registerSchema } from "./authSchemas";
+export {
+  updatePasswordSchema,
+  updateUsernameSchema,
+} from "./updateUserSchemas";

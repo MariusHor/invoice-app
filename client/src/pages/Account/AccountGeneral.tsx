@@ -1,11 +1,11 @@
-import { isAxiosError } from "axios";
-import { Button } from "components";
-import { InputTextField } from "components/Inputs/inputTextField";
-import { Formik, Form as FormikForm, FormikHelpers } from "formik";
-import { useUser } from "hooks/useInvoices";
-import { useUpdateUserSettings } from "hooks/useUpdateUser";
 import { useState } from "react";
-import * as yup from "yup";
+import { isAxiosError } from "axios";
+import { Formik, Form as FormikForm, FormikHelpers } from "formik";
+
+import { Button, InputTextField } from "components";
+import { useUser } from "hooks/useQueries";
+import { useUpdateUser } from "hooks/useMutations";
+import { updateUsernameSchema } from "schemas";
 
 interface GeneralSettingsValues {
   username: string;
@@ -13,7 +13,7 @@ interface GeneralSettingsValues {
 }
 
 export const AccountGeneral = (): React.JSX.Element => {
-  const updateUser = useUpdateUserSettings();
+  const updateUser = useUpdateUser();
   const { data: user } = useUser();
   const [_, setState] = useState();
 
@@ -49,18 +49,13 @@ export const AccountGeneral = (): React.JSX.Element => {
     }
   };
 
-  const schema = yup.object().shape({
-    username: yup.string().required("Username is required"),
-    email: yup.string().email().optional(),
-  });
-
   return (
     <div className="flex grow flex-col gap-3 text-center">
       <Formik
         initialValues={initialValues}
         enableReinitialize={true}
         onSubmit={handleSubmit}
-        validationSchema={schema}
+        validationSchema={updateUsernameSchema}
       >
         {({ isSubmitting, values }) => (
           <FormikForm className="flex w-full flex-col gap-5">

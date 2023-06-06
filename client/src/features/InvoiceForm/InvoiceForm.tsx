@@ -1,13 +1,17 @@
 import { Formik, Form, FormikHelpers } from "formik";
-import { Invoice, InvoiceResult } from "types";
-import { invoiceSchema } from "schemas";
-import { ButtonBack, Button } from "components";
+
+import {
+  ButtonBack,
+  Button,
+  InputDatePicker,
+  InputSelectField,
+  InputTextField,
+} from "components";
 import { BillFrom } from "./BillFrom";
 import { BillTo } from "./BillTo";
 import { ItemList } from "./ItemList";
-import { InputDatePicker } from "components/Inputs/InputDatePicker";
-import { InputSelectField } from "components/Inputs/InputSelectField";
-import { InputTextField } from "components/Inputs/inputTextField";
+import { Invoice, InvoiceResult } from "types";
+import { invoiceSchema } from "schemas";
 
 interface InvoiceFormProps {
   invoice?: InvoiceResult;
