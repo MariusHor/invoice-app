@@ -7,8 +7,12 @@ export const useInvoices = () => {
   return useQuery({
     queryKey: ["invoices"],
     queryFn: async () => {
-      const response = await axiosPrivate.get("/user/invoices");
-      return response.data;
+      try {
+        const response = await axiosPrivate.get("/user/invoices");
+        return response.data;
+      } catch (error) {
+        return {};
+      }
     },
   });
 };

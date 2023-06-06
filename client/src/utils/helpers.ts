@@ -58,3 +58,12 @@ export const formatDate = (createdAt: string, paymentTerms: number) => {
 export const getCharacterValidationError = (str: string) => {
   return `Password must have at least 1 ${str} character`;
 };
+
+export const parseJwt = (token: string | undefined) => {
+  try {
+    if (token) return JSON.parse(atob(token.split(".")[1]));
+    return null;
+  } catch (e) {
+    return null;
+  }
+};
