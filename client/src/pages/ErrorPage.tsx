@@ -4,6 +4,8 @@ import { LinkButton } from "components";
 export const ErrorPage = () => {
   const error = useRouteError();
 
+  console.log(error);
+
   if (isRouteErrorResponse(error)) {
     return (
       <div className="col-span-full row-span-full flex flex-col items-center justify-center gap-4">

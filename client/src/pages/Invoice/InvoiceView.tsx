@@ -1,5 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { InvoiceStatus, InvoiceDetails, LinkButton, Button } from "components";
+import {
+  InvoiceStatus,
+  InvoiceDetails,
+  LinkButton,
+  Button,
+  Spinner,
+} from "components";
 import { InvoiceResult } from "types";
 import { invariant } from "utils";
 import { useDeleteInvoice, useInvoices, useUpdateInvoice } from "hooks";
@@ -12,7 +18,9 @@ export const InvoiceView = () => {
   const { id } = useParams();
   invariant(id);
 
-  const { data: invoices } = useInvoices();
+  const { data: invoices, isLoading } = useInvoices();
+
+  if (isLoading) return <Spinner intent={"inner"} />;
 
   const invoice: InvoiceResult = invoices.find(
     (invoice: InvoiceResult) => invoice.invoiceId === id
