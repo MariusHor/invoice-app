@@ -9,8 +9,6 @@ export const PersistLogin = () => {
   const { setAuth } = useAuth();
   const { persist, setPersist } = usePersist();
 
-  console.log("PERSIST");
-
   useEffect(() => {
     let isMounted = true;
     const refreshAuth = async () => {
@@ -18,7 +16,7 @@ export const PersistLogin = () => {
         const {
           data: { username, accessToken },
         } = await getRefreshToken();
-        console.log(accessToken);
+
         setAuth((prev) => {
           return { ...prev, accessToken, username, isLoggedIn: true };
         });

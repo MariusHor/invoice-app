@@ -22,10 +22,10 @@ export const button = cva(
           "enabled:hover:bg-skin-btn-accent-hover enabled:hover:border-btn-accent-hover",
         ],
         outlined: [
-          "enabled:hover:border-btn-outlined-hover enabled:hover:bg-skin-btn-outlined-hover",
+          "enabled:hover:border-btn-outlined-hover enabled:hover:bg-skin-btn-outlined-hover border-slate-300",
         ],
         "outlined-link": [
-          "hover:border-btn-outlined-hover hover:bg-skin-btn-outlined-hover",
+          "hover:border-btn-outlined-hover hover:bg-skin-btn-outlined-hover border-slate-300",
         ],
       },
 

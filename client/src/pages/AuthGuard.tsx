@@ -8,7 +8,7 @@ import { parseJwt } from "utils";
 export const AuthGuard = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(true);
-  const [hasValidJWT, setHasValidJWT] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const { auth, setAuth } = useAuth();
   const { setPersist } = usePersist();
 
@@ -24,7 +24,7 @@ export const AuthGuard = () => {
           data: { accessToken },
         } = await getRefreshToken();
 
-        setHasValidJWT(true);
+        setIsAuthenticated(true);
         setAuth((prev) => {
           return { ...prev, accessToken };
         });
@@ -35,20 +35,24 @@ export const AuthGuard = () => {
       }
     };
 
-    if (isExpired) {
-      setHasValidJWT(false);
-      setIsLoading(true);
+    if (!auth.accessToken) {
+      setIsLoading(false);
+    }
 
+    if (isExpired && auth.accessToken) {
+      setIsAuthenticated(false);
+      setIsLoading(true);
       refreshAuth();
     }
+
     if (!isExpired) {
-      setHasValidJWT(true);
+      setIsAuthenticated(true);
       setIsLoading(false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
-  if (isLoading) return <Spinner />;
-  if (hasValidJWT) return <Outlet />;
+  if (!isExpired) return <Outlet />;
+  if (isLoading || (isAuthenticated && isExpired)) return <Spinner />;
   return <Navigate to="/login" state={{ from: location }} replace />;
 };

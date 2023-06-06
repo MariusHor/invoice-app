@@ -68,11 +68,7 @@ export const AccountHeader = ({
         </div>
       </div>
       <div className="hidden md:block">
-        <LinkButton
-          to="/subscribe"
-          intent={"outlined-link"}
-          className="border-slate-300"
-        >
+        <LinkButton to="/subscribe" intent={"outlined-link"}>
           Go PRO
         </LinkButton>
       </div>

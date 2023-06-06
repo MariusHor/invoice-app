@@ -44,12 +44,10 @@ export const getSignout = async () =>
     withCredentials: true,
   });
 
-export const getRefreshToken = async () => {
-  console.log("GET-REFRESH");
-  return await axiosPublic.get("/auth/refresh", {
+export const getRefreshToken = async () =>
+  await axiosPublic.get("/auth/refresh", {
     withCredentials: true,
   });
-};
 
 export const getInvoices = async () => {
   const response = await axiosPrivate.get("/user/invoices");
