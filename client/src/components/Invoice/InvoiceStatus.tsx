@@ -1,6 +1,7 @@
-import { cva, type VariantProps } from "class-variance-authority";
 import { HTMLAttributes } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
+
 import { capitalize } from "utils";
 
 const status = cva(

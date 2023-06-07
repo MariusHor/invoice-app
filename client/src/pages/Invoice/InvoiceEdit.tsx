@@ -1,9 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { FormikHelpers } from "formik";
+
+import { InvoiceForm } from "features";
 import { Invoice, InvoiceResult } from "types";
-import { invariant } from "utils";
 import { useGetInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
-import { LayoutForm } from "layouts/LayoutInvoiceForm";
+import { invariant } from "utils";
 
 export const InvoiceEdit = () => {
   const getInvoiceProps = useGetInvoiceProps();
@@ -35,11 +36,9 @@ export const InvoiceEdit = () => {
   };
 
   return (
-    <LayoutForm
-      title="Edit Invoice"
-      handleSubmit={handleSubmit}
-      isEditing={true}
-      invoice={invoice}
-    />
+    <div className="form-wrapper lg:grow-1 flex w-full max-w-xl flex-col justify-between gap-8 rounded-xl bg-skin-fill-secondary p-8 lg:overflow-y-auto">
+      <h1 className="heading-md text-skin-base">Edit Invoice</h1>
+      <InvoiceForm onSubmit={handleSubmit} invoice={invoice} isEditing={true} />
+    </div>
   );
 };

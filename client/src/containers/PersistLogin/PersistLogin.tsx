@@ -1,8 +1,9 @@
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+
+import { Spinner } from "components";
 import { useAuth, usePersist } from "hooks";
 import { getRefreshToken } from "api";
-import { Spinner } from "components";
 
 export const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,6 +17,8 @@ export const PersistLogin = () => {
         const {
           data: { username, accessToken },
         } = await getRefreshToken();
+
+        console.log(accessToken);
 
         setAuth((prev) => {
           return { ...prev, accessToken, username, isLoggedIn: true };

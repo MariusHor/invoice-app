@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { FormikHelpers } from "formik";
+
+import { InvoiceForm } from "features";
 import { Invoice } from "types";
 import { useCreateInvoice, useGetInvoiceProps } from "hooks";
-import { LayoutForm } from "layouts/LayoutInvoiceForm";
 
 export const InvoiceCreate = () => {
   const getInvoiceProps = useGetInvoiceProps();
@@ -28,5 +29,10 @@ export const InvoiceCreate = () => {
     return navigate("/dashboard");
   };
 
-  return <LayoutForm title="New Invoice" handleSubmit={handleSubmit} />;
+  return (
+    <div className="form-wrapper lg:grow-1 flex w-full max-w-xl flex-col justify-between gap-8 rounded-xl bg-skin-fill-secondary p-8 lg:overflow-y-auto">
+      <h1 className="heading-md text-skin-base">New Invoice</h1>
+      <InvoiceForm onSubmit={handleSubmit} />
+    </div>
+  );
 };

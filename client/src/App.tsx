@@ -17,7 +17,7 @@ import {
   LayoutPublic,
   LayoutAccount,
 } from "layouts";
-
+import { AuthGuard, PersistLogin } from "containers";
 import {
   ErrorPage,
   InvoiceEdit,
@@ -27,14 +27,12 @@ import {
   Home,
   Login,
   Register,
-  AuthGuard,
-  PersistLogin,
   AccountGeneral,
+  AccountProfile,
+  AccountPassword,
 } from "pages";
 
 import "./App.css";
-import { AccountProfile } from "pages/Account/AccountProfile";
-import { AccountPassword } from "pages/Account/AccountPassword";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

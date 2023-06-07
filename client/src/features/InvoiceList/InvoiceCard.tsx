@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { ReactNode } from "react";
-import { InvoiceResult } from "types";
+
 import { InvoiceStatus } from "components";
+import { InvoiceResult } from "types";
 import arrowRight from "assets/icon-arrow-right.svg";
 
 export const InvoiceCard = ({

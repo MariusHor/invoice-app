@@ -1,7 +1,7 @@
-import { CircularProgress } from "@mui/material";
-import { type VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
 import { HTMLAttributes } from "react";
+import { CircularProgress } from "@mui/material";
+import { cva } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 
 const spinner = cva("flex-center w-full", {
   variants: {

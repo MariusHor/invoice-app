@@ -8,8 +8,7 @@ import {
 } from "formik";
 
 import { Button, InputTextField, Spinner } from "components";
-import { useUser } from "hooks/useQueries";
-import { useUpdateUser } from "hooks/useMutations";
+import { useUpdateUser, useUser } from "hooks";
 import { updateUsernameSchema } from "schemas";
 
 export const AccountGeneral = (): React.JSX.Element => {

@@ -1,5 +1,5 @@
-import bgVector from "../assets/bgVector.svg";
 import { ReactNode } from "react";
+import bgVector from "../assets/bgVector.svg";
 
 interface LayoutLoginRegisterProps {
   children: ReactNode;

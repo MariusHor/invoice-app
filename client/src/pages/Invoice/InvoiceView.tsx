@@ -1,4 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+
 import {
   InvoiceStatus,
   InvoiceDetails,
@@ -9,7 +11,6 @@ import {
 import { InvoiceResult } from "types";
 import { invariant } from "utils";
 import { useDeleteInvoice, useInvoices, useUpdateInvoice } from "hooks";
-import { AnimatePresence, motion } from "framer-motion";
 
 export const InvoiceView = () => {
   const deleteInvoice = useDeleteInvoice();

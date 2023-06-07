@@ -1,7 +1,8 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { useAuth, usePersist } from "hooks";
 import { useEffect, useState } from "react";
+import { useLocation, Navigate, Outlet } from "react-router-dom";
+
 import { Spinner } from "components";
+import { useAuth, usePersist } from "hooks";
 import { getRefreshToken } from "api";
 import { parseJwt } from "utils";
 

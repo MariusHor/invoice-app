@@ -1,5 +1,5 @@
-import fallbackImg from "assets/illustration-empty.svg";
 import { ReactNode } from "react";
+import fallbackImg from "assets/illustration-empty.svg";
 
 export const InvoiceFallback = ({
   children,

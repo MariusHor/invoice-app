@@ -1,5 +1,5 @@
-import { useUser } from "hooks/useQueries";
 import { default as AvatarMUI } from "@mui/material/Avatar";
+import { useUser } from "hooks";
 
 interface SizesProps {
   [key: string]: {

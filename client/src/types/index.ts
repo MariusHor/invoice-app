@@ -55,3 +55,11 @@ export interface Auth {
   accessToken?: string;
   isLoggedIn?: boolean;
 }
+
+export interface AccountUpdates {
+  username?: string;
+  email?: string;
+  image?: FormData;
+  oldPassword?: string;
+  newPassword?: string;
+}

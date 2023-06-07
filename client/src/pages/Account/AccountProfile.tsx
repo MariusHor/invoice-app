@@ -8,8 +8,7 @@ import {
   FormikValues,
 } from "formik";
 import { SimpleFileUpload } from "formik-mui";
-import { useDeleteUser, useUpdateUser } from "hooks/useMutations";
-import { useUser } from "hooks/useQueries";
+import { useDeleteUser, useUpdateUser, useUser } from "hooks";
 
 export const AccountProfile = (): React.JSX.Element => {
   return (

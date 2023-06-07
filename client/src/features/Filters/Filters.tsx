@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { CSSTransition } from "react-transition-group";
 import { Button } from "@mui/material";
+
 import { Filter } from "./Filter";
 import arrowDownIcon from "assets/icon-arrow-down.svg";
 

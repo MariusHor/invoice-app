@@ -1,6 +1,7 @@
+import { motion, AnimatePresence } from "framer-motion";
+
 import { InvoiceResult } from "types";
 import { InvoiceCard } from "./InvoiceCard";
-import { motion, AnimatePresence } from "framer-motion";
 
 export const InvoiceList = ({
   currentInvoices,

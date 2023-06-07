@@ -1,13 +1,11 @@
 import { useState } from "react";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { motion, AnimatePresence } from "framer-motion";
-
-import { Avatar, LinkButton } from "components";
-import { ButtonSignout } from "components/Button/ButtonSignout";
-import { capitalize } from "utils";
-import { useAuth } from "hooks";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { IconButton } from "@mui/material";
-import { useUser } from "hooks/useQueries";
+
+import { Avatar, LinkButton, ButtonSignout } from "components";
+import { useAuth, useUser } from "hooks";
+import { capitalize } from "utils";
 
 export const Hamburger = () => {
   const [isOpen, setIsOpen] = useState(false);

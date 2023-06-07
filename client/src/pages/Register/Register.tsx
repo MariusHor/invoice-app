@@ -1,12 +1,13 @@
-import { postRegister } from "api";
-import { isAxiosError } from "axios";
-import { Form } from "features/Form";
-import { FormikHelpers } from "formik";
-import { LayoutLoginRegister } from "layouts/LayoutLoginRegister";
-import { RegisterValues } from "types";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { InputPasswordField } from "components/Inputs/InputPasswordField";
+import { useNavigate } from "react-router-dom";
+import { isAxiosError } from "axios";
+import { FormikHelpers } from "formik";
+
+import { LayoutLoginRegister } from "layouts";
+import { RegisterLoginForm } from "features";
+import { InputPasswordField } from "components";
+import { RegisterValues } from "types";
+import { postRegister } from "api";
 
 export const Register = (): React.JSX.Element => {
   const [_, setState] = useState();
@@ -47,13 +48,13 @@ export const Register = (): React.JSX.Element => {
 
   return (
     <LayoutLoginRegister>
-      <Form
+      <RegisterLoginForm
         isLogin={false}
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
         <InputPasswordField label="Confirm Password" id="passwordConfirm" />
-      </Form>
+      </RegisterLoginForm>
     </LayoutLoginRegister>
   );
 };

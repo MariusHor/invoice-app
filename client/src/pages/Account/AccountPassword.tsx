@@ -8,9 +8,7 @@ import {
 } from "formik";
 
 import { Button, InputPasswordField } from "components";
-import { useSignout } from "hooks";
-import { useUser } from "hooks/useQueries";
-import { useUpdateUser } from "hooks/useMutations";
+import { useSignout, useUpdateUser, useUser } from "hooks";
 import { updatePasswordSchema } from "schemas";
 
 export const AccountPassword = (): React.JSX.Element => {

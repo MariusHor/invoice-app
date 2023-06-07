@@ -1,6 +1,6 @@
-import { LinkButton } from "./Button/Link";
+import { LinkButton } from "../Button/Link";
+import { ButtonSignout } from "../Button/ButtonSignout";
 import { useAuth } from "hooks";
-import { ButtonSignout } from "./Button/ButtonSignout";
 
 export const NavLinks = (): React.JSX.Element => {
   const {

@@ -16,7 +16,7 @@ interface FormProps {
   ) => void;
 }
 
-export const Form = ({
+export const RegisterLoginForm = ({
   isLogin,
   onSubmit,
   initialValues,

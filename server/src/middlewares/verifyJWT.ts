@@ -19,8 +19,13 @@ export const verifyJWT = (req: CustomRequest, res: Response, next: NextFunction)
         ? authHeader.find((item) => item.startsWith('Bearer ')).split(' ')[1]
         : authHeader.split(' ')[1];
 
+    console.log(token);
+
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
-        if (err) return res.sendStatus(403);
+        if (err) {
+            console.log(`err: ${err}`);
+            return res.sendStatus(403);
+        }
 
         req.user = decoded.UserInfo.username;
         next();

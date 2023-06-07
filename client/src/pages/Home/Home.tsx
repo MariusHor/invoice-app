@@ -1,5 +1,5 @@
-import { LinkButton } from "components";
 import { useOutletContext } from "react-router-dom";
+import { LinkButton } from "components";
 
 export const Home = (): React.JSX.Element => {
   const { isLoggedIn } = useOutletContext<{ isLoggedIn: boolean }>();

@@ -1,8 +1,9 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { Avatar, LinkButton, Spinner } from "components";
-import { capitalize } from "utils";
-import { useUser } from "hooks/useQueries";
 import { useEffect, useState } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+
+import { Avatar, LinkButton, Spinner } from "components";
+import { useUser } from "hooks";
+import { capitalize } from "utils";
 
 export const LayoutAccount = () => {
   const { data: user, isLoading } = useUser();

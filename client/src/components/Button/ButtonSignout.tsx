@@ -1,5 +1,5 @@
-import { useSignout } from "hooks";
 import { Button } from "./Button";
+import { useSignout } from "hooks";
 
 interface ButtonSignoutProps {
   signoutCallback?: () => void;

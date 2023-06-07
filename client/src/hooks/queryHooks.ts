@@ -8,9 +8,12 @@ export const useInvoices = () => {
     queryKey: ["invoices"],
     queryFn: async () => {
       try {
-        const response = await axiosPrivate.get("/user/invoices");
+        const response = await axiosPrivate.get("/user/invoices", {
+          headers: { "Content-Type": "application/json" },
+        });
         return response.data;
       } catch (error) {
+        console.log(error);
         return {};
       }
     },
@@ -24,7 +27,9 @@ export const useUser = () => {
     queryKey: ["user"],
     queryFn: async () => {
       try {
-        const response = await axiosPrivate.get("/user/account");
+        const response = await axiosPrivate.get("/user/account", {
+          headers: { "Content-Type": "application/json" },
+        });
         return response.data;
       } catch (error) {
         return {};

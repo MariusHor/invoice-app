@@ -1,20 +1,17 @@
-import { postLogin } from "api";
-import { isAxiosError } from "axios";
-import { InputCheckboxField } from "components/Inputs/InputCheckboxField";
-import { Form } from "features/Form";
-import { FormikHelpers } from "formik";
-import { useAuth, usePersist } from "hooks";
-import { LayoutLoginRegister } from "layouts/LayoutLoginRegister";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { isAxiosError } from "axios";
+import { FormikHelpers } from "formik";
+
+import { LayoutLoginRegister } from "layouts";
+import { RegisterLoginForm } from "features";
+import { InputCheckboxField } from "components";
+import { useLogin, usePersist } from "hooks";
 import { LoginValues } from "types";
 
 export const Login = (): React.JSX.Element => {
-  const { setAuth } = useAuth();
-  const navigate = useNavigate();
-  const { state } = useLocation();
   const [_, setState] = useState();
   const { setPersist } = usePersist();
+  const login = useLogin();
 
   const initialValues = {
     username: "",
@@ -29,20 +26,10 @@ export const Login = (): React.JSX.Element => {
     const { username, password, rememberMe } = values;
 
     try {
-      const { accessToken } = await postLogin({ password, username });
-
-      setAuth({
-        isLoggedIn: true,
-        username,
-        password,
-        accessToken,
-      });
-
+      await login.mutateAsync({ password, username });
       setSubmitting(false);
 
       if (rememberMe !== undefined) setPersist(rememberMe);
-
-      navigate(state?.from || "/dashboard");
     } catch (error) {
       if (isAxiosError(error)) {
         switch (error.response?.status) {
@@ -65,7 +52,7 @@ export const Login = (): React.JSX.Element => {
 
   return (
     <LayoutLoginRegister>
-      <Form
+      <RegisterLoginForm
         isLogin={true}
         initialValues={initialValues}
         onSubmit={handleSubmit}
@@ -74,7 +61,7 @@ export const Login = (): React.JSX.Element => {
           id={"rememberMe"}
           label="Remember me?"
         ></InputCheckboxField>
-      </Form>
+      </RegisterLoginForm>
     </LayoutLoginRegister>
   );
 };
