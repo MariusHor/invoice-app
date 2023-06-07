@@ -1,26 +1,28 @@
-import userAvatar from "assets/image-avatar.jpg";
-import { type VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
-import { HTMLAttributes } from "react";
+import { useUser } from "hooks/useQueries";
+import { default as AvatarMUI } from "@mui/material/Avatar";
 
-const avatar = cva("overflow-hidden rounded-full", {
-  variants: {
-    intent: {
-      primary: ["h-10 w-10 md:h-12 md:w-12"],
-      secondary: ["h-16 w-16 md:h-20 md:w-20"],
-    },
-  },
-  defaultVariants: {
-    intent: "primary",
-  },
-});
+interface SizesProps {
+  [key: string]: {
+    width: number;
+    height: number;
+  };
+}
 
-export interface SpinnerProps
-  extends HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof avatar> {}
+export const Avatar = ({ intent = "small" }: { intent?: string }) => {
+  const { data: user, isLoading } = useUser();
+  const sizes: SizesProps = {
+    small: { width: 50, height: 50 },
+    medium: { width: 70, height: 70 },
+    large: { width: 80, height: 80 },
+  };
 
-export const Avatar = ({ className, intent, ...props }: SpinnerProps) => (
-  <div className={avatar({ intent, className })} {...props}>
-    <img src={userAvatar} alt="" />
-  </div>
-);
+  if (isLoading) return <></>;
+
+  return (
+    <AvatarMUI
+      sx={{ bgcolor: "grey", ...sizes[intent] }}
+      alt={user.username}
+      src={user.image}
+    />
+  );
+};

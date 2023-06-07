@@ -2,6 +2,7 @@ import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Avatar, LinkButton, Spinner } from "components";
 import { capitalize } from "utils";
 import { useUser } from "hooks/useQueries";
+import { useEffect, useState } from "react";
 
 export const LayoutAccount = () => {
   const { data: user, isLoading } = useUser();
@@ -15,7 +16,7 @@ export const LayoutAccount = () => {
   };
 
   return (
-    <div className="mt-20 flex grow flex-col gap-10 text-start">
+    <div className="mt-20 flex w-full max-w-lg grow flex-col gap-10 text-start">
       <AccountHeader username={user.username} />
       <div className="flex gap-10">
         <ul className="flex w-20 flex-col gap-3">
@@ -39,32 +40,36 @@ export const AccountHeader = ({
   username: string;
 }): React.JSX.Element => {
   const location = useLocation();
-  let title = "";
+  const [title, setTitle] = useState("");
+  const [phrase, setPhrase] = useState("");
 
-  switch (location.pathname.slice(1)) {
-    case "account/profile":
-      title = "Edit Profile";
-      break;
-    case "account/password":
-      title = "Password";
-      break;
-    default:
-      title = "General";
-  }
+  useEffect(() => {
+    switch (location.pathname.slice(1)) {
+      case "account/profile":
+        setTitle("Edit Profile");
+        setPhrase("Set up your Paperless presence");
+        break;
+      case "account/password":
+        setTitle("Password");
+        setPhrase("Manage your password");
+        break;
+      default:
+        setTitle("General");
+        setPhrase("Update your username and email");
+    }
+  }, [location.pathname]);
 
   return (
     <div className="flex items-center justify-between gap-20">
       <div className="flex-center gap-6 text-start">
         <Avatar />
-        <div>
+        <div className="grow">
           <div>
             <h1 className="heading-lg font-bold">
-              {capitalize(username)} / {title}
+              {capitalize(username ?? "")} / {title}
             </h1>
           </div>
-          <p className="text-skin-muted">
-            Update your username and manage your account
-          </p>
+          <p className="text-skin-muted">{phrase}</p>
         </div>
       </div>
       <div className="hidden md:block">

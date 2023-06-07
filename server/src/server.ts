@@ -4,12 +4,15 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
+
 import {errorLogger, errorResponder} from './middlewares';
-import {dbConfig, corsConfig} from './config';
-import {userRoutes, authRoutes} from './routes';
+import {dbConfig, corsConfig, cloudinaryConfig} from './config';
 import {verifyJWT} from './middlewares/verifyJWT';
+import {authRoutes, userRoutes} from './routes';
 
 dotenv.config();
+dbConfig();
+cloudinaryConfig();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -20,8 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors(corsConfig));
 app.use(cookieParser());
-
-dbConfig();
 
 app.use('/api/public/auth', authRoutes);
 

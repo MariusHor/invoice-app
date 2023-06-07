@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { isAxiosError } from "axios";
-import { Formik, Form as FormikForm, FormikHelpers } from "formik";
+import {
+  Formik,
+  Form as FormikForm,
+  FormikHelpers,
+  FormikValues,
+} from "formik";
 
 import { Button, InputPasswordField } from "components";
 import { useSignout } from "hooks";
@@ -8,25 +13,20 @@ import { useUser } from "hooks/useQueries";
 import { useUpdateUser } from "hooks/useMutations";
 import { updatePasswordSchema } from "schemas";
 
-interface PasswordValues {
-  oldPassword: string;
-  newPassword: string;
-}
-
 export const AccountPassword = (): React.JSX.Element => {
   const signout = useSignout();
   const { data: user } = useUser();
   const updateUser = useUpdateUser();
   const [_, setState] = useState();
 
-  const initialValues = {
+  const initialValues: FormikValues = {
     oldPassword: "",
     newPassword: "",
   };
 
   const handleSubmit = async (
-    values: PasswordValues,
-    { setSubmitting, setFieldError }: FormikHelpers<PasswordValues>
+    values: FormikValues,
+    { setSubmitting, setFieldError }: FormikHelpers<FormikValues>
   ) => {
     const { oldPassword, newPassword } = values;
 

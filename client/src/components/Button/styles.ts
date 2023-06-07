@@ -48,6 +48,10 @@ export const button = cva(
         intent: ["outlined", "outlined-link"],
         class: "text-skin-base hover:text-skin-dark border border-btn-outlined",
       },
+      {
+        size: ["small", "medium"],
+        class: "w-fit",
+      },
     ],
     defaultVariants: {
       intent: "primary",

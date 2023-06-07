@@ -3,4 +3,4 @@ export {registerUser} from './register.controller';
 export {loginUser} from './login.controller';
 export {signoutUser} from './signout.controller';
 export {refreshToken} from './refreshToken.controller';
-export {getUser, updateUser} from './user.controller';
+export {getUser, updateUser, updateUserAvatar, DeleteUserAvatar} from './user.controller';

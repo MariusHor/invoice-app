@@ -66,7 +66,7 @@ export const Hamburger = () => {
                 }}
               >
                 <Avatar />
-                <span>{capitalize(user.username)}</span>
+                <span>{capitalize(user?.username ?? "")}</span>
               </motion.li>
             ) : null}
             <motion.li

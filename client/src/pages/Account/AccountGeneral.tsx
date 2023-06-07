@@ -1,30 +1,32 @@
 import { useState } from "react";
 import { isAxiosError } from "axios";
-import { Formik, Form as FormikForm, FormikHelpers } from "formik";
+import {
+  Formik,
+  Form as FormikForm,
+  FormikHelpers,
+  FormikValues,
+} from "formik";
 
-import { Button, InputTextField } from "components";
+import { Button, InputTextField, Spinner } from "components";
 import { useUser } from "hooks/useQueries";
 import { useUpdateUser } from "hooks/useMutations";
 import { updateUsernameSchema } from "schemas";
 
-interface GeneralSettingsValues {
-  username: string;
-  email: string;
-}
-
 export const AccountGeneral = (): React.JSX.Element => {
   const updateUser = useUpdateUser();
-  const { data: user } = useUser();
+  const { data: user, isLoading } = useUser();
   const [_, setState] = useState();
 
-  const initialValues = {
+  if (isLoading) return <Spinner />;
+
+  const initialValues: FormikValues = {
     username: user.username ?? "",
     email: user?.email ?? "",
   };
 
   const handleSubmit = async (
-    values: GeneralSettingsValues,
-    { setSubmitting, setFieldError }: FormikHelpers<GeneralSettingsValues>
+    values: FormikValues,
+    { setSubmitting, setFieldError }: FormikHelpers<FormikValues>
   ) => {
     const { username, email } = values;
 
