@@ -6,3 +6,4 @@ export { Pagination } from "./Pagination/Pagination";
 export { InvoiceForm } from "./InvoiceForm/InvoiceForm";
 export { RegisterLoginForm } from "./RegisterSharedForm/RegisterLoginForm";
 export { Hamburger } from "./Hamburger/Hamburger";
+export { UploadImageForm } from "./UploadImageForm/UploadImageForm";

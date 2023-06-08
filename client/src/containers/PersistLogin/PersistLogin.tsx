@@ -2,25 +2,19 @@ import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 import { Spinner } from "components";
-import { useAuth, usePersist } from "hooks";
-import { getRefreshToken } from "api";
+import { useAuth, usePersist, useRefreshToken } from "hooks";
 
 export const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { auth, setAuth } = useAuth();
+  const { auth } = useAuth();
   const { persist, setPersist } = usePersist();
+  const refreshAccessToken = useRefreshToken();
 
   useEffect(() => {
     let isMounted = true;
     const refreshAuth = async () => {
       try {
-        const {
-          data: { username, accessToken },
-        } = await getRefreshToken();
-
-        setAuth((prev) => {
-          return { ...prev, accessToken, username, isLoggedIn: true };
-        });
+        await refreshAccessToken();
       } catch (err) {
         setPersist(false);
       } finally {
@@ -35,5 +29,5 @@ export const PersistLogin = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <>{isLoading ? <Spinner /> : <Outlet />}</>;
+  return <>{!persist ? <Outlet /> : isLoading ? <Spinner /> : <Outlet />}</>;
 };

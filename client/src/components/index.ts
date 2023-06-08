@@ -18,3 +18,4 @@ export { Avatar } from "./Avatar/Avatar";
 export { Spinner } from "./Spinner/Spinner";
 
 export { NavLinks } from "./NavLinks/NavLinks";
+export { SelectOptionLink } from "./SelectOption/SelectOptionLink";

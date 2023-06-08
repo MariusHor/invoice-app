@@ -63,3 +63,8 @@ export interface AccountUpdates {
   oldPassword?: string;
   newPassword?: string;
 }
+
+export interface SelectOption {
+  label: string;
+  value: string;
+}

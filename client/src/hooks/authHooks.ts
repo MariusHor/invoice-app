@@ -59,12 +59,13 @@ export const useRefreshToken = () => {
   return async () => {
     try {
       const response = await getRefreshToken();
+      const { username, accessToken } = response.data;
 
       setAuth((prev) => {
-        return { ...prev, accessToken: response.data.accessToken };
+        return { ...prev, accessToken, username, isLoggedIn: true };
       });
 
-      return response.data.accessToken;
+      return accessToken;
     } catch (error) {
       console.log(error);
       throw error;

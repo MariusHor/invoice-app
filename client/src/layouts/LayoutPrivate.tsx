@@ -14,7 +14,7 @@ export const LayoutPrivate = () => {
       <Navbar intent={"private"}>
         <Hamburger />
       </Navbar>
-      <main className="flex grow flex-col items-center p-4 lg:col-span-11 lg:col-start-2 lg:row-span-full lg:h-screen">
+      <main className="flex grow flex-col items-center px-4 py-8 lg:col-span-11 lg:col-start-2 lg:row-span-full lg:h-screen">
         <Outlet />
       </main>
     </div>
