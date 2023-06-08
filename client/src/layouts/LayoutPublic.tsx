@@ -11,9 +11,7 @@ export const LayoutPublic = () => {
 
   return (
     <div
-      className={`${
-        theme === "light" ? "theme-light" : "theme-dark"
-      } flex min-h-screen flex-col bg-skin-fill font-main`}
+      className={`${theme} flex min-h-screen flex-col bg-skin-fill font-main`}
     >
       <Navbar intent={"public"}>
         <div className={!isLoggedIn ? "md:hidden" : ""}>

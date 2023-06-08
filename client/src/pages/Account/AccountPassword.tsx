@@ -10,17 +10,13 @@ import {
 import { Button, InputPasswordField } from "components";
 import { useSignout, useUpdateUser, useUser } from "hooks";
 import { updatePasswordSchema } from "schemas";
+import { RESET_PASS_INIT_VALUES } from "utils/constants";
 
 export const AccountPassword = (): React.JSX.Element => {
   const signout = useSignout();
   const { data: user } = useUser();
   const updateUser = useUpdateUser();
   const [_, setState] = useState();
-
-  const initialValues: FormikValues = {
-    oldPassword: "",
-    newPassword: "",
-  };
 
   const handleSubmit = async (
     values: FormikValues,
@@ -59,7 +55,7 @@ export const AccountPassword = (): React.JSX.Element => {
   return (
     <div className="flex grow flex-col gap-3 text-center">
       <Formik
-        initialValues={initialValues}
+        initialValues={RESET_PASS_INIT_VALUES}
         enableReinitialize={true}
         onSubmit={handleSubmit}
         validationSchema={updatePasswordSchema}

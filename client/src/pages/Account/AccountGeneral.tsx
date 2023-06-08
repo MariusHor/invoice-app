@@ -10,6 +10,7 @@ import {
 import { Button, InputTextField, Spinner } from "components";
 import { useUpdateUser, useUser } from "hooks";
 import { updateUsernameSchema } from "schemas";
+import { RESET_USERNAME_INIT_VALUES } from "utils/constants";
 
 export const AccountGeneral = (): React.JSX.Element => {
   const updateUser = useUpdateUser();
@@ -17,11 +18,6 @@ export const AccountGeneral = (): React.JSX.Element => {
   const [_, setState] = useState();
 
   if (isLoading) return <Spinner />;
-
-  const initialValues: FormikValues = {
-    username: user.username ?? "",
-    email: user?.email ?? "",
-  };
 
   const handleSubmit = async (
     values: FormikValues,
@@ -50,10 +46,15 @@ export const AccountGeneral = (): React.JSX.Element => {
     }
   };
 
+  const dbInitValues: FormikValues = {
+    username: user?.username,
+    email: user?.email,
+  };
+
   return (
     <div className="flex grow flex-col gap-3 text-center">
       <Formik
-        initialValues={initialValues}
+        initialValues={dbInitValues || RESET_USERNAME_INIT_VALUES}
         enableReinitialize={true}
         onSubmit={handleSubmit}
         validationSchema={updateUsernameSchema}

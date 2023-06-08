@@ -8,15 +8,11 @@ import { RegisterLoginForm } from "features";
 import { InputPasswordField } from "components";
 import { RegisterValues } from "types";
 import { postRegister } from "api";
+import { REGISTER_FORM_INIT_VALUES } from "utils/constants";
 
 export const Register = (): React.JSX.Element => {
   const [_, setState] = useState();
   const navigate = useNavigate();
-  const initialValues = {
-    username: "",
-    password: "",
-    passwordConfirm: "",
-  };
 
   const handleSubmit = async (
     values: RegisterValues,
@@ -50,7 +46,7 @@ export const Register = (): React.JSX.Element => {
     <LayoutLoginRegister>
       <RegisterLoginForm
         isLogin={false}
-        initialValues={initialValues}
+        initialValues={REGISTER_FORM_INIT_VALUES}
         onSubmit={handleSubmit}
       >
         <InputPasswordField

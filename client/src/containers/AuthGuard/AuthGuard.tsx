@@ -4,6 +4,7 @@ import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { Spinner } from "components";
 import { useAuth, usePersist, useRefreshToken } from "hooks";
 import { parseJwt } from "utils";
+import { PERSIST_FALSE } from "utils/constants";
 
 export const AuthGuard = () => {
   const location = useLocation();
@@ -21,7 +22,7 @@ export const AuthGuard = () => {
       try {
         await refreshAccessToken();
       } catch (err) {
-        setPersist(false);
+        setPersist(PERSIST_FALSE);
       }
     };
 

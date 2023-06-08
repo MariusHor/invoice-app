@@ -7,17 +7,12 @@ import { RegisterLoginForm } from "features";
 import { InputCheckboxField } from "components";
 import { useLogin, usePersist } from "hooks";
 import { LoginValues } from "types";
+import { LOGIN_FORM_INIT_VALUES } from "utils/constants";
 
 export const Login = (): React.JSX.Element => {
   const [_, setState] = useState();
   const { setPersist } = usePersist();
   const login = useLogin();
-
-  const initialValues = {
-    username: "",
-    password: "",
-    rememberMe: false,
-  };
 
   const handleSubmit = async (
     values: LoginValues,
@@ -28,7 +23,6 @@ export const Login = (): React.JSX.Element => {
     try {
       await login.mutateAsync({ password, username });
       setSubmitting(false);
-
       if (rememberMe !== undefined) setPersist(rememberMe);
     } catch (error) {
       if (isAxiosError(error)) {
@@ -54,7 +48,7 @@ export const Login = (): React.JSX.Element => {
     <LayoutLoginRegister>
       <RegisterLoginForm
         isLogin={true}
-        initialValues={initialValues}
+        initialValues={LOGIN_FORM_INIT_VALUES}
         onSubmit={handleSubmit}
       >
         <InputCheckboxField

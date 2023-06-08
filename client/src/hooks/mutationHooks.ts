@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAxiosPrivate } from "./useAxiosPrivate";
 import { AccountUpdates, Invoice } from "types";
 import { deleteInvoice, postInvoice, updateInvoice } from "api";
+import { QUERY_INVOICES, QUERY_USER } from "utils/constants";
 
 export const useUpdateUser = (
   path = "/account",
@@ -19,7 +20,7 @@ export const useUpdateUser = (
       }),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["user"]);
+        queryClient.invalidateQueries([QUERY_USER]);
       },
     }
   );
@@ -36,7 +37,7 @@ export const useDeleteUser = (path = "/account") => {
       }),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["user"]);
+        queryClient.invalidateQueries([QUERY_USER]);
       },
     }
   );
@@ -49,7 +50,7 @@ export const useCreateInvoice = () => {
       await postInvoice(newInvoice),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["invoices"]);
+        queryClient.invalidateQueries([QUERY_INVOICES]);
       },
     }
   );
@@ -62,7 +63,7 @@ export const useUpdateInvoice = () => {
       await updateInvoice(id, updatedInvoice),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["invoices"]);
+        queryClient.invalidateQueries([QUERY_INVOICES]);
       },
     }
   );
@@ -74,7 +75,7 @@ export const useDeleteInvoice = () => {
     async ({ id }: { id: string }) => await deleteInvoice(id),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries(["invoices"]);
+        queryClient.invalidateQueries([QUERY_INVOICES]);
       },
     }
   );

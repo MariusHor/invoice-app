@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosPrivate } from "./useAxiosPrivate";
 import { useAuth } from "./contextHooks";
+import { QUERY_INVOICES, QUERY_USER } from "utils/constants";
 
 export const useInvoices = () => {
   const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuth();
 
   return useQuery({
-    queryKey: ["invoices"],
+    queryKey: [QUERY_INVOICES],
     queryFn: async () => {
       if (!auth.isLoggedIn) return {};
 
@@ -29,7 +30,7 @@ export const useUser = () => {
   const { auth } = useAuth();
 
   return useQuery({
-    queryKey: ["user"],
+    queryKey: [QUERY_USER],
     queryFn: async () => {
       if (!auth.isLoggedIn) return {};
 

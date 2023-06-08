@@ -11,6 +11,7 @@ import {
 import { InvoiceResult } from "types";
 import { invariant } from "utils";
 import { useDeleteInvoice, useInvoices, useUpdateInvoice } from "hooks";
+import { DRAFT, PAID, PENDING } from "utils/constants";
 
 export const InvoiceView = () => {
   const deleteInvoice = useDeleteInvoice();
@@ -37,7 +38,7 @@ export const InvoiceView = () => {
       id: invoice._id,
       updatedInvoice: {
         ...invoice,
-        status: "paid",
+        status: PAID,
       },
     });
   };
@@ -62,7 +63,9 @@ export const InvoiceView = () => {
           <span className="text-skin-base">Status</span>
           <InvoiceStatus
             size={"medium"}
-            intent={invoice.status as "paid" | "pending" | "draft"}
+            intent={
+              invoice.status as typeof PAID | typeof PENDING | typeof DRAFT
+            }
             statusType={invoice.status}
           />
         </div>
@@ -76,7 +79,7 @@ export const InvoiceView = () => {
           </Button>
           <Button
             onClick={handleUpdateStatus}
-            disabled={invoice.status === "paid"}
+            disabled={invoice.status === PAID}
           >
             Paid
           </Button>

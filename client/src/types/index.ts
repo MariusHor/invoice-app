@@ -68,3 +68,10 @@ export interface SelectOption {
   label: string;
   value: string;
 }
+
+export interface AccountRoutesConfig {
+  [key: string]: {
+    title: string;
+    phrase: string;
+  };
+}

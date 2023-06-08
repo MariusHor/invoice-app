@@ -3,17 +3,19 @@ import { FormikHelpers } from "formik";
 
 import { InvoiceForm } from "features";
 import { Invoice, InvoiceResult } from "types";
-import { useGetInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
-import { invariant } from "utils";
+import { useInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
+import { Spinner } from "components";
 
 export const InvoiceEdit = () => {
-  const getInvoiceProps = useGetInvoiceProps();
+  const getInvoiceProps = useInvoiceProps();
   const updateInvoice = useUpdateInvoice();
   const navigate = useNavigate();
   const { id } = useParams();
-  invariant(id);
 
-  const { data: invoices } = useInvoices();
+  const { data: invoices, isLoading } = useInvoices();
+
+  if (isLoading) return <Spinner intent={"inner"} />;
+
   const invoice: InvoiceResult = invoices.find(
     (invoice: InvoiceResult) => invoice.invoiceId === id
   );

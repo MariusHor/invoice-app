@@ -16,17 +16,17 @@ input.input-error {
   border-radius: 100px;
 }
 
-.field.dark label,
-.field.dark button {
+.field.theme-dark label,
+.field.theme-dark button {
   color: #b0b2c2;
 }
 
-.field.dark input,
-.field.dark div[role="button"] {
+.field.theme-dark input,
+.field.theme-dark div[role="button"] {
   color: #dde0f3;
 }
 
-.field.dark fieldset {
+.field.theme-dark fieldset {
   border-color: #41434b;
 }
 

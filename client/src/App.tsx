@@ -7,7 +7,7 @@ import {
 import {
   AuthProvider,
   ReactQueryProvider,
-  FiltersProvider,
+  InvoiceFiltersProvider,
   ThemeProvider,
   PersistProvider,
 } from "providers";
@@ -70,13 +70,13 @@ const App = (): React.JSX.Element => {
   return (
     <ReactQueryProvider>
       <ThemeProvider>
-        <FiltersProvider>
+        <InvoiceFiltersProvider>
           <PersistProvider>
             <AuthProvider>
               <RouterProvider router={router} />
             </AuthProvider>
           </PersistProvider>
-        </FiltersProvider>
+        </InvoiceFiltersProvider>
       </ThemeProvider>
     </ReactQueryProvider>
   );

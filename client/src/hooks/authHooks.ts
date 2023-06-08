@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useAuth, usePersist } from "./contextHooks";
 import { getSignout, postLogin, getRefreshToken } from "api";
 import { LoginValues } from "types";
+import { PERSIST_FALSE } from "utils/constants";
 
 export const useLogin = () => {
   const { setAuth } = useAuth();
@@ -40,7 +41,7 @@ export const useSignout = () => {
 
   return async (path?: string) => {
     setAuth({});
-    setPersist(false);
+    setPersist(PERSIST_FALSE);
     queryClient.removeQueries();
     navigate(path ?? "/");
 

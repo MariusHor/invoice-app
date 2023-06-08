@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 
 import { Spinner } from "components";
 import { useAuth, usePersist, useRefreshToken } from "hooks";
+import { PERSIST_TRUE } from "utils/constants";
 
 export const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +17,7 @@ export const PersistLogin = () => {
       try {
         await refreshAccessToken();
       } catch (err) {
-        setPersist(false);
+        setPersist(PERSIST_TRUE);
       } finally {
         isMounted && setIsLoading(false);
       }

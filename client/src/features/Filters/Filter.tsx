@@ -1,5 +1,5 @@
 import { FiltersState } from "types";
-import { useFilters } from "hooks";
+import { useInvoiceFilters } from "hooks";
 
 import "./Filter.css";
 
@@ -10,7 +10,7 @@ interface FilterProps {
 }
 
 export const Filter = ({ id, name, title }: FilterProps): React.JSX.Element => {
-  const { filters, setFilters } = useFilters();
+  const { filters, setFilters } = useInvoiceFilters();
 
   return (
     <li className="flex items-center gap-3 text-skin-base">

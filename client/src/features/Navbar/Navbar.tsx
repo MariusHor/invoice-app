@@ -4,6 +4,7 @@ import { VariantProps, cva } from "class-variance-authority";
 import { Logo } from "./Logo";
 import { useTheme } from "hooks";
 import moon from "assets/icon-moon.svg";
+import { THEME_PRIMARY, THEME_SECONDARY } from "utils/constants";
 
 const navbar = cva("flex h-fit justify-between gap-6 ", {
   variants: {
@@ -44,7 +45,11 @@ export const Navbar = ({
         }`}
       >
         <IconButton
-          onClick={() => setTheme(() => (theme === "light" ? "dark" : "light"))}
+          onClick={() =>
+            setTheme(() =>
+              theme === THEME_PRIMARY ? THEME_SECONDARY : THEME_PRIMARY
+            )
+          }
         >
           <img
             src={moon}

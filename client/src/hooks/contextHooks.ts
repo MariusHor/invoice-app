@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
 import { AuthContext } from "providers/AuthProvider";
-import { FiltersContext } from "providers/FiltersProvider";
+import { InvoiceFiltersContext } from "providers/InvoiceFiltersProvider";
 import { PersistContext } from "providers/PersistProvider";
 import { ThemeContext } from "providers/ThemeProvider";
 
@@ -13,16 +13,16 @@ export const useAuth = () => {
   return context;
 };
 
-export const useFilters = () => {
-  const filtersContext = useContext(FiltersContext);
+export const useInvoiceFilters = () => {
+  const invoiceFiltersContext = useContext(InvoiceFiltersContext);
 
-  if (!filtersContext) {
+  if (!invoiceFiltersContext) {
     throw new Error(
-      "useFilters has to be used within <FiltersContext.Provider>"
+      "useInvoiceFilters has to be used within <InvoiceFiltersContext.Provider>"
     );
   }
 
-  return filtersContext;
+  return invoiceFiltersContext;
 };
 
 export const usePersist = () => {
@@ -41,9 +41,7 @@ export const useTheme = () => {
   const themeContext = useContext(ThemeContext);
 
   if (!themeContext) {
-    throw new Error(
-      "useFilters has to be used within <FiltersContext.Provider>"
-    );
+    throw new Error("useTheme has to be used within <ThemeContext.Provider>");
   }
 
   return themeContext;

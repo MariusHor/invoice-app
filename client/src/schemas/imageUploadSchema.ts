@@ -1,3 +1,4 @@
+import { MAX_ALLOWED_FILE_SIZE, ALLOWED_FILE_TYPES } from "utils/constants";
 import * as yup from "yup";
 
 interface FileValuesExtended {
@@ -14,12 +15,14 @@ export const imageUploadSchema = yup.object().shape({
     })
     .test("fileType", "File type is not supported", (file) => {
       const { type } = file as FileValuesExtended;
-      const validTypes = ["gif", "png", "jpg"];
 
       if (type) {
         const fileType = type.split("/").pop();
 
-        if (typeof fileType === "string" && !validTypes.includes(fileType)) {
+        if (
+          typeof fileType === "string" &&
+          !ALLOWED_FILE_TYPES.includes(fileType)
+        ) {
           return false;
         }
       }
@@ -29,7 +32,7 @@ export const imageUploadSchema = yup.object().shape({
     .test("fileSize", "File size exceeds maximum allowed limit", (file) => {
       const { size } = file as FileValuesExtended;
 
-      if (size && size / 1024 / 1024 > 0.8) {
+      if (size && size > MAX_ALLOWED_FILE_SIZE) {
         return false;
       }
 

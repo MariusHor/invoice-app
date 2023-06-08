@@ -2,13 +2,13 @@ import { useCallback, useState } from "react";
 
 import { ActionsBar, InvoiceList, Pagination } from "features";
 import { InvoiceFallback, Spinner } from "components";
-import { useFilters, useInvoices } from "hooks";
+import { useInvoiceFilters, useInvoices } from "hooks";
 import { filterInvoices, getTotalPages, paginateInvoices } from "utils";
+import { INIT_PAGE } from "utils/constants";
 
 export const Dashboard = (): React.JSX.Element => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [invoicesPerPage] = useState(6);
-  const { filters } = useFilters();
+  const [currentPage, setCurrentPage] = useState(INIT_PAGE);
+  const { filters } = useInvoiceFilters();
 
   const handleCurrentPage = useCallback(
     (value: number) => setCurrentPage(value),
@@ -20,20 +20,12 @@ export const Dashboard = (): React.JSX.Element => {
   if (isLoading) return <Spinner intent={"inner"} />;
 
   const filteredInvoices = filterInvoices(invoices, filters);
-  const totalPages = getTotalPages(filteredInvoices.length, invoicesPerPage);
+  const totalPages = getTotalPages(filteredInvoices.length);
 
-  let currentInvoices = paginateInvoices(
-    filteredInvoices,
-    currentPage,
-    invoicesPerPage
-  );
+  let currentInvoices = paginateInvoices(filteredInvoices, currentPage);
 
   if (currentPage > 1 && !currentInvoices.length) {
-    currentInvoices = paginateInvoices(
-      filteredInvoices,
-      currentPage - 1,
-      invoicesPerPage
-    );
+    currentInvoices = paginateInvoices(filteredInvoices, currentPage - 1);
 
     setCurrentPage(currentPage - 1);
   }

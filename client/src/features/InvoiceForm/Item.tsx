@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material";
 import { InputNumericField, InputTextField } from "components";
 import { Invoice } from "types";
 import { useTheme } from "hooks";
+import { THEME_SECONDARY } from "utils/constants";
 
 interface ItemProps {
   id: number;
@@ -37,7 +38,7 @@ export const Item = ({ id, remove }: ItemProps) => {
             aria-label="delete"
             size="small"
             onClick={() => remove(id)}
-            style={{ color: theme === "dark" ? "#7E88C3" : "" }}
+            style={{ color: theme === THEME_SECONDARY ? "#7E88C3" : "" }}
           >
             <DeleteIcon fontSize="medium" />
           </IconButton>

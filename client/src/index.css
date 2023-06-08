@@ -35,6 +35,7 @@
     --color-inverted: #f8f8fb;
     --color-border-base: #494e6e;
     --color-button-outlined: #2d3252;
+    --color-button-outlined-hover: #494e6e;
   }
   .theme-light {
     --color-text-base: #000000;
@@ -46,6 +47,7 @@
     --color-inverted: #1e2139;
     --color-border-base: #dfe3fa;
     --color-button-outlined: #f9fafe;
+    --color-button-outlined-hover: #dfe3fa;
   }
 }
 

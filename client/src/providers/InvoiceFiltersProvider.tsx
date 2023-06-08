@@ -1,14 +1,19 @@
 import { ReactNode, useState, createContext } from "react";
 import { FiltersState } from "types";
 
-interface FiltersContextType {
+interface InvoiceFiltersContextType {
   filters: FiltersState;
   setFilters: React.Dispatch<React.SetStateAction<FiltersState>>;
 }
 
-export const FiltersContext = createContext<FiltersContextType | null>(null);
+export const InvoiceFiltersContext =
+  createContext<InvoiceFiltersContextType | null>(null);
 
-export const FiltersProvider = ({ children }: { children: ReactNode }) => {
+export const InvoiceFiltersProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}) => {
   const [filters, setFilters] = useState<FiltersState>({
     paid: true,
     pending: true,
@@ -16,8 +21,8 @@ export const FiltersProvider = ({ children }: { children: ReactNode }) => {
   });
 
   return (
-    <FiltersContext.Provider value={{ filters, setFilters }}>
+    <InvoiceFiltersContext.Provider value={{ filters, setFilters }}>
       {children}
-    </FiltersContext.Provider>
+    </InvoiceFiltersContext.Provider>
   );
 };
