@@ -7,9 +7,14 @@ import { InputTextField } from "./InputTextField";
 interface InputPasswordFieldProps {
   label: string;
   id: string;
+  autocomplete?: string;
 }
 
-export const InputPasswordField = ({ label, id }: InputPasswordFieldProps) => {
+export const InputPasswordField = ({
+  label,
+  id,
+  autocomplete,
+}: InputPasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -28,6 +33,7 @@ export const InputPasswordField = ({ label, id }: InputPasswordFieldProps) => {
           </IconButton>
         </InputAdornment>
       }
+      autocomplete={autocomplete}
     />
   );
 };

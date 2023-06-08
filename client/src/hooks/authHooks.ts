@@ -42,10 +42,10 @@ export const useSignout = () => {
     setAuth({});
     setPersist(false);
     queryClient.removeQueries();
+    navigate(path ?? "/");
 
     try {
       await getSignout();
-      navigate(path ?? "/");
     } catch (error) {
       console.log(error);
       throw error;
@@ -56,15 +56,18 @@ export const useSignout = () => {
 export const useRefreshToken = () => {
   const { setAuth } = useAuth();
 
-  const refresh = async () => {
-    const response = await getRefreshToken();
+  return async () => {
+    try {
+      const response = await getRefreshToken();
 
-    setAuth((prev) => {
-      return { ...prev, accessToken: response.data.accessToken };
-    });
+      setAuth((prev) => {
+        return { ...prev, accessToken: response.data.accessToken };
+      });
 
-    return response.data.accessToken;
+      return response.data.accessToken;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   };
-
-  return { refresh };
 };

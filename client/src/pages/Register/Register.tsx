@@ -53,7 +53,11 @@ export const Register = (): React.JSX.Element => {
         initialValues={initialValues}
         onSubmit={handleSubmit}
       >
-        <InputPasswordField label="Confirm Password" id="passwordConfirm" />
+        <InputPasswordField
+          label="Confirm Password"
+          id="passwordConfirm"
+          autocomplete={"new-password"}
+        />
       </RegisterLoginForm>
     </LayoutLoginRegister>
   );

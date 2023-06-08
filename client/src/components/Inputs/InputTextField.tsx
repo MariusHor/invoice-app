@@ -10,6 +10,7 @@ interface InputTextFieldProps {
   type?: string;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
+  autocomplete?: string;
 }
 
 export const InputTextField = ({
@@ -18,6 +19,7 @@ export const InputTextField = ({
   label,
   id,
   type = "text",
+  autocomplete,
 }: InputTextFieldProps) => {
   const { theme } = useTheme();
 
@@ -34,6 +36,7 @@ export const InputTextField = ({
           startAdornment: startAdornment,
           endAdornment: endAdornment,
         }}
+        autoComplete={autocomplete}
       />
     </div>
   );

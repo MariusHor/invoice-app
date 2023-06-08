@@ -4,11 +4,9 @@ import {User} from '../models';
 export const signoutUser = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const refreshToken = req?.cookies?.jwt;
-
         if (!refreshToken) return res.status(204);
 
         const foundUser = await User.findOne({refreshToken}).exec();
-
         if (!foundUser) {
             res.clearCookie('jwt', {httpOnly: true, sameSite: 'none', secure: true});
             return res.status(204);

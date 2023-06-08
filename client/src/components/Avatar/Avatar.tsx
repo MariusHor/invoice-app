@@ -9,20 +9,20 @@ interface SizesProps {
 }
 
 export const Avatar = ({ intent = "small" }: { intent?: string }) => {
-  const { data: user, isLoading } = useUser();
+  const { data: user } = useUser();
   const sizes: SizesProps = {
     small: { width: 50, height: 50 },
     medium: { width: 70, height: 70 },
     large: { width: 80, height: 80 },
   };
 
-  if (isLoading) return <></>;
-
   return (
     <AvatarMUI
       sx={{ bgcolor: "grey", ...sizes[intent] }}
-      alt={user.username}
-      src={user.image}
-    />
+      alt={user?.username}
+      src={user?.image}
+    >
+      <div className="h-full w-full bg-inherit"></div>
+    </AvatarMUI>
   );
 };

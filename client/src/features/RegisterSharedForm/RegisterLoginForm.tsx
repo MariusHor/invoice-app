@@ -36,8 +36,16 @@ export const RegisterLoginForm = ({
       >
         {({ isSubmitting }) => (
           <FormikForm className="flex w-full flex-col gap-5">
-            <InputTextField label={"Username"} id={"username"} />
-            <InputPasswordField label="Password" id="password" />
+            <InputTextField
+              label={"Username"}
+              id={"username"}
+              autocomplete={"username"}
+            />
+            <InputPasswordField
+              label="Password"
+              id="password"
+              autocomplete={isLogin ? "current-password" : "new-password"}
+            />
             {children}
             <Button
               intent="primary"

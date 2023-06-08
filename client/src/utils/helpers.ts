@@ -62,7 +62,7 @@ export const getCharacterValidationError = (str: string) => {
 export const parseJwt = (token: string | undefined) => {
   try {
     if (token) return JSON.parse(atob(token.split(".")[1]));
-    return null;
+    throw new Error();
   } catch (e) {
     return null;
   }

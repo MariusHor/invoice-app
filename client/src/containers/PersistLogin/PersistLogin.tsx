@@ -7,7 +7,7 @@ import { getRefreshToken } from "api";
 
 export const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const { persist, setPersist } = usePersist();
 
   useEffect(() => {
@@ -17,8 +17,6 @@ export const PersistLogin = () => {
         const {
           data: { username, accessToken },
         } = await getRefreshToken();
-
-        console.log(accessToken);
 
         setAuth((prev) => {
           return { ...prev, accessToken, username, isLoggedIn: true };
@@ -30,7 +28,7 @@ export const PersistLogin = () => {
       }
     };
 
-    persist ? refreshAuth() : setIsLoading(false);
+    persist && !auth.isLoggedIn ? refreshAuth() : setIsLoading(false);
     return () => {
       isMounted = false;
     };

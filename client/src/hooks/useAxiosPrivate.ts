@@ -4,7 +4,7 @@ import { useRefreshToken } from "./authHooks";
 import { useAuth } from "./contextHooks";
 
 export const useAxiosPrivate = () => {
-  const { refresh } = useRefreshToken();
+  const refreshAccessToken = useRefreshToken();
   const { auth } = useAuth();
 
   useEffect(() => {
@@ -25,9 +25,7 @@ export const useAxiosPrivate = () => {
 
         if (error?.response?.status === 403 && !prevRequest?.sent) {
           prevRequest.sent = true;
-
-          const newAccessToken = await refresh();
-
+          const newAccessToken = await refreshAccessToken();
           prevRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
 
           return axiosPrivate(prevRequest);
@@ -40,7 +38,7 @@ export const useAxiosPrivate = () => {
       axiosPrivate.interceptors.request.eject(requestIntercept);
       axiosPrivate.interceptors.response.eject(responseIntercept);
     };
-  }, [auth, refresh]);
+  }, [auth, refreshAccessToken]);
 
   return axiosPrivate;
 };
