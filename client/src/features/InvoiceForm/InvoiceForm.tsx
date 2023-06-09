@@ -12,6 +12,7 @@ import { BillTo } from "./BillTo";
 import { ItemList } from "./ItemList";
 import { Invoice, InvoiceResult } from "types";
 import { invoiceSchema } from "schemas";
+import { INVOICE_FORM_INIT_VALUES } from "utils/constants";
 
 interface InvoiceFormProps {
   invoice?: InvoiceResult;
@@ -27,35 +28,9 @@ export const InvoiceForm = ({
   invoice,
   onSubmit,
 }: InvoiceFormProps) => {
-  const initialValues = invoice
-    ? invoice
-    : {
-        status: "draft",
-        isDraft: true,
-        createdAt: "",
-        description: "",
-        paymentTerms: 1,
-        clientName: "",
-        clientEmail: "",
-        senderAddress: {
-          street: "",
-          city: "",
-          postCode: "",
-          country: "",
-        },
-        clientAddress: {
-          street: "",
-          city: "",
-          postCode: "",
-          country: "",
-        },
-        total: 0,
-        items: [{ name: "", quantity: 0, price: 0, total: 0 }],
-      };
-
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={invoice ? invoice : INVOICE_FORM_INIT_VALUES}
       onSubmit={onSubmit}
       enableReinitialize={true}
       validationSchema={invoiceSchema}

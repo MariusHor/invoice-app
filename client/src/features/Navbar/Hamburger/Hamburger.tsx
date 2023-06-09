@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { IconButton } from "@mui/material";
 
-import { Avatar, LinkButton, ButtonSignout } from "components";
+import { Avatar, ButtonLink, ButtonSignout } from "components";
 import { useAuth, useUser } from "hooks";
 import { capitalize } from "utils";
 
@@ -80,14 +80,14 @@ export const Hamburger = () => {
                 },
               }}
             >
-              <LinkButton
+              <ButtonLink
                 onClick={() => setIsOpen((isOpen) => !isOpen)}
                 to={isLoggedIn ? "/dashboard" : "login"}
                 intent={"outlined-link"}
                 size={"fixed"}
               >
                 {isLoggedIn ? "Dashboard" : "Log In"}
-              </LinkButton>
+              </ButtonLink>
             </motion.li>
             {isLoggedIn ? (
               <motion.li
@@ -103,14 +103,14 @@ export const Hamburger = () => {
                   },
                 }}
               >
-                <LinkButton
+                <ButtonLink
                   onClick={() => setIsOpen((isOpen) => !isOpen)}
                   to="account"
                   intent={"outlined-link"}
                   size={"fixed"}
                 >
                   My Account
-                </LinkButton>
+                </ButtonLink>
               </motion.li>
             ) : null}
             <motion.li
@@ -131,14 +131,14 @@ export const Hamburger = () => {
                   signoutCallback={() => setIsOpen((isOpen) => !isOpen)}
                 />
               ) : (
-                <LinkButton
+                <ButtonLink
                   onClick={() => setIsOpen((isOpen) => !isOpen)}
                   to={"register"}
                   intent={"primary-link"}
                   size={"fixed"}
                 >
                   Register
-                </LinkButton>
+                </ButtonLink>
               )}
             </motion.li>
           </motion.ul>

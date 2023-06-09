@@ -1,3 +1,6 @@
+import { FormikHelpers, FormikValues } from "formik";
+import { Dispatch, ReactNode, SetStateAction } from "react";
+
 export interface Address {
   city: string;
   country: string;
@@ -39,8 +42,8 @@ export interface FiltersState {
 }
 
 export interface LoginValues {
-  username: string;
-  password: string;
+  username?: string;
+  password?: string;
   rememberMe?: boolean;
 }
 
@@ -74,4 +77,35 @@ export interface AccountRoutesConfig {
     title: string;
     phrase: string;
   };
+}
+
+export interface AuthProviderProps {
+  children: ReactNode;
+}
+
+export interface AuthContextInterface {
+  auth: Auth;
+  setAuth: Dispatch<SetStateAction<Auth>>;
+}
+
+export interface SubmitBtn {
+  intent?:
+    | "primary"
+    | "primary-link"
+    | "secondary"
+    | "accent"
+    | "outlined"
+    | "outlined-link"
+    | null
+    | undefined;
+  text?: string;
+  disabled?: (isSubmitting: boolean, values: FormikValues) => boolean;
+}
+
+export interface FormProps {
+  initialValues: object;
+  children?: ReactNode;
+  validationSchema?: object;
+  submitBtn: SubmitBtn;
+  onSubmit: (values: object, { setSubmitting }: FormikHelpers<object>) => void;
 }

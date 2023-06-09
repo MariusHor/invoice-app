@@ -1,29 +1,9 @@
 import { HTMLAttributes } from "react";
-import { cva, type VariantProps } from "class-variance-authority";
+import { type VariantProps } from "class-variance-authority";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 
 import { capitalize } from "utils";
-
-const status = cva(
-  "center col-span-2 w-fit justify-self-center rounded-lg xl:col-span-1 min-w-28",
-  {
-    variants: {
-      intent: {
-        pending: ["bg-skin-orange", "text-skin-orange"],
-        paid: ["bg-skin-green", "text-skin-green"],
-        draft: ["bg-skin-grey", "text-skin-grey"],
-      },
-      size: {
-        small: ["text-sm", "py-2", "px-4"],
-        medium: ["text-base", "py-3", "px-5"],
-      },
-    },
-    defaultVariants: {
-      intent: "pending",
-      size: "small",
-    },
-  }
-);
+import { status } from "./styles";
 
 export interface StatusProps
   extends HTMLAttributes<HTMLDivElement>,

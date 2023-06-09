@@ -1,19 +1,7 @@
 import { HTMLAttributes } from "react";
 import { CircularProgress } from "@mui/material";
-import { cva } from "class-variance-authority";
 import { type VariantProps } from "class-variance-authority";
-
-const spinner = cva("flex-center w-full", {
-  variants: {
-    intent: {
-      full: ["h-screen"],
-      inner: ["grow"],
-    },
-  },
-  defaultVariants: {
-    intent: "full",
-  },
-});
+import { spinner } from "./styles";
 
 export interface SpinnerProps
   extends HTMLAttributes<HTMLDivElement>,

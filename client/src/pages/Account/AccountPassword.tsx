@@ -1,13 +1,8 @@
 import { useState } from "react";
 import { isAxiosError } from "axios";
-import {
-  Formik,
-  Form as FormikForm,
-  FormikHelpers,
-  FormikValues,
-} from "formik";
+import { FormikHelpers, FormikValues } from "formik";
 
-import { Button, InputPasswordField } from "components";
+import { Form, InputPasswordField } from "components";
 import { useSignout, useUpdateUser, useUser } from "hooks";
 import { updatePasswordSchema } from "schemas";
 import { RESET_PASS_INIT_VALUES } from "utils/constants";
@@ -54,31 +49,22 @@ export const AccountPassword = (): React.JSX.Element => {
 
   return (
     <div className="flex grow flex-col gap-3 text-center">
-      <Formik
+      <Form
         initialValues={RESET_PASS_INIT_VALUES}
-        enableReinitialize={true}
         onSubmit={handleSubmit}
         validationSchema={updatePasswordSchema}
+        submitBtn={{
+          intent: "accent",
+          text: "Change",
+          disabled: (isSubmitting: boolean, values: FormikValues) =>
+            isSubmitting ||
+            !values.oldPassword.length ||
+            !values.newPassword.length,
+        }}
       >
-        {({ isSubmitting, values }) => (
-          <FormikForm className="flex w-full flex-col gap-5">
-            <InputPasswordField label="Old Password" id="oldPassword" />
-            <InputPasswordField label="New Password" id="newPassword" />
-            <Button
-              intent="accent"
-              type="submit"
-              disabled={
-                isSubmitting ||
-                !values.oldPassword.length ||
-                !values.newPassword.length
-              }
-              className="mx-auto mt-4 w-fit"
-            >
-              Change
-            </Button>
-          </FormikForm>
-        )}
-      </Formik>
+        <InputPasswordField label="Old Password" id="oldPassword" />
+        <InputPasswordField label="New Password" id="newPassword" />
+      </Form>
     </div>
   );
 };

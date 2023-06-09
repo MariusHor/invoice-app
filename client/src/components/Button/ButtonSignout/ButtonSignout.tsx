@@ -1,4 +1,5 @@
-import { Button } from "./Button";
+import { useState } from "react";
+import { Button } from "../Button";
 import { useSignout } from "hooks";
 
 interface ButtonSignoutProps {
@@ -8,20 +9,25 @@ interface ButtonSignoutProps {
 export const ButtonSignout = ({
   signoutCallback,
 }: ButtonSignoutProps): React.JSX.Element => {
+  const [_, setState] = useState();
   const signout = useSignout();
 
-  const handleSignOut = async () => {
+  const handleSignout = async () => {
     try {
       await signout();
-      if (signoutCallback) signoutCallback();
-    } catch (err) {
-      console.error(err);
+    } catch (error) {
+      return setState(() => {
+        throw error;
+      });
     }
   };
 
   return (
     <Button
-      onClick={handleSignOut}
+      onClick={() => {
+        handleSignout();
+        if (signoutCallback) signoutCallback();
+      }}
       intent={"primary"}
       size={"fixed"}
       className="hover:bg-skin-btn-primary-hover"

@@ -1,5 +1,5 @@
 import { Filters } from "features";
-import { LinkButton } from "components";
+import { ButtonLink } from "components";
 import { useInvoices } from "hooks";
 import plusIcon from "assets/icon-plus.svg";
 
@@ -13,7 +13,7 @@ export const ActionsBar = (): React.JSX.Element => {
         <p className="heading-md text-skin-accent">{invoices?.length ?? 0}</p>
       </div>
       <Filters />
-      <LinkButton to="/dashboard/create" intent={"primary-link"}>
+      <ButtonLink to="/dashboard/create" intent={"primary-link"}>
         <div className="flex-center gap-2">
           <img
             src={plusIcon}
@@ -22,7 +22,7 @@ export const ActionsBar = (): React.JSX.Element => {
           />
           <span>New</span>
         </div>
-      </LinkButton>
+      </ButtonLink>
     </div>
   );
 };

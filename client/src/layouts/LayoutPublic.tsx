@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Navbar, Hamburger } from "features";
-import { NavLinks } from "components";
+import { Navbar, Hamburger, NavLinks } from "features";
 import { useAuth, useTheme } from "hooks";
 
 export const LayoutPublic = () => {

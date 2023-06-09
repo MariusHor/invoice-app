@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-import { Avatar, LinkButton } from "components";
+import { Avatar, ButtonLink } from "components";
 import { capitalize } from "utils";
 import { ACCOUNT_ROUTES_CONFIG } from "utils/constants";
 
@@ -25,7 +25,7 @@ export const AccountHeader = ({
   }, [location.pathname]);
 
   return (
-    <div className="flex items-center justify-between gap-20">
+    <div className="flex w-full items-center justify-between gap-20">
       <div className="flex-center gap-6 text-start">
         <Avatar />
         <div className="grow">
@@ -38,9 +38,9 @@ export const AccountHeader = ({
         </div>
       </div>
       <div className="hidden md:block">
-        <LinkButton to="/subscribe" intent={"outlined-link"}>
+        <ButtonLink to="/subscribe" intent={"outlined-link"}>
           Go PRO
-        </LinkButton>
+        </ButtonLink>
       </div>
     </div>
   );

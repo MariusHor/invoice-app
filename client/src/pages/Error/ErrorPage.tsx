@@ -1,5 +1,6 @@
 import { isRouteErrorResponse, useRouteError } from "react-router-dom";
-import { LinkButton } from "components";
+import { ButtonLink } from "components";
+import { HOME_PATH } from "utils/constants";
 
 export const ErrorPage = () => {
   const error = useRouteError();
@@ -11,9 +12,9 @@ export const ErrorPage = () => {
         <p>
           <i>{error.statusText}</i>
         </p>
-        <LinkButton intent={"primary-link"} to="/">
+        <ButtonLink intent={"primary-link"} to={HOME_PATH}>
           Home
-        </LinkButton>
+        </ButtonLink>
       </div>
     );
   }
@@ -21,9 +22,9 @@ export const ErrorPage = () => {
   return (
     <div className="col-span-full col-start-2 row-span-full flex h-screen flex-col items-center justify-center gap-4">
       <h1>An error has occured</h1>
-      <LinkButton intent={"primary-link"} to="/">
+      <ButtonLink intent={"primary-link"} to={HOME_PATH}>
         Home
-      </LinkButton>
+      </ButtonLink>
     </div>
   );
 };

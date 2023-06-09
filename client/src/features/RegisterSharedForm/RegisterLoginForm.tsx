@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { Formik, Form as FormikForm, FormikHelpers } from "formik";
+import { FormikHelpers } from "formik";
 
-import { Button, InputTextField, InputPasswordField } from "components";
+import { InputTextField, InputPasswordField, Form } from "components";
 import { loginSchema, registerSchema } from "schemas";
 import { RegisterValues } from "types";
 
@@ -23,61 +23,51 @@ export const RegisterLoginForm = ({
   children,
 }: FormProps) => {
   return (
-    <>
+    <div className="w-full">
       <h1 className="heading-lg mb-4">
         {isLogin ? "Log in" : "Register"} to
         <span className="font-bold text-skin-accent"> Paperless</span>
       </h1>
-      <Formik
+      <Form
         initialValues={initialValues}
-        enableReinitialize={true}
         onSubmit={onSubmit}
         validationSchema={isLogin ? loginSchema : registerSchema}
+        submitBtn={{ text: isLogin ? "Log in" : "Register" }}
       >
-        {({ isSubmitting }) => (
-          <FormikForm className="flex w-full flex-col gap-5">
-            <InputTextField
-              label={"Username"}
-              id={"username"}
-              autocomplete={"username"}
-            />
-            <InputPasswordField
-              label="Password"
-              id="password"
-              autocomplete={isLogin ? "current-password" : "new-password"}
-            />
-            {children}
-            <Button
-              intent="primary"
-              type="submit"
-              disabled={isSubmitting}
-              className="mx-auto mt-4 w-fit"
-            >
-              {isLogin ? "Log in" : "Register"}
-            </Button>
-          </FormikForm>
-        )}
-      </Formik>
-      <div className="flex-center mt-4 gap-2">
-        {isLogin ? (
-          <>
-            <p>Don't have an account?</p>
-            <Link
-              to="/register"
-              className="transition-primary text-skin-accent"
-            >
-              Sign up
-            </Link>
-          </>
-        ) : (
-          <>
-            <p>Already a member?</p>
-            <Link to="/login" className="transition-primary text-skin-accent">
-              Log in
-            </Link>
-          </>
-        )}
-      </div>
-    </>
+        <InputTextField
+          label={"Username"}
+          id={"username"}
+          autocomplete={"username"}
+        />
+        <InputPasswordField
+          label="Password"
+          id="password"
+          autocomplete={isLogin ? "current-password" : "new-password"}
+        />
+        {children}
+      </Form>
+      <FormRedirect
+        title={isLogin ? "Don't have an account?" : "Already a member?"}
+        path={isLogin ? "/register" : "/login"}
+        linkText={isLogin ? "Sign up" : "Log in"}
+      />
+    </div>
+  );
+};
+
+interface FormRedirectProps {
+  title: string;
+  path: string;
+  linkText: string;
+}
+
+const FormRedirect = ({ title, path, linkText }: FormRedirectProps) => {
+  return (
+    <div className="flex-center mt-4 gap-2">
+      <p>{title}</p>
+      <Link to={path} className="transition-primary text-skin-accent">
+        {linkText}
+      </Link>
+    </div>
   );
 };

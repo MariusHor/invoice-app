@@ -1,20 +1,6 @@
-import {
-  ReactNode,
-  useState,
-  Dispatch,
-  SetStateAction,
-  createContext,
-} from "react";
-import { Auth } from "types";
+import { useState, createContext } from "react";
 
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-interface AuthContextInterface {
-  auth: Auth;
-  setAuth: Dispatch<SetStateAction<Auth>>;
-}
+import { Auth, AuthContextInterface, AuthProviderProps } from "types";
 
 export const AuthContext = createContext<AuthContextInterface | null>(null);
 

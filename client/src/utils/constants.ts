@@ -16,6 +16,31 @@ export const PENDING = "pending";
 export const INIT_PAGE = 1;
 export const QUERY_USER = "user";
 export const QUERY_INVOICES = "invoices";
+export const HOME_PATH = "/";
+
+export const INVOICE_FORM_INIT_VALUES = {
+  status: "draft",
+  isDraft: true,
+  createdAt: "",
+  description: "",
+  paymentTerms: 1,
+  clientName: "",
+  clientEmail: "",
+  senderAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  clientAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  total: 0,
+  items: [{ name: "", quantity: 0, price: 0, total: 0 }],
+};
 
 export const REGISTER_FORM_INIT_VALUES = {
   username: "",
@@ -37,6 +62,10 @@ export const RESET_PASS_INIT_VALUES: FormikValues = {
 export const RESET_USERNAME_INIT_VALUES: FormikValues = {
   username: "",
   email: "",
+};
+
+export const UPLOAD_IMAGE_INIT_VALUES: FormikValues = {
+  file: "",
 };
 
 export const ACCOUNT_ROUTES_CONFIG: AccountRoutesConfig = {

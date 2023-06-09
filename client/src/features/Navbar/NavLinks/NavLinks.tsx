@@ -1,5 +1,4 @@
-import { LinkButton } from "../Button/Link";
-import { ButtonSignout } from "../Button/ButtonSignout";
+import { ButtonSignout, ButtonLink } from "components";
 import { useAuth } from "hooks";
 
 export const NavLinks = (): React.JSX.Element => {
@@ -9,20 +8,20 @@ export const NavLinks = (): React.JSX.Element => {
 
   return (
     <>
-      <LinkButton
+      <ButtonLink
         to={isLoggedIn ? "dashboard" : "login"}
         intent={"outlined-link"}
         size={"fixed"}
       >
         {isLoggedIn ? "Dashboard" : "Log In"}
-      </LinkButton>
+      </ButtonLink>
 
       {isLoggedIn ? (
         <ButtonSignout />
       ) : (
-        <LinkButton to={"register"} intent={"primary-link"} size={"fixed"}>
+        <ButtonLink to={"register"} intent={"primary-link"} size={"fixed"}>
           Register
-        </LinkButton>
+        </ButtonLink>
       )}
     </>
   );

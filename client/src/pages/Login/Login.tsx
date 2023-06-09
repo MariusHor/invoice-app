@@ -6,15 +6,15 @@ import { LayoutLoginRegister } from "layouts";
 import { RegisterLoginForm } from "features";
 import { InputCheckboxField } from "components";
 import { useLogin, usePersist } from "hooks";
-import { LoginValues } from "types";
 import { LOGIN_FORM_INIT_VALUES } from "utils/constants";
+import { LoginValues } from "types";
 
 export const Login = (): React.JSX.Element => {
   const [_, setState] = useState();
   const { setPersist } = usePersist();
   const login = useLogin();
 
-  const handleSubmit = async (
+  const handleLogin = async (
     values: LoginValues,
     { setSubmitting, setFieldError }: FormikHelpers<LoginValues>
   ) => {
@@ -49,7 +49,7 @@ export const Login = (): React.JSX.Element => {
       <RegisterLoginForm
         isLogin={true}
         initialValues={LOGIN_FORM_INIT_VALUES}
-        onSubmit={handleSubmit}
+        onSubmit={handleLogin}
       >
         <InputCheckboxField
           id={"rememberMe"}

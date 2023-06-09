@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { type VariantProps } from "class-variance-authority";
 
-import { button } from "./styles";
+import { button } from "../styles";
 
 interface LinkButtonProps
   extends React.AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -9,7 +9,7 @@ interface LinkButtonProps
   to: string;
 }
 
-export const LinkButton = ({
+export const ButtonLink = ({
   to,
   className,
   intent,

@@ -1,13 +1,8 @@
 import { useState } from "react";
 import { isAxiosError } from "axios";
-import {
-  Formik,
-  Form as FormikForm,
-  FormikHelpers,
-  FormikValues,
-} from "formik";
+import { FormikHelpers, FormikValues } from "formik";
 
-import { Button, InputTextField, Spinner } from "components";
+import { Form, InputTextField, Spinner } from "components";
 import { useUpdateUser, useUser } from "hooks";
 import { updateUsernameSchema } from "schemas";
 import { RESET_USERNAME_INIT_VALUES } from "utils/constants";
@@ -53,31 +48,21 @@ export const AccountGeneral = (): React.JSX.Element => {
 
   return (
     <div className="flex grow flex-col gap-3 text-center">
-      <Formik
+      <Form
         initialValues={dbInitValues || RESET_USERNAME_INIT_VALUES}
-        enableReinitialize={true}
         onSubmit={handleSubmit}
         validationSchema={updateUsernameSchema}
+        submitBtn={{
+          intent: "accent",
+          text: "Save Changes",
+          disabled: (isSubmitting: boolean, values: FormikValues) =>
+            isSubmitting ||
+            (values.username === user.username && values.email === user.email),
+        }}
       >
-        {({ isSubmitting, values }) => (
-          <FormikForm className="flex w-full flex-col gap-5">
-            <InputTextField label={"Username"} id={"username"} />
-            <InputTextField type="email" label="Email" id="email" />
-            <Button
-              intent="accent"
-              type="submit"
-              disabled={
-                isSubmitting ||
-                (values.username === user.username &&
-                  values.email === user.email)
-              }
-              className="mx-auto mt-4 w-fit"
-            >
-              Save Changes
-            </Button>
-          </FormikForm>
-        )}
-      </Formik>
+        <InputTextField label={"Username"} id={"username"} />
+        <InputTextField type="email" label="Email" id="email" />
+      </Form>
     </div>
   );
 };

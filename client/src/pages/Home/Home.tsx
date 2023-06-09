@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { LinkButton } from "components";
+import { ButtonLink } from "components";
 
 export const Home = (): React.JSX.Element => {
   const { isLoggedIn } = useOutletContext<{ isLoggedIn: boolean }>();
@@ -19,12 +19,12 @@ export const Home = (): React.JSX.Element => {
         </span>
         .
       </p>
-      <LinkButton
+      <ButtonLink
         to={isLoggedIn ? "dashboard" : "demo"}
         intent={"primary-link"}
       >
         {isLoggedIn ? "Dashboard" : "Try a Demo"}
-      </LinkButton>
+      </ButtonLink>
     </div>
   );
 };

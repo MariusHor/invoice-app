@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { isAxiosError } from "axios";
 import { FormikHelpers } from "formik";
+import { isAxiosError } from "axios";
 
 import { LayoutLoginRegister } from "layouts";
 import { RegisterLoginForm } from "features";
 import { InputPasswordField } from "components";
-import { RegisterValues } from "types";
 import { postRegister } from "api";
 import { REGISTER_FORM_INIT_VALUES } from "utils/constants";
+import { RegisterValues } from "types";
 
 export const Register = (): React.JSX.Element => {
   const [_, setState] = useState();
   const navigate = useNavigate();
 
-  const handleSubmit = async (
+  const handleRegister = async (
     values: RegisterValues,
     { setSubmitting, setFieldError }: FormikHelpers<RegisterValues>
   ) => {
@@ -47,7 +47,7 @@ export const Register = (): React.JSX.Element => {
       <RegisterLoginForm
         isLogin={false}
         initialValues={REGISTER_FORM_INIT_VALUES}
-        onSubmit={handleSubmit}
+        onSubmit={handleRegister}
       >
         <InputPasswordField
           label="Confirm Password"

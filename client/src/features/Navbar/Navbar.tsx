@@ -1,26 +1,11 @@
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
-import { VariantProps, cva } from "class-variance-authority";
-import { Logo } from "./Logo";
+import { VariantProps } from "class-variance-authority";
+import { Logo } from "./Logo/Logo";
 import { useTheme } from "hooks";
 import moon from "assets/icon-moon.svg";
-import { THEME_PRIMARY, THEME_SECONDARY } from "utils/constants";
-
-const navbar = cva("flex h-fit justify-between gap-6 ", {
-  variants: {
-    intent: {
-      private: [
-        "lg:row-span-6 lg:flex-col",
-        "lg:min-h-screen lg:w-20",
-        "lg:rounded-r-3xl bg-skin-static",
-      ],
-      public: ["container mx-auto py-2"],
-    },
-    defaultVariants: {
-      intent: "public",
-    },
-  },
-});
+import { HOME_PATH, THEME_PRIMARY, THEME_SECONDARY } from "utils/constants";
+import { navbar } from "./styles";
 
 export interface NavbarProps
   extends React.AllHTMLAttributes<HTMLElement>,
@@ -36,7 +21,7 @@ export const Navbar = ({
 
   return (
     <nav className={navbar({ intent, className })} {...props}>
-      <Link to="/">
+      <Link to={HOME_PATH}>
         <Logo intent={intent} />
       </Link>
       <div

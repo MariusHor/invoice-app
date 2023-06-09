@@ -11,6 +11,7 @@ import { SimpleFileUpload } from "formik-mui";
 import { Button } from "components";
 import { useDeleteUser, useUpdateUser, useUser } from "hooks";
 import { imageUploadSchema } from "schemas";
+import { UPLOAD_IMAGE_INIT_VALUES } from "utils/constants";
 
 export const UploadImageForm = (): React.JSX.Element => {
   const [isUploading, setIsUploading] = useState(false);
@@ -21,10 +22,6 @@ export const UploadImageForm = (): React.JSX.Element => {
   const updateUser = useUpdateUser("/avatar", {
     headers: { "Content-Type": "multipart/form-data" },
   });
-
-  const initialValues: FormikValues = {
-    file: "",
-  };
 
   const handleSubmit = async (
     values: FormikValues,
@@ -56,7 +53,7 @@ export const UploadImageForm = (): React.JSX.Element => {
 
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={UPLOAD_IMAGE_INIT_VALUES}
       enableReinitialize={true}
       onSubmit={handleSubmit}
       validationSchema={imageUploadSchema}
