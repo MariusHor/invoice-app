@@ -15,7 +15,11 @@ export const Dashboard = (): React.JSX.Element => {
     []
   );
 
-  const { data: invoices, isLoading } = useInvoices();
+  const { data: invoices, isLoading, isError } = useInvoices();
+
+  console.log(invoices);
+
+  if (isError) console.log("ERROR");
 
   if (isLoading) return <Spinner intent={"inner"} />;
 

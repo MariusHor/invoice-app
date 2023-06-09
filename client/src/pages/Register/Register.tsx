@@ -9,6 +9,7 @@ import { InputPasswordField } from "components";
 import { postRegister } from "api";
 import { REGISTER_FORM_INIT_VALUES } from "utils/constants";
 import { RegisterValues } from "types";
+import { toast } from "react-hot-toast";
 
 export const Register = (): React.JSX.Element => {
   const [_, setState] = useState();
@@ -22,6 +23,7 @@ export const Register = (): React.JSX.Element => {
 
     try {
       await postRegister({ username, password });
+      toast.success("Successfully registered!");
       setSubmitting(false);
       navigate("/login");
     } catch (error) {

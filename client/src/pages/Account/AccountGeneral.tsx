@@ -3,13 +3,15 @@ import { isAxiosError } from "axios";
 import { FormikHelpers, FormikValues } from "formik";
 
 import { Form, InputTextField, Spinner } from "components";
-import { useUpdateUser, useUser } from "hooks";
+import { useAuth, useUpdateUser, useUser } from "hooks";
 import { updateUsernameSchema } from "schemas";
 import { RESET_USERNAME_INIT_VALUES } from "utils/constants";
+import { toast } from "react-hot-toast";
 
 export const AccountGeneral = (): React.JSX.Element => {
   const updateUser = useUpdateUser();
   const { data: user, isLoading } = useUser();
+  const { auth, setAuth } = useAuth();
   const [_, setState] = useState();
 
   if (isLoading) return <Spinner />;
@@ -22,6 +24,13 @@ export const AccountGeneral = (): React.JSX.Element => {
 
     try {
       await updateUser.mutateAsync({ username, email });
+      setAuth((prev) => ({ ...prev, username, email }));
+
+      if (username !== auth.username)
+        toast.success(`Username updated: ${username}`);
+
+      if (email !== auth.email) toast.success(`email updated: ${email}`);
+
       setSubmitting(false);
     } catch (error) {
       if (isAxiosError(error)) {

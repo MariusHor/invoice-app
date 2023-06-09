@@ -2,12 +2,6 @@ import {Schema, model} from 'mongoose';
 import {nanoid} from 'nanoid';
 
 const invoiceSchema = new Schema({
-    invoiceId: {
-        type: String,
-        required: true,
-        default: () => nanoid(6),
-        index: {unique: true},
-    },
     createdAt: String,
     paymentDue: String,
     description: String,
@@ -16,6 +10,16 @@ const invoiceSchema = new Schema({
     clientEmail: String,
     status: String,
     total: Number,
+    invoiceId: {
+        type: String,
+        required: true,
+        default: () => nanoid(6),
+        index: {unique: true},
+    },
+    userId: {
+        required: true,
+        type: String,
+    },
     senderAddress: {
         street: String,
         city: String,

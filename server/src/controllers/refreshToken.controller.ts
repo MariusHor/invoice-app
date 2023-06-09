@@ -27,7 +27,8 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
                 {expiresIn: '10s'}
             );
 
-            res.json({accessToken, username: decoded.username});
+            const hasProfilePicture = foundUser.profilePicture ? true : false;
+            res.json({accessToken, username: decoded.username, email: foundUser.email, hasProfilePicture});
         });
     } catch (error) {
         next(error);

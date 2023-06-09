@@ -20,9 +20,7 @@ export const Avatar = ({ intent = "small" }: { intent?: string }) => {
     <AvatarMUI
       sx={{ bgcolor: "grey", ...sizes[intent] }}
       alt={user?.username}
-      src={user?.image}
-    >
-      <div className="h-full w-full bg-inherit"></div>
-    </AvatarMUI>
+      src={user?.profilePicture}
+    />
   );
 };

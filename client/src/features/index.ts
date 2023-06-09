@@ -7,4 +7,4 @@ export { InvoiceForm } from "./InvoiceForm/InvoiceForm";
 export { RegisterLoginForm } from "./RegisterSharedForm/RegisterLoginForm";
 export { Hamburger } from "./Navbar/Hamburger/Hamburger";
 export { NavLinks } from "./Navbar/NavLinks/NavLinks";
-export { UploadImageForm } from "./UploadImageForm/UploadImageForm";
+export { UploadProfilePictureForm } from "./UploadProfilePictureForm/UploadProfilePictureForm";

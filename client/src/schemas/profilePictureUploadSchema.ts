@@ -6,15 +6,19 @@ interface FileValuesExtended {
   type?: string;
 }
 
-export const imageUploadSchema = yup.object().shape({
+export const profilePictureUploadSchema = yup.object().shape({
   file: yup
     .mixed()
     .test("required", "You need to provide a file", (file) => {
+      console.log(file);
       if (file) return true;
       return false;
     })
     .test("fileType", "File type is not supported", (file) => {
+      console.log(file);
       const { type } = file as FileValuesExtended;
+
+      console.log(type);
 
       if (type) {
         const fileType = type.split("/").pop();
@@ -23,6 +27,7 @@ export const imageUploadSchema = yup.object().shape({
           typeof fileType === "string" &&
           !ALLOWED_FILE_TYPES.includes(fileType)
         ) {
+          console.log(ALLOWED_FILE_TYPES, fileType);
           return false;
         }
       }

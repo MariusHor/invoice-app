@@ -1,4 +1,4 @@
-import { FormikHelpers, FormikValues } from "formik";
+import { FormikValues } from "formik";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface Address {
@@ -57,12 +57,12 @@ export interface Auth {
   password?: string;
   accessToken?: string;
   isLoggedIn?: boolean;
+  hasProfilePicture?: boolean;
 }
 
 export interface AccountUpdates {
   username?: string;
   email?: string;
-  image?: FormData;
   oldPassword?: string;
   newPassword?: string;
 }
@@ -100,12 +100,4 @@ export interface SubmitBtn {
     | undefined;
   text?: string;
   disabled?: (isSubmitting: boolean, values: FormikValues) => boolean;
-}
-
-export interface FormProps {
-  initialValues: object;
-  children?: ReactNode;
-  validationSchema?: object;
-  submitBtn: SubmitBtn;
-  onSubmit: (values: object, { setSubmitting }: FormikHelpers<object>) => void;
 }

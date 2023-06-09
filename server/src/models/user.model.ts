@@ -12,7 +12,7 @@ const userSchema = new Schema({
     email: {
         type: String,
     },
-    image: String,
+    profilePicture: String,
     refreshToken: String,
 });
 

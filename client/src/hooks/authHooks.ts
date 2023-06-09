@@ -16,10 +16,13 @@ export const useLogin = () => {
     async ({ password, username }: LoginValues) =>
       await postLogin({ password, username }),
     {
-      onSuccess: async ({ accessToken }) => {
+      onSuccess: async ({ data }) => {
+        const { accessToken, email, hasProfilePicture } = data;
         setAuth({
           isLoggedIn: true,
           accessToken,
+          email,
+          hasProfilePicture,
         });
 
         queryClient.removeQueries();
@@ -60,10 +63,17 @@ export const useRefreshToken = () => {
   return async () => {
     try {
       const response = await getRefreshToken();
-      const { username, accessToken } = response.data;
+      const { username, accessToken, email, hasProfilePicture } = response.data;
 
       setAuth((prev) => {
-        return { ...prev, accessToken, username, isLoggedIn: true };
+        return {
+          ...prev,
+          accessToken,
+          username,
+          email,
+          hasProfilePicture,
+          isLoggedIn: true,
+        };
       });
 
       return accessToken;

@@ -1,8 +1,8 @@
 import { FormikValues } from "formik";
 import { AccountRoutesConfig } from "types";
 
-export const MAX_ALLOWED_FILE_SIZE = 2097152;
-export const ALLOWED_FILE_TYPES = ["gif", "png", "jpg"];
+export const MAX_ALLOWED_FILE_SIZE = 97152;
+export const ALLOWED_FILE_TYPES = ["gif", "png", "jpg", "jpeg"];
 export const INVOICES_PER_PAGE = 6;
 export const KEY_THEME = "theme";
 export const KEY_PERSIST = "persist";
@@ -64,7 +64,7 @@ export const RESET_USERNAME_INIT_VALUES: FormikValues = {
   email: "",
 };
 
-export const UPLOAD_IMAGE_INIT_VALUES: FormikValues = {
+export const UPLOAD_PROFILE_PICTURE_INIT_VALUES: FormikValues = {
   file: "",
 };
 

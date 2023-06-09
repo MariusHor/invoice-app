@@ -8,6 +8,8 @@ import { InputCheckboxField } from "components";
 import { useLogin, usePersist } from "hooks";
 import { LOGIN_FORM_INIT_VALUES } from "utils/constants";
 import { LoginValues } from "types";
+import { toast } from "react-hot-toast";
+import { capitalize } from "utils";
 
 export const Login = (): React.JSX.Element => {
   const [_, setState] = useState();
@@ -22,8 +24,14 @@ export const Login = (): React.JSX.Element => {
 
     try {
       await login.mutateAsync({ password, username });
+
       setSubmitting(false);
       if (rememberMe !== undefined) setPersist(rememberMe);
+
+      const feedback = username
+        ? `Welcome back, ${capitalize(username)}`
+        : "Welcome back!";
+      toast.success(feedback);
     } catch (error) {
       if (isAxiosError(error)) {
         switch (error.response?.status) {

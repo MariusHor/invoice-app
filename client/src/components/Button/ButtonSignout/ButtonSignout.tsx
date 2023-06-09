@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "../Button";
 import { useSignout } from "hooks";
+import { toast } from "react-hot-toast";
 
 interface ButtonSignoutProps {
   signoutCallback?: () => void;
@@ -15,6 +16,7 @@ export const ButtonSignout = ({
   const handleSignout = async () => {
     try {
       await signout();
+      toast.success("Successfully signed out!");
     } catch (error) {
       return setState(() => {
         throw error;

@@ -1,4 +1,4 @@
-import { UploadImageForm } from "features";
+import { UploadProfilePictureForm } from "features";
 import { Avatar } from "components";
 
 export const AccountProfile = (): React.JSX.Element => {
@@ -8,7 +8,7 @@ export const AccountProfile = (): React.JSX.Element => {
         <div>
           <Avatar intent={"large"} />
         </div>
-        <UploadImageForm />
+        <UploadProfilePictureForm />
       </div>
     </div>
   );

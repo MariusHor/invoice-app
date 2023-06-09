@@ -2,13 +2,13 @@ import express from 'express';
 import {
     getUser,
     updateUser,
-    updateUserAvatar,
+    updateProfilePicture,
     createInvoice,
     getInvoices,
     deleteInvoice,
     updateInvoice,
     getInvoice,
-    DeleteUserAvatar,
+    DeleteProfilePicture,
 } from '../controllers';
 
 const router = express.Router();
@@ -18,5 +18,5 @@ router.route('/invoices').get(getInvoices).post(createInvoice);
 router.route('/invoices/:id').get(getInvoice).delete(deleteInvoice).patch(updateInvoice);
 
 router.route('/account').get(getUser).patch(updateUser);
-router.route('/avatar').patch(updateUserAvatar).delete(DeleteUserAvatar);
+router.route('/account/avatar').patch(updateProfilePicture).delete(DeleteProfilePicture);
 export default router;

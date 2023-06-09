@@ -44,7 +44,9 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
                 sameSite: 'none',
                 maxAge: 24 * 60 * 60 * 1000,
             });
-            res.status(200).json({accessToken});
+
+            const hasProfilePicture = foundUser.profilePicture ? true : false;
+            res.status(200).json({accessToken, hasProfilePicture, email: foundUser.email});
         }
 
         if (!match) {

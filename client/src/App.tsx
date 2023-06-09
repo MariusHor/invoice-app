@@ -33,6 +33,7 @@ import {
 } from "pages";
 
 import "./App.css";
+import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -73,6 +74,7 @@ const App = (): React.JSX.Element => {
         <InvoiceFiltersProvider>
           <PersistProvider>
             <AuthProvider>
+              <Toaster />
               <RouterProvider router={router} />
             </AuthProvider>
           </PersistProvider>

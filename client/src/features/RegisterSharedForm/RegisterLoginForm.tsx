@@ -12,10 +12,9 @@ interface FormProps {
   isLogin?: boolean;
   onSubmit: (
     values: RegisterValues,
-    { setSubmitting }: FormikHelpers<RegisterValues>
+    formikHelpers: FormikHelpers<RegisterValues>
   ) => void;
 }
-
 export const RegisterLoginForm = ({
   isLogin,
   onSubmit,

@@ -15,7 +15,11 @@ export const getUser = async (req: Request, res: Response, next: NextFunction) =
         const foundUser = await User.findOne({refreshToken}).exec();
         if (!foundUser) return res.sendStatus(403);
 
-        res.status(200).json({username: foundUser.username, email: foundUser.email, image: foundUser.image});
+        res.status(200).json({
+            username: foundUser.username,
+            email: foundUser.email,
+            profilePicture: foundUser.profilePicture,
+        });
     } catch (error) {
         next(error);
     }
@@ -61,7 +65,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
     }
 };
 
-export const updateUserAvatar = (req: Request, res: Response, next: NextFunction) => {
+export const updateProfilePicture = (req: Request, res: Response, next: NextFunction) => {
     handleMultipartData(req, res, async (err) => {
         if (err) {
             return next(err);
@@ -86,7 +90,7 @@ export const updateUserAvatar = (req: Request, res: Response, next: NextFunction
                     const foundUser = await User.findOne({refreshToken});
                     if (!foundUser) return res.sendStatus(403);
 
-                    foundUser.image = result.secure_url;
+                    foundUser.profilePicture = result.secure_url;
                     foundUser.save();
 
                     fs.unlink(filePath, (err) => {
@@ -106,7 +110,7 @@ export const updateUserAvatar = (req: Request, res: Response, next: NextFunction
     });
 };
 
-export const DeleteUserAvatar = async (req: Request, res: Response, next: NextFunction) => {
+export const DeleteProfilePicture = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const refreshToken = req?.cookies?.jwt;
         if (!refreshToken) return res.sendStatus(401);
@@ -114,10 +118,10 @@ export const DeleteUserAvatar = async (req: Request, res: Response, next: NextFu
         const foundUser = await User.findOne({refreshToken});
         if (!foundUser) return res.sendStatus(403);
 
-        foundUser.image = '';
+        foundUser.profilePicture = '';
         foundUser.save();
 
-        res.status(200).json({message: 'Image deleted successfully'});
+        res.status(200).json({message: 'Profile picture deleted successfully'});
     } catch (error) {
         next(error);
     }

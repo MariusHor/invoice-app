@@ -1,5 +1,5 @@
 export { invoiceSchema } from "./invoiceSchema";
-export { imageUploadSchema } from "./imageUploadSchema";
+export { profilePictureUploadSchema } from "./profilePictureUploadSchema";
 export { loginSchema, registerSchema } from "./authSchemas";
 export {
   updatePasswordSchema,

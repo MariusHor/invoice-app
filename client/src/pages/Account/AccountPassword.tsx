@@ -6,6 +6,7 @@ import { Form, InputPasswordField } from "components";
 import { useSignout, useUpdateUser, useUser } from "hooks";
 import { updatePasswordSchema } from "schemas";
 import { RESET_PASS_INIT_VALUES } from "utils/constants";
+import { toast } from "react-hot-toast";
 
 export const AccountPassword = (): React.JSX.Element => {
   const signout = useSignout();
@@ -25,7 +26,10 @@ export const AccountPassword = (): React.JSX.Element => {
         newPassword,
         username: user.username,
       });
+
+      toast.success(`Password updated. Please login again!`);
       await signout("/login");
+
       setSubmitting(false);
     } catch (error) {
       if (isAxiosError(error)) {

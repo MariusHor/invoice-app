@@ -1,10 +1,20 @@
 import {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
 import {Invoice} from '../models';
+import {User} from '../models';
 
 export const getInvoices = async (req: Request, res: Response, next: NextFunction) => {
+    const refreshToken = req?.cookies?.jwt;
+    if (!refreshToken) return res.sendStatus(401);
+
     try {
-        const invoices = await Invoice.find();
+        const foundUser = await User.findOne({refreshToken}).exec();
+        if (!foundUser) return res.sendStatus(403);
+
+        const invoices = await Invoice.find({userId: foundUser._id}).exec();
+        console.log(invoices);
+        if (!invoices.length) res.status(204).json({message: 'No invoices found'});
+
         res.status(200).json(invoices);
     } catch (error) {
         next(error);
@@ -23,8 +33,17 @@ export const getInvoice = async (req: Request, res: Response, next: NextFunction
 };
 
 export const createInvoice = async (req: Request, res: Response, next: NextFunction) => {
+    const refreshToken = req?.cookies?.jwt;
+    if (!refreshToken) return res.sendStatus(401);
+
     try {
-        const newInvoice = new Invoice(req.body);
+        const foundUser = await User.findOne({refreshToken}).exec();
+        if (!foundUser) return res.sendStatus(403);
+
+        const newInvoice = new Invoice({
+            ...req.body,
+            userId: foundUser._id,
+        });
 
         await newInvoice.save();
         res.status(201).json(newInvoice);
