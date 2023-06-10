@@ -1,5 +1,6 @@
-export { ErrorPage } from "./Error/ErrorPage";
+export { Errors } from "./Errors/Errors";
 export { Home } from "./Home/Home";
+export { Demo } from "./Demo/Demo";
 export { Login } from "./Login/Login";
 export { Register } from "./Register/Register";
 export { Dashboard } from "./Dashboard/Dashboard";

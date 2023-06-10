@@ -4,6 +4,7 @@ import { useAuth } from "./contextHooks";
 import { QUERY_INVOICES, QUERY_USER } from "utils/constants";
 import toast from "react-hot-toast";
 import { isAxiosError } from "axios";
+import { axiosPublic } from "lib";
 
 export const useInvoices = () => {
   const axiosPrivate = useAxiosPrivate();
@@ -12,10 +13,11 @@ export const useInvoices = () => {
   return useQuery({
     queryKey: [QUERY_INVOICES],
     queryFn: async () => {
-      if (!auth.isLoggedIn) return [];
-
       try {
-        const response = await axiosPrivate.get("/user/invoices", {
+        const path = auth.isLoggedIn ? "user" : "demo";
+        const api = auth.isLoggedIn ? axiosPrivate : axiosPublic;
+
+        const response = await api.get(`/${path}/invoices`, {
           headers: { "Content-Type": "application/json" },
         });
 

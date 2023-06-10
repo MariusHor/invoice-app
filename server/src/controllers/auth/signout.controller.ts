@@ -1,5 +1,5 @@
 import {NextFunction, Request, Response} from 'express';
-import {User} from '../models';
+import {User} from '../../models';
 
 export const signoutUser = async (req: Request, res: Response, next: NextFunction) => {
     try {

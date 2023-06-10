@@ -10,6 +10,7 @@ const invoiceSchema = new Schema({
     clientEmail: String,
     status: String,
     total: Number,
+    isDemo: Boolean,
     invoiceId: {
         type: String,
         required: true,
@@ -17,7 +18,6 @@ const invoiceSchema = new Schema({
         index: {unique: true},
     },
     userId: {
-        required: true,
         type: String,
     },
     senderAddress: {

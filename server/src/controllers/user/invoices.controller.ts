@@ -1,7 +1,7 @@
 import {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
-import {Invoice} from '../models';
-import {User} from '../models';
+import {Invoice} from '../../models';
+import {User} from '../../models';
 
 export const getInvoices = async (req: Request, res: Response, next: NextFunction) => {
     const refreshToken = req?.cookies?.jwt;
@@ -12,8 +12,7 @@ export const getInvoices = async (req: Request, res: Response, next: NextFunctio
         if (!foundUser) return res.sendStatus(403);
 
         const invoices = await Invoice.find({userId: foundUser._id}).exec();
-        console.log(invoices);
-        if (!invoices.length) res.status(204).json({message: 'No invoices found'});
+        if (!invoices.length) return res.status(204).json({message: 'No invoices found'});
 
         res.status(200).json(invoices);
     } catch (error) {

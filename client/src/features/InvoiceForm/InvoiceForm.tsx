@@ -13,6 +13,7 @@ import { ItemList } from "./ItemList";
 import { Invoice, InvoiceResult } from "types";
 import { invoiceSchema } from "schemas";
 import { INVOICE_FORM_INIT_VALUES } from "utils/constants";
+import { useAuth } from "hooks";
 
 interface InvoiceFormProps {
   invoice?: InvoiceResult;
@@ -28,6 +29,7 @@ export const InvoiceForm = ({
   invoice,
   onSubmit,
 }: InvoiceFormProps) => {
+  const { auth } = useAuth();
   return (
     <Formik
       initialValues={invoice ? invoice : INVOICE_FORM_INIT_VALUES}
@@ -65,7 +67,7 @@ export const InvoiceForm = ({
                 setFieldValue("isDraft", false);
                 handleSubmit();
               }}
-              disabled={isSubmitting}
+              disabled={isSubmitting || !auth.isLoggedIn}
             >
               {isEditing ? "Save changes" : "Save"}
             </Button>

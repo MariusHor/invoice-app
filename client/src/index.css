@@ -106,14 +106,14 @@
     line-height: 15px;
   }
 
-  .text-sm,
-  .text-sm-variant {
+  .text-sm {
     letter-spacing: -0.1px;
     @apply text-font-sm;
   }
 
   .text-sm-variant {
     line-height: 18px;
+    @apply text-font-md;
   }
 }
 

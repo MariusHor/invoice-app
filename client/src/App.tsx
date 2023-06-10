@@ -4,60 +4,41 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import {
-  AuthProvider,
-  ReactQueryProvider,
-  InvoiceFiltersProvider,
-  ThemeProvider,
-  PersistProvider,
-} from "providers";
-import {
-  LayoutInvoice,
-  LayoutPrivate,
-  LayoutPublic,
-  LayoutAccount,
-} from "layouts";
-import { AuthGuard, PersistLogin } from "containers";
-import {
-  ErrorPage,
-  InvoiceEdit,
-  InvoiceCreate,
-  InvoiceView,
-  Dashboard,
-  Home,
-  Login,
-  Register,
-  AccountGeneral,
-  AccountProfile,
-  AccountPassword,
-} from "pages";
+
+import * as layouts from "layouts";
+import * as containers from "containers";
+import * as pages from "pages";
 
 import "./App.css";
-import { Toaster } from "react-hot-toast";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route element={<PersistLogin />}>
-      <Route path="/" errorElement={<ErrorPage />}>
-        <Route element={<LayoutPublic />}>
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-        </Route>
-
-        <Route element={<AuthGuard />}>
-          <Route element={<LayoutPrivate />}>
-            <Route path="account" element={<LayoutAccount />}>
-              <Route index element={<AccountGeneral />} />
-              <Route path="profile" element={<AccountProfile />} />
-              <Route path="password" element={<AccountPassword />} />
+    <Route element={<containers.Toaster />}>
+      <Route path="/" errorElement={<pages.Errors />}>
+        <Route element={<containers.PersistLogin />}>
+          <Route element={<layouts.Public />}>
+            <Route index element={<pages.Home />} />
+            <Route path="login" element={<pages.Login />} />
+            <Route path="register" element={<pages.Register />} />
+            <Route element={<containers.DemoGuard />}>
+              <Route path="demo/*" element={<pages.Demo />} />
             </Route>
-            <Route path="dashboard">
-              <Route index element={<Dashboard />} />
-              <Route element={<LayoutInvoice />}>
-                <Route path="create" element={<InvoiceCreate />} />
-                <Route path=":id" element={<InvoiceView />} />
-                <Route path=":id/edit" element={<InvoiceEdit />} />
+          </Route>
+
+          <Route element={<containers.AuthGuard />}>
+            <Route element={<layouts.Private />}>
+              <Route path="account" element={<layouts.Account />}>
+                <Route index element={<pages.AccountGeneral />} />
+                <Route path="profile" element={<pages.AccountProfile />} />
+                <Route path="password" element={<pages.AccountPassword />} />
+              </Route>
+              <Route path="dashboard">
+                <Route index element={<pages.Dashboard />} />
+                <Route element={<layouts.Invoice />}>
+                  <Route path="create" element={<pages.InvoiceCreate />} />
+                  <Route path=":id" element={<pages.InvoiceView />} />
+                  <Route path=":id/edit" element={<pages.InvoiceEdit />} />
+                </Route>
               </Route>
             </Route>
           </Route>
@@ -68,20 +49,7 @@ const router = createBrowserRouter(
 );
 
 const App = (): React.JSX.Element => {
-  return (
-    <ReactQueryProvider>
-      <ThemeProvider>
-        <InvoiceFiltersProvider>
-          <PersistProvider>
-            <AuthProvider>
-              <Toaster />
-              <RouterProvider router={router} />
-            </AuthProvider>
-          </PersistProvider>
-        </InvoiceFiltersProvider>
-      </ThemeProvider>
-    </ReactQueryProvider>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;

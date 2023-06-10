@@ -4,12 +4,19 @@ import { ReactNode } from "react";
 import { InvoiceStatus } from "components";
 import { InvoiceResult } from "types";
 import arrowRight from "assets/icon-arrow-right.svg";
+import { useAuth } from "hooks";
+
+interface InvoiceCardProps {
+  invoice: InvoiceResult;
+}
 
 export const InvoiceCard = ({
   invoice,
-}: {
-  invoice: InvoiceResult;
-}): React.JSX.Element => {
+}: InvoiceCardProps): React.JSX.Element => {
+  const {
+    auth: { isLoggedIn },
+  } = useAuth();
+
   return (
     <div className="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg bg-skin-fill-secondary text-skin-muted shadow-xl lg:max-w-2xl xl:max-w-4xl">
       <div className="center m-4 w-full grid-cols-2 grid-rows-2 gap-2 xl:grid-cols-5 xl:grid-rows-none">
@@ -28,7 +35,7 @@ export const InvoiceCard = ({
       </div>
       <div className="grow">
         <Link
-          to={`/dashboard/${invoice.invoiceId}`}
+          to={`/${isLoggedIn ? "dashboard" : "demo"}/${invoice.invoiceId}`}
           className="min-h-10 center h-full min-w-10 border-l border-base p-2 transition-all ease-in-out hover:bg-skin-box"
         >
           <img src={arrowRight} alt="view invoice" className="" />

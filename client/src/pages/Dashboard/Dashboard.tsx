@@ -15,11 +15,7 @@ export const Dashboard = (): React.JSX.Element => {
     []
   );
 
-  const { data: invoices, isLoading, isError } = useInvoices();
-
-  console.log(invoices);
-
-  if (isError) console.log("ERROR");
+  const { data: invoices, isLoading } = useInvoices();
 
   if (isLoading) return <Spinner intent={"inner"} />;
 
@@ -48,7 +44,7 @@ export const Dashboard = (): React.JSX.Element => {
         </div>
       ) : (
         <InvoiceFallback>
-          <p className="paragraph-secondary mx-auto mt-6 max-w-42 text-center">
+          <p className="text-sm-variant mx-auto mt-6 max-w-42 text-center text-skin-muted">
             Create an invoice by clicking the New Invoice button and get started
           </p>
         </InvoiceFallback>

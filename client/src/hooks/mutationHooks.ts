@@ -3,6 +3,7 @@ import { useAxiosPrivate } from "./useAxiosPrivate";
 import { AccountUpdates, Invoice } from "types";
 import { deleteInvoice, postInvoice, updateInvoice } from "api";
 import { QUERY_INVOICES, QUERY_USER } from "utils/constants";
+import { useAuth } from "./contextHooks";
 
 export const useUpdateUser = (
   path = "/account",
@@ -45,9 +46,11 @@ export const useDeleteUser = (path = "/account") => {
 
 export const useCreateInvoice = () => {
   const queryClient = useQueryClient();
+  const { auth } = useAuth();
+
   return useMutation(
     async ({ newInvoice }: { newInvoice: Invoice }) =>
-      await postInvoice(newInvoice),
+      await postInvoice({ invoice: newInvoice, isDemo: !auth.isLoggedIn }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QUERY_INVOICES]);
@@ -58,9 +61,11 @@ export const useCreateInvoice = () => {
 
 export const useUpdateInvoice = () => {
   const queryClient = useQueryClient();
+  const { auth } = useAuth();
+
   return useMutation(
     async ({ id, updatedInvoice }: { id: string; updatedInvoice: Invoice }) =>
-      await updateInvoice(id, updatedInvoice),
+      await updateInvoice({ id, updatedInvoice, isDemo: !auth.isLoggedIn }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QUERY_INVOICES]);
@@ -71,8 +76,11 @@ export const useUpdateInvoice = () => {
 
 export const useDeleteInvoice = () => {
   const queryClient = useQueryClient();
+  const { auth } = useAuth();
+
   return useMutation(
-    async ({ id }: { id: string }) => await deleteInvoice(id),
+    async ({ id }: { id: string }) =>
+      await deleteInvoice({ id, isDemo: !auth.isLoggedIn }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries([QUERY_INVOICES]);

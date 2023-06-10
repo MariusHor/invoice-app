@@ -8,7 +8,7 @@ import cookieParser from 'cookie-parser';
 import {errorLogger, errorResponder} from './middlewares';
 import {dbConfig, corsConfig, cloudinaryConfig} from './config';
 import {verifyJWT} from './middlewares/verifyJWT';
-import {authRoutes, userRoutes} from './routes';
+import {authRoutes, demoRoutes, userRoutes} from './routes';
 
 dotenv.config();
 dbConfig();
@@ -25,6 +25,7 @@ app.use(cors(corsConfig));
 app.use(cookieParser());
 
 app.use('/api/public/auth', authRoutes);
+app.use('/api/public/demo', demoRoutes);
 
 app.use(verifyJWT);
 app.use('/api/private/user', userRoutes);

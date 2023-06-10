@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FormikHelpers } from "formik";
 import { isAxiosError } from "axios";
 
-import { LayoutLoginRegister } from "layouts";
+import { Auth as LayoutAuth } from "layouts";
 import { RegisterLoginForm } from "features";
 import { InputPasswordField } from "components";
 import { postRegister } from "api";
@@ -45,7 +45,7 @@ export const Register = (): React.JSX.Element => {
   };
 
   return (
-    <LayoutLoginRegister>
+    <LayoutAuth>
       <RegisterLoginForm
         isLogin={false}
         initialValues={REGISTER_FORM_INIT_VALUES}
@@ -57,6 +57,6 @@ export const Register = (): React.JSX.Element => {
           autocomplete={"new-password"}
         />
       </RegisterLoginForm>
-    </LayoutLoginRegister>
+    </LayoutAuth>
   );
 };

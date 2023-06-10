@@ -30,14 +30,43 @@ export const getRefreshToken = async () =>
     withCredentials: true,
   });
 
-export const postInvoice = async (invoice: Invoice) => {
-  await axiosPrivate.post("/user/invoices", invoice);
+export const postInvoice = async ({
+  invoice,
+  isDemo,
+}: {
+  invoice: Invoice;
+  isDemo: boolean;
+}) => {
+  const path = isDemo ? "demo" : "user";
+  const api = isDemo ? axiosPublic : axiosPrivate;
+
+  await api.post(`/${path}/invoices`, invoice);
 };
 
-export const deleteInvoice = async (id: string) => {
-  await axiosPrivate.delete(`/user/invoices/${id}`);
+export const deleteInvoice = async ({
+  id,
+  isDemo,
+}: {
+  id: string;
+  isDemo: boolean;
+}) => {
+  const path = isDemo ? "demo" : "user";
+  const api = isDemo ? axiosPublic : axiosPrivate;
+
+  await api.delete(`/${path}/invoices/${id}`);
 };
 
-export const updateInvoice = async (id: string, updatedInvoice: Invoice) => {
-  await axiosPrivate.patch(`/user/invoices/${id}`, updatedInvoice);
+export const updateInvoice = async ({
+  id,
+  updatedInvoice,
+  isDemo,
+}: {
+  id: string;
+  updatedInvoice: Invoice;
+  isDemo: boolean;
+}) => {
+  const path = isDemo ? "demo" : "user";
+  const api = isDemo ? axiosPublic : axiosPrivate;
+
+  await api.patch(`/${path}/invoices/${id}`, updatedInvoice);
 };

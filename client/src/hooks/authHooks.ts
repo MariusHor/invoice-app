@@ -27,7 +27,7 @@ export const useLogin = () => {
 
         queryClient.removeQueries();
         await queryClient.invalidateQueries();
-        navigate(state?.from || "/dashboard");
+        navigate(state?.from ?? "/dashboard");
       },
       onError: (error) => {
         throw error;

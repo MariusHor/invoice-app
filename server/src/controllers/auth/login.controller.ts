@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import {User} from '../models';
+import {User} from '../../models';
 
 export const loginUser = async (req: Request, res: Response, next: NextFunction) => {
     try {

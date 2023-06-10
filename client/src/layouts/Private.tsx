@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Hamburger, Navbar } from "features";
 import { useTheme } from "hooks";
 
-export const LayoutPrivate = () => {
+export const Private = () => {
   const { theme } = useTheme();
 
   return (

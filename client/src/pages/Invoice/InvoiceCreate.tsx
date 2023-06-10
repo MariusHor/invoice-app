@@ -3,18 +3,20 @@ import { FormikHelpers } from "formik";
 
 import { InvoiceForm } from "features";
 import { Invoice } from "types";
-import { useCreateInvoice, useInvoiceProps } from "hooks";
+import { useAuth, useCreateInvoice, useInvoiceProps } from "hooks";
 import { DRAFT, PENDING } from "utils/constants";
 
 export const InvoiceCreate = () => {
   const getInvoiceProps = useInvoiceProps();
   const createInvoice = useCreateInvoice();
   const navigate = useNavigate();
+  const { auth } = useAuth();
 
   const handleSubmit = async (
     values: Invoice,
     { setSubmitting }: FormikHelpers<Invoice>
   ) => {
+    const path = auth.isLoggedIn ? "/dashboard" : "/demo";
     const { paymentDue, total, isDraft } = getInvoiceProps(values);
     const status = isDraft ? DRAFT : PENDING;
     const newInvoice = {
@@ -26,7 +28,7 @@ export const InvoiceCreate = () => {
 
     await createInvoice.mutateAsync({ newInvoice });
     setSubmitting(false);
-    return navigate("/dashboard");
+    return navigate(path);
   };
 
   return (

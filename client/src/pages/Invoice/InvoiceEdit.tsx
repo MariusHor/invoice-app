@@ -1,15 +1,17 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FormikHelpers } from "formik";
 
 import { InvoiceForm } from "features";
 import { Invoice, InvoiceResult } from "types";
-import { useInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
+import { useAuth, useInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
 import { Spinner } from "components";
 
 export const InvoiceEdit = () => {
   const getInvoiceProps = useInvoiceProps();
   const updateInvoice = useUpdateInvoice();
   const navigate = useNavigate();
+  const location = useLocation();
+  const { auth } = useAuth();
   const { id } = useParams();
 
   const { data: invoices, isLoading } = useInvoices();
@@ -24,6 +26,10 @@ export const InvoiceEdit = () => {
     values: Invoice,
     { setSubmitting }: FormikHelpers<Invoice>
   ) => {
+    const path = auth.isLoggedIn ? "/dashboard" : "/demo";
+    const from = location.state?.from ?? path;
+
+    console.log(from);
     const { paymentDue, total } = getInvoiceProps(values);
     const updatedInvoice = {
       ...values,
@@ -34,7 +40,7 @@ export const InvoiceEdit = () => {
     await updateInvoice.mutateAsync({ id: invoice._id, updatedInvoice });
     setSubmitting(false);
 
-    return navigate("/invoices");
+    return navigate(from, { replace: true });
   };
 
   return (

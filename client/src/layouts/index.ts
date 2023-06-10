@@ -1,5 +1,5 @@
-export { LayoutInvoice } from "./LayoutInvoice";
-export { LayoutPrivate } from "./LayoutPrivate";
-export { LayoutPublic } from "./LayoutPublic";
-export { LayoutAccount } from "./LayoutAccount/LayoutAccount";
-export { LayoutLoginRegister } from "./LayoutLoginRegister";
+export { Invoice } from "./Invoice";
+export { Private } from "./Private";
+export { Public } from "./Public";
+export { Account } from "./Account/Account";
+export { Auth } from "./Auth";

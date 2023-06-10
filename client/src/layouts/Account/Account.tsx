@@ -6,7 +6,7 @@ import { AccountHeader } from "./AccountHeader";
 import { useUser } from "hooks";
 import { AccountLinks } from "./AccountLinks";
 
-export const LayoutAccount = () => {
+export const Account = () => {
   const { data: user, isLoading } = useUser();
 
   if (isLoading) return <Spinner intent={"inner"} />;

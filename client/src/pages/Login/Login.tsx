@@ -1,14 +1,15 @@
 import { useState } from "react";
+import { toast } from "react-hot-toast";
 import { isAxiosError } from "axios";
 import { FormikHelpers } from "formik";
 
-import { LayoutLoginRegister } from "layouts";
+import { Auth as LayoutAuth } from "layouts";
 import { RegisterLoginForm } from "features";
 import { InputCheckboxField } from "components";
 import { useLogin, usePersist } from "hooks";
 import { LOGIN_FORM_INIT_VALUES } from "utils/constants";
 import { LoginValues } from "types";
-import { toast } from "react-hot-toast";
+
 import { capitalize } from "utils";
 
 export const Login = (): React.JSX.Element => {
@@ -53,7 +54,7 @@ export const Login = (): React.JSX.Element => {
   };
 
   return (
-    <LayoutLoginRegister>
+    <LayoutAuth>
       <RegisterLoginForm
         isLogin={true}
         initialValues={LOGIN_FORM_INIT_VALUES}
@@ -64,6 +65,6 @@ export const Login = (): React.JSX.Element => {
           label="Remember me?"
         ></InputCheckboxField>
       </RegisterLoginForm>
-    </LayoutLoginRegister>
+    </LayoutAuth>
   );
 };

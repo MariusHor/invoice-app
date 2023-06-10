@@ -1,6 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import bcrypt from 'bcryptjs';
-import {User} from '../models';
+import {User} from '../../models';
 
 export const registerUser = async (req: Request, res: Response, next: NextFunction) => {
     const {username, password} = req.body;

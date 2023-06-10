@@ -2,8 +2,8 @@ import {NextFunction, Request, Response} from 'express';
 import cloudinary from 'cloudinary';
 import bcrypt from 'bcryptjs';
 import fs from 'fs';
-import {multerConfig} from '../config';
-import {User} from '../models';
+import {multerConfig} from '../../config';
+import {User} from '../../models';
 
 const handleMultipartData = multerConfig();
 
