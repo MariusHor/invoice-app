@@ -46,7 +46,22 @@ export const UploadProfilePictureForm = (): React.JSX.Element => {
       const feedback = auth.hasProfilePicture
         ? "Profile picture updated!"
         : "Profile picture uploaded!";
+
       toast.success(feedback);
+    } catch (error) {
+      return setState(() => {
+        throw error;
+      });
+    }
+  };
+
+  const handleDeletePicture = async () => {
+    try {
+      await deleteUserAvatar.mutateAsync();
+      setAuth((prev) => ({ ...prev, hasProfilePicture: false }));
+      setIsUploading(false);
+
+      toast.success("Profile picture successfully deleted!");
     } catch (error) {
       return setState(() => {
         throw error;
@@ -65,11 +80,7 @@ export const UploadProfilePictureForm = (): React.JSX.Element => {
         <FormikForm className="flex w-full flex-col gap-4 sm:items-center">
           {isUploading ? (
             <div className="w-fit">
-              <Field
-                component={SimpleFileUpload}
-                name="file"
-                label="JPG, GIF or PNG. Max size of 800K"
-              />
+              <Field component={SimpleFileUpload} name="file" />
             </div>
           ) : null}
           <div className="flex flex-col gap-2 sm:flex-row">
@@ -94,11 +105,7 @@ export const UploadProfilePictureForm = (): React.JSX.Element => {
             )}
 
             <Button
-              onClick={async () => {
-                await deleteUserAvatar.mutateAsync();
-                setAuth((prev) => ({ ...prev, hasProfilePicture: false }));
-                toast.success("Profile picture successfully deleted!");
-              }}
+              onClick={handleDeletePicture}
               type="button"
               key={"delete-picture"}
               intent={"outlined"}

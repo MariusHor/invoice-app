@@ -17,10 +17,14 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
             if (err || foundUser._id.toString() !== decoded._id) {
                 return res.sendStatus(403);
             }
+
+            const roles = Object.values(foundUser.roles);
             const accessToken = jwt.sign(
                 {
                     UserInfo: {
                         username: decoded.username,
+                        roles,
+                        _id: decoded._id,
                     },
                 },
                 process.env.ACCESS_TOKEN_SECRET,

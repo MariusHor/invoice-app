@@ -16,10 +16,13 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
         const match = await bcrypt.compare(password, foundUser.password);
 
         if (match) {
+            const roles = Object.values(foundUser.roles).filter(Boolean);
+
             const accessToken = jwt.sign(
                 {
                     UserInfo: {
                         username: foundUser.username,
+                        roles,
                         _id: foundUser._id,
                     },
                 },
@@ -46,7 +49,9 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
             });
 
             const hasProfilePicture = foundUser.profilePicture ? true : false;
-            res.status(200).json({accessToken, hasProfilePicture, email: foundUser.email});
+            const email = foundUser.email;
+
+            res.status(200).json({accessToken, hasProfilePicture, roles, email});
         }
 
         if (!match) {

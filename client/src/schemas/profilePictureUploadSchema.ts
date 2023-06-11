@@ -1,4 +1,5 @@
 import { MAX_ALLOWED_FILE_SIZE, ALLOWED_FILE_TYPES } from "utils/constants";
+import { formatBytes } from "utils/utils";
 import * as yup from "yup";
 
 interface FileValuesExtended {
@@ -6,19 +7,33 @@ interface FileValuesExtended {
   type?: string;
 }
 
+const allowedFileTypesErrorMessage = ALLOWED_FILE_TYPES.reduce(
+  (acc, current) => {
+    if (current === ALLOWED_FILE_TYPES.at(0))
+      return "Only " + acc + current.toUpperCase() + ", ";
+    if (current === ALLOWED_FILE_TYPES.at(-2))
+      return acc + current.toUpperCase() + " and ";
+    if (current === ALLOWED_FILE_TYPES.at(-1))
+      return acc + current.toUpperCase() + " supported.";
+
+    return acc + current.toUpperCase() + ", ";
+  },
+  ""
+);
+
+const maxFileSizeErrorMessage = `Max allowed file size is ${formatBytes(
+  MAX_ALLOWED_FILE_SIZE
+)}`;
+
 export const profilePictureUploadSchema = yup.object().shape({
   file: yup
     .mixed()
     .test("required", "You need to provide a file", (file) => {
-      console.log(file);
       if (file) return true;
       return false;
     })
-    .test("fileType", "File type is not supported", (file) => {
-      console.log(file);
+    .test("fileType", allowedFileTypesErrorMessage, (file) => {
       const { type } = file as FileValuesExtended;
-
-      console.log(type);
 
       if (type) {
         const fileType = type.split("/").pop();
@@ -27,14 +42,13 @@ export const profilePictureUploadSchema = yup.object().shape({
           typeof fileType === "string" &&
           !ALLOWED_FILE_TYPES.includes(fileType)
         ) {
-          console.log(ALLOWED_FILE_TYPES, fileType);
           return false;
         }
       }
 
       return true;
     })
-    .test("fileSize", "File size exceeds maximum allowed limit", (file) => {
+    .test("fileSize", maxFileSizeErrorMessage, (file) => {
       const { size } = file as FileValuesExtended;
 
       if (size && size > MAX_ALLOWED_FILE_SIZE) {

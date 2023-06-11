@@ -1,9 +1,6 @@
-import {NextFunction, Request, Response} from 'express';
+import {NextFunction, Response} from 'express';
 import jwt from 'jsonwebtoken';
-
-interface CustomRequest extends Request {
-    user?: string;
-}
+import {CustomRequest} from '../types';
 
 export const verifyJWT = (req: CustomRequest, res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization || req.headers.Authorization;
@@ -25,7 +22,9 @@ export const verifyJWT = (req: CustomRequest, res: Response, next: NextFunction)
             return res.sendStatus(403);
         }
 
-        req.user = decoded.UserInfo.username;
+        req.username = decoded.UserInfo.username;
+        req.roles = decoded.UserInfo.roles;
+        req.userId = decoded.UserInfo._id;
         next();
     });
 };

@@ -2,13 +2,11 @@ import {Request, Response, NextFunction} from 'express';
 import {Types} from 'mongoose';
 import {Invoice} from '../../models';
 import {User} from '../../models';
+import {CustomRequest} from '../../types';
 
-export const getInvoices = async (req: Request, res: Response, next: NextFunction) => {
-    const refreshToken = req?.cookies?.jwt;
-    if (!refreshToken) return res.sendStatus(401);
-
+export const getInvoices = async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
-        const foundUser = await User.findOne({refreshToken}).exec();
+        const foundUser = await User.findOne({_id: req.userId}).exec();
         if (!foundUser) return res.sendStatus(403);
 
         const invoices = await Invoice.find({userId: foundUser._id}).exec();
@@ -31,12 +29,9 @@ export const getInvoice = async (req: Request, res: Response, next: NextFunction
     }
 };
 
-export const createInvoice = async (req: Request, res: Response, next: NextFunction) => {
-    const refreshToken = req?.cookies?.jwt;
-    if (!refreshToken) return res.sendStatus(401);
-
+export const createInvoice = async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
-        const foundUser = await User.findOne({refreshToken}).exec();
+        const foundUser = await User.findOne({_id: req.userId}).exec();
         if (!foundUser) return res.sendStatus(403);
 
         const newInvoice = new Invoice({

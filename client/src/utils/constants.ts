@@ -2,7 +2,7 @@ import dayjs from "dayjs";
 import { FormikValues } from "formik";
 import { AccountRoutesConfig } from "types";
 
-export const MAX_ALLOWED_FILE_SIZE = 97152;
+export const MAX_ALLOWED_FILE_SIZE = 2097152;
 export const ALLOWED_FILE_TYPES = ["gif", "png", "jpg", "jpeg"];
 export const INVOICES_PER_PAGE = 6;
 export const KEY_THEME = "theme";

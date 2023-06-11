@@ -1,18 +1,16 @@
-import {NextFunction, Request, Response} from 'express';
+import {NextFunction, Response} from 'express';
 import cloudinary from 'cloudinary';
 import bcrypt from 'bcryptjs';
 import fs from 'fs';
 import {multerConfig} from '../../config';
 import {User} from '../../models';
+import {CustomRequest} from '../../types';
 
 const handleMultipartData = multerConfig();
 
-export const getUser = async (req: Request, res: Response, next: NextFunction) => {
+export const getUser = async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
-        const refreshToken = req?.cookies?.jwt;
-        if (!refreshToken) return res.sendStatus(401);
-
-        const foundUser = await User.findOne({refreshToken}).exec();
+        const foundUser = await User.findOne({_id: req.userId}).exec();
         if (!foundUser) return res.sendStatus(403);
 
         res.status(200).json({
@@ -25,19 +23,19 @@ export const getUser = async (req: Request, res: Response, next: NextFunction) =
     }
 };
 
-export const updateUser = async (req: Request, res: Response, next: NextFunction) => {
+const checkUsername = async (username: string) => {
+    const user = await User.findOne({username}).exec();
+    if (user) return false;
+
+    return true;
+};
+
+export const updateUser = async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
         const {newPassword, oldPassword, ...rest} = req.body;
 
-        const refreshToken = req?.cookies?.jwt;
-        if (!refreshToken) return res.sendStatus(401);
-
-        const foundUser = await User.findOne({refreshToken});
+        const foundUser = await User.findOne({_id: req.userId}).exec();
         if (!foundUser) return res.sendStatus(403);
-
-        if (rest.username && refreshToken !== foundUser.refreshToken) {
-            return res.status(409).json({message: 'An account with this username already exists.'});
-        }
 
         if (newPassword) {
             const match = await bcrypt.compare(oldPassword, foundUser.password);
@@ -51,13 +49,17 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
             }
 
             const hashedPwd = await bcrypt.hash(newPassword, 10);
-            await User.findOneAndUpdate({refreshToken}, {password: hashedPwd}).exec();
+            await User.findOneAndUpdate({_id: req.userId}, {password: hashedPwd}).exec();
 
             return res.status(200).json(`User updated`);
         }
 
+        const isUsernameValid = rest.username ? checkUsername(rest.username) : true;
+        if (rest.username && !isUsernameValid)
+            return res.status(409).json({message: 'An account with this username already exists.'});
+
         if (rest) {
-            await User.findOneAndUpdate({refreshToken}, rest).exec();
+            await User.findOneAndUpdate({_id: req.userId}, rest).exec();
             return res.status(200).json(`User updated`);
         }
     } catch (error) {
@@ -65,7 +67,7 @@ export const updateUser = async (req: Request, res: Response, next: NextFunction
     }
 };
 
-export const updateProfilePicture = (req: Request, res: Response, next: NextFunction) => {
+export const updateProfilePicture = (req: CustomRequest, res: Response, next: NextFunction) => {
     handleMultipartData(req, res, async (err) => {
         if (err) {
             return next(err);
@@ -76,7 +78,6 @@ export const updateProfilePicture = (req: Request, res: Response, next: NextFunc
         }
 
         const filePath = req.file.path;
-
         cloudinary.v2.uploader.upload(filePath, async (error, result) => {
             if (error) {
                 return res.send(error.message);
@@ -84,10 +85,7 @@ export const updateProfilePicture = (req: Request, res: Response, next: NextFunc
 
             if (result.secure_url) {
                 try {
-                    const refreshToken = req?.cookies?.jwt;
-                    if (!refreshToken) return res.sendStatus(401);
-
-                    const foundUser = await User.findOne({refreshToken});
+                    const foundUser = await User.findOne({_id: req.userId});
                     if (!foundUser) return res.sendStatus(403);
 
                     foundUser.profilePicture = result.secure_url;
@@ -110,12 +108,9 @@ export const updateProfilePicture = (req: Request, res: Response, next: NextFunc
     });
 };
 
-export const DeleteProfilePicture = async (req: Request, res: Response, next: NextFunction) => {
+export const DeleteProfilePicture = async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
-        const refreshToken = req?.cookies?.jwt;
-        if (!refreshToken) return res.sendStatus(401);
-
-        const foundUser = await User.findOne({refreshToken});
+        const foundUser = await User.findOne({_id: req.userId});
         if (!foundUser) return res.sendStatus(403);
 
         foundUser.profilePicture = '';
