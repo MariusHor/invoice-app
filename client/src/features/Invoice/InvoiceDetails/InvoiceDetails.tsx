@@ -22,8 +22,8 @@ export const InvoiceDetails = ({
   } = invoice;
 
   return (
-    <div className="flex flex-col gap-6 rounded-lg bg-skin-fill-secondary p-4">
-      <div className="flex justify-between">
+    <div className="flex flex-col gap-6 rounded-lg bg-skin-fill-secondary p-4 shadow-lg">
+      <div className="flex justify-between p-4">
         <div>
           <h1 className="heading-md text-skin-base">
             <span className="text-skin-muted">#</span>

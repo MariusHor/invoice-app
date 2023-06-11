@@ -24,7 +24,6 @@ export interface Invoice {
   clientAddress: Address;
   senderAddress: Address;
   status: string;
-  isDraft: boolean;
   total: number;
   items: InvoiceItem[];
 }

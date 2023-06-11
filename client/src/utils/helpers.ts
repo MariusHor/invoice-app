@@ -40,3 +40,20 @@ export const formatDate = (createdAt: string, paymentTerms: number) => {
 
   return format(newDate, "yyyy-MM-dd");
 };
+
+export const checkInvoiceFalsyFields = (obj: object, prop?: string) => {
+  let errors: string[] = [];
+  Object.entries(obj).map(([key, value]) => {
+    if (value === "" || value === 0)
+      errors = [...errors, `Invoice field ${prop} ${key} is not filled in`];
+    if (typeof value === "object" && value !== null && !Array.isArray(value))
+      checkInvoiceFalsyFields(value, key);
+    if (Array.isArray(value))
+      value.forEach((item) => checkInvoiceFalsyFields(item, key));
+  });
+
+  if (errors.length === 1) throw new Error(errors[1]);
+
+  if (errors.length > 1)
+    throw new Error("Multiple invoice fields are not filled in");
+};

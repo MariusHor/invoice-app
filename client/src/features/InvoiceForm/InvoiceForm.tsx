@@ -1,19 +1,23 @@
 import { Formik, Form, FormikHelpers } from "formik";
-
 import {
   ButtonBack,
   Button,
   InputDatePicker,
   InputSelectField,
   InputTextField,
+  Spinner,
 } from "components";
 import { BillFrom } from "./BillFrom";
 import { BillTo } from "./BillTo";
 import { ItemList } from "./ItemList";
+import { SaveDraft } from "./SaveDraft";
 import { Invoice, InvoiceResult } from "types";
 import { invoiceSchema } from "schemas";
-import { INVOICE_FORM_INIT_VALUES } from "utils/constants";
-import { useAuth } from "hooks";
+import {
+  INVOICE_FORM_INIT_VALUES,
+  DEMO_MODE_MAX_INVOICES,
+} from "utils/constants";
+import { useAuth, useInvoices } from "hooks";
 
 interface InvoiceFormProps {
   invoice?: InvoiceResult;
@@ -30,14 +34,17 @@ export const InvoiceForm = ({
   onSubmit,
 }: InvoiceFormProps) => {
   const { auth } = useAuth();
+  const { data: invoices, isLoading } = useInvoices();
+
+  if (isLoading) return <Spinner intent={"inner"} />;
+
   return (
     <Formik
       initialValues={invoice ? invoice : INVOICE_FORM_INIT_VALUES}
       onSubmit={onSubmit}
-      enableReinitialize={true}
       validationSchema={invoiceSchema}
     >
-      {({ handleSubmit, isSubmitting, setFieldValue }) => (
+      {({ isSubmitting }) => (
         <Form className="flex flex-col gap-10">
           <BillFrom />
           <BillTo />
@@ -49,25 +56,17 @@ export const InvoiceForm = ({
           <ItemList />
           <div className="flex-center flex-wrap gap-3 rounded-md p-4">
             <ButtonBack>Discard</ButtonBack>
-            {!isEditing ? (
-              <Button
-                intent="secondary"
-                onClick={() => {
-                  setFieldValue("isDraft", true);
-                  handleSubmit();
-                }}
-                disabled={isSubmitting}
-              >
-                Save as Draft
-              </Button>
-            ) : null}
+            {!isEditing ? <SaveDraft isSubmitting={isSubmitting} /> : null}
             <Button
+              type="submit"
               intent="primary"
-              onClick={() => {
-                setFieldValue("isDraft", false);
-                handleSubmit();
-              }}
-              disabled={isSubmitting || !auth.isLoggedIn}
+              disabled={
+                isSubmitting ||
+                (!auth.isLoggedIn && isEditing) ||
+                (!auth.isLoggedIn &&
+                  invoices &&
+                  invoices.length >= DEMO_MODE_MAX_INVOICES)
+              }
             >
               {isEditing ? "Save changes" : "Save"}
             </Button>

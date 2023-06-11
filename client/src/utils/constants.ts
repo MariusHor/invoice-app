@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { FormikValues } from "formik";
 import { AccountRoutesConfig } from "types";
 
@@ -17,11 +18,11 @@ export const INIT_PAGE = 1;
 export const QUERY_USER = "user";
 export const QUERY_INVOICES = "invoices";
 export const HOME_PATH = "/";
+export const DEMO_MODE_MAX_INVOICES = 3;
 
 export const INVOICE_FORM_INIT_VALUES = {
   status: "draft",
-  isDraft: true,
-  createdAt: "",
+  createdAt: dayjs(new Date()).format("YYYY-MM-DD"),
   description: "",
   paymentTerms: 1,
   clientName: "",

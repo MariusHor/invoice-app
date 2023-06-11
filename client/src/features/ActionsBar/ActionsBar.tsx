@@ -1,9 +1,12 @@
 import { Filters } from "features";
 import { ButtonLink } from "components";
-import { useInvoices } from "hooks";
+import { useAuth, useInvoices } from "hooks";
 import plusIcon from "assets/icon-plus.svg";
+import { toast } from "react-hot-toast";
+import { DEMO_MODE_MAX_INVOICES } from "utils/constants";
 
 export const ActionsBar = (): React.JSX.Element => {
+  const { auth } = useAuth();
   const { data: invoices } = useInvoices();
 
   return (
@@ -13,7 +16,14 @@ export const ActionsBar = (): React.JSX.Element => {
         <p className="heading-md text-skin-accent">{invoices?.length ?? 0}</p>
       </div>
       <Filters />
-      <ButtonLink to="create" intent={"primary-link"}>
+      <ButtonLink
+        to="create"
+        intent={"primary-link"}
+        onClick={() => {
+          if (!auth.isLoggedIn && invoices.length >= DEMO_MODE_MAX_INVOICES)
+            return toast.error("Only 3 invoices allowed in Demo mode");
+        }}
+      >
         <div className="flex-center gap-2">
           <img
             src={plusIcon}

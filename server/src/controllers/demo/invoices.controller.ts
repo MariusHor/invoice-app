@@ -1,7 +1,5 @@
 import {Request, Response, NextFunction} from 'express';
-import {Types} from 'mongoose';
 import {Invoice} from '../../models';
-import {User} from '../../models';
 
 export const getDemoInvoices = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -27,6 +25,10 @@ export const getDemoInvoice = async (req: Request, res: Response, next: NextFunc
 
 export const createDemoInvoice = async (req: Request, res: Response, next: NextFunction) => {
     try {
+        const invoices = await Invoice.find({isDemo: true}).exec();
+
+        if (invoices.length >= 3) return res.status(201).json();
+
         const newInvoice = new Invoice({
             ...req.body,
             isDemo: true,
