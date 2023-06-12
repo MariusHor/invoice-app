@@ -19,6 +19,7 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
             }
 
             const roles = Object.values(foundUser.roles);
+
             const accessToken = jwt.sign(
                 {
                     UserInfo: {

@@ -6,9 +6,10 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 
 import {errorLogger, errorResponder} from './middlewares';
-import {dbConfig, corsConfig, cloudinaryConfig} from './config';
+import {dbConfig, corsConfig, cloudinaryConfig, ROLES_LIST} from './config';
 import {verifyJWT} from './middlewares/verifyJWT';
-import {authRoutes, demoRoutes, userRoutes} from './routes';
+import {authRoutes, demoRoutes, userRoutes, adminRoutes} from './routes';
+import {verifyRoles} from './middlewares/verifyRoles';
 
 dotenv.config();
 dbConfig();
@@ -29,6 +30,8 @@ app.use('/api/public/demo', demoRoutes);
 
 app.use(verifyJWT);
 app.use('/api/private/user', userRoutes);
+app.use(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.User));
+app.use('/api/private/admin', adminRoutes);
 
 app.use(errorLogger);
 app.use(errorResponder);

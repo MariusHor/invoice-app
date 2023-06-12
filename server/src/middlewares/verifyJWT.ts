@@ -22,6 +22,7 @@ export const verifyJWT = (req: CustomRequest, res: Response, next: NextFunction)
             return res.sendStatus(403);
         }
 
+        console.log(decoded.UserInfo);
         req.username = decoded.UserInfo.username;
         req.roles = decoded.UserInfo.roles;
         req.userId = decoded.UserInfo._id;

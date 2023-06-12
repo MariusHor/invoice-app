@@ -7,15 +7,13 @@ import {
     getInvoices,
     deleteInvoice,
     updateInvoice,
-    getInvoice,
     DeleteProfilePicture,
 } from '../controllers';
 
 const router = express.Router();
 
-router.route('/').get(getUser);
 router.route('/invoices').get(getInvoices).post(createInvoice);
-router.route('/invoices/:id').get(getInvoice).delete(deleteInvoice).patch(updateInvoice);
+router.route('/invoices/:id').delete(deleteInvoice).patch(updateInvoice);
 
 router.route('/account').get(getUser).patch(updateUser);
 router.route('/account/avatar').patch(updateProfilePicture).delete(DeleteProfilePicture);

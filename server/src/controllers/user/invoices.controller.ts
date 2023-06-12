@@ -18,17 +18,6 @@ export const getInvoices = async (req: CustomRequest, res: Response, next: NextF
     }
 };
 
-export const getInvoice = async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        const {id} = req.params;
-
-        const invoice = await Invoice.findOne({invoiceId: id});
-        res.status(200).json(invoice);
-    } catch (error) {
-        next(error);
-    }
-};
-
 export const createInvoice = async (req: CustomRequest, res: Response, next: NextFunction) => {
     try {
         const foundUser = await User.findOne({_id: req.userId}).exec();
