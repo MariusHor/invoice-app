@@ -25,6 +25,14 @@ app.use(express.urlencoded({extended: true}));
 app.use(cors(corsConfig));
 app.use(cookieParser());
 
+app.use('/api/public/health', (req, res) => {
+    const serverStatus = {
+        status: 'OK',
+        timestamp: new Date(),
+    };
+    res.status(200).json(serverStatus);
+});
+
 app.use('/api/public/auth', authRoutes);
 app.use('/api/public/demo', demoRoutes);
 

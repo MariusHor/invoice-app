@@ -10,6 +10,9 @@ import * as containers from "containers";
 import * as pages from "pages";
 
 import "./App.css";
+import { useEffect } from "react";
+import { axiosPublic } from "lib";
+import { toast } from "react-hot-toast";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,6 +52,22 @@ const router = createBrowserRouter(
 );
 
 const App = (): React.JSX.Element => {
+  useEffect(() => {
+    const checkServerHealth = async () => {
+      try {
+        await axiosPublic.get("/health");
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    toast.promise(checkServerHealth(), {
+      loading: "Building the server...",
+      success: "App is ready!",
+      error: "Error building server.",
+    });
+  }, []);
+
   return <RouterProvider router={router} />;
 };
 

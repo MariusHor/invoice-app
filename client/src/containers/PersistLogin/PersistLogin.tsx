@@ -15,6 +15,7 @@ export const PersistLogin = () => {
     let isMounted = true;
     const refreshAuth = async () => {
       try {
+        console.log("persist");
         await refreshAccessToken();
       } catch (err) {
         setPersist(PERSIST_TRUE);
