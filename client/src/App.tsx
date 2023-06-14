@@ -10,6 +10,7 @@ import * as containers from "containers";
 import * as pages from "pages";
 
 import "./App.css";
+import { AdminPanel } from "pages/AdminPanel/AdminPanel";
 import { useEffect } from "react";
 import { axiosPublic } from "lib";
 import { toast } from "react-hot-toast";
@@ -43,6 +44,9 @@ const router = createBrowserRouter(
                   <Route path=":id/edit" element={<pages.InvoiceEdit />} />
                 </Route>
               </Route>
+              <Route element={<containers.AdminGuard />}>
+                <Route path="admin" element={<AdminPanel />} />
+              </Route>
             </Route>
           </Route>
         </Route>
@@ -62,9 +66,9 @@ const App = (): React.JSX.Element => {
     };
 
     toast.promise(checkServerHealth(), {
-      loading: "Building the server...",
+      loading: "Loading the app...",
       success: "App is ready!",
-      error: "Error building server.",
+      error: "Error connecting to the server.",
     });
   }, []);
 

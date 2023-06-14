@@ -1,4 +1,4 @@
-export { useInvoices, useUser } from "./queryHooks";
+export { useInvoices, useUser, useUsers } from "./queryHooks";
 export { useInvoiceProps } from "./useInvoiceProps";
 export { useLocalStorage } from "./useLocalStorage";
 export { useSubmitInvoice } from "./useSubmitInvoice";

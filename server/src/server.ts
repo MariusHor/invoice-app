@@ -38,7 +38,7 @@ app.use('/api/public/demo', demoRoutes);
 
 app.use(verifyJWT);
 app.use('/api/private/user', userRoutes);
-app.use(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.User));
+app.use(verifyRoles(ROLES_LIST.Admin));
 app.use('/api/private/admin', adminRoutes);
 
 app.use(errorLogger);

@@ -55,3 +55,24 @@ export const useUser = () => {
     },
   });
 };
+
+export const useUsers = () => {
+  const axiosPrivate = useAxiosPrivate();
+
+  return useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      try {
+        const response = await axiosPrivate.get(`/admin/users`, {
+          headers: { "Content-Type": "application/json" },
+        });
+
+        return response.data;
+      } catch (error) {
+        console.log(error);
+        return [];
+      }
+    },
+    enabled: false,
+  });
+};
