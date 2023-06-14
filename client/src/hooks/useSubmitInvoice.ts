@@ -27,7 +27,7 @@ export const useSubmitInvoice = () => {
       total,
       status,
     };
-    console.log("HOOK");
+
     await createInvoice.mutateAsync({ newInvoice });
     setSubmitting(false);
     return navigate(path);

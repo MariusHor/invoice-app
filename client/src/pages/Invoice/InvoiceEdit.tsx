@@ -29,7 +29,6 @@ export const InvoiceEdit = () => {
     const path = auth.isLoggedIn ? "/dashboard" : "/demo";
     const from = location.state?.from ?? path;
 
-    console.log(from);
     const { paymentDue, total } = getInvoiceProps(values);
     const updatedInvoice = {
       ...values,
