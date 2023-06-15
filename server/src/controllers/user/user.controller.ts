@@ -1,5 +1,5 @@
 import {NextFunction, Response} from 'express';
-import cloudinary from 'cloudinary';
+import {v2 as cloudinary} from 'cloudinary';
 import bcrypt from 'bcryptjs';
 import fs from 'fs';
 import {multerConfig} from '../../config';
@@ -78,14 +78,16 @@ export const updateProfilePicture = (req: CustomRequest, res: Response, next: Ne
         }
 
         const filePath = req.file.path;
-        cloudinary.v2.uploader.upload(filePath, async (error, result) => {
+        cloudinary.uploader.upload(filePath, async (error, result) => {
             if (error) {
+                console.log(error);
                 return res.send(error.message);
             }
 
             if (result.secure_url) {
                 try {
                     const foundUser = await User.findOne({_id: req.userId});
+                    console.log(foundUser);
                     if (!foundUser) return res.sendStatus(403);
 
                     foundUser.profilePicture = result.secure_url;
@@ -93,6 +95,7 @@ export const updateProfilePicture = (req: CustomRequest, res: Response, next: Ne
 
                     fs.unlink(filePath, (err) => {
                         if (err) {
+                            console.log(err);
                             throw err;
                         }
 
@@ -101,6 +104,7 @@ export const updateProfilePicture = (req: CustomRequest, res: Response, next: Ne
 
                     res.status(200).json({message: 'Image uploaded successfully'});
                 } catch (error) {
+                    console.log(error);
                     next(error);
                 }
             }
