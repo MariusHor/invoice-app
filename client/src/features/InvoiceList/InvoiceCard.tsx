@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import { ReactNode } from "react";
 
 import { InvoiceStatus } from "components";
+import { useAuth } from "hooks";
 import { InvoiceResult } from "types";
 import arrowRight from "assets/icon-arrow-right.svg";
-import { useAuth } from "hooks";
 
 interface InvoiceCardProps {
   invoice: InvoiceResult;
@@ -18,7 +18,7 @@ export const InvoiceCard = ({
   } = useAuth();
 
   return (
-    <div className="mx-auto flex w-full max-w-sm overflow-hidden rounded-lg bg-skin-fill-secondary text-skin-muted shadow-xl lg:max-w-2xl xl:max-w-4xl">
+    <div className="mx-auto flex w-full max-w-sm gap-4 overflow-hidden rounded-lg bg-skin-fill-secondary text-skin-muted shadow-xl lg:max-w-2xl xl:max-w-4xl">
       <div className="center m-4 w-full grid-cols-2 grid-rows-2 gap-2 xl:grid-cols-5 xl:grid-rows-none">
         <CardHeading text={invoice.invoiceId} position="left">
           <span className="text-skin-muted">#</span>

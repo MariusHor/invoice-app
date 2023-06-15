@@ -49,7 +49,7 @@ export const Invoice = () => {
   ) => {
     e.preventDefault();
 
-    toast.error("Editing not available in Demo mode");
+    if (!auth.isLoggedIn) toast.error("Editing not available in Demo mode");
     return navigate(`${path}/${id}/edit`, {
       state: { from: location },
       replace: true,
@@ -85,7 +85,7 @@ export const Invoice = () => {
         />
       </div>
       <InvoiceDetails invoice={invoice} id={id} />
-      <div className="flex-center h-20 gap-2 bg-skin-fill-secondary p-4 shadow-lg  lg:rounded-lg">
+      <div className="flex-center h-20 gap-2 rounded-lg bg-skin-fill-secondary p-4 shadow-lg">
         <ButtonLink
           to={`${path}/${id}/edit`}
           intent={"outlined-link"}

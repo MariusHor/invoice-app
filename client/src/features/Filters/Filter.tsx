@@ -15,13 +15,14 @@ export const Filter = ({ id, name, title }: FilterProps): React.JSX.Element => {
   return (
     <li className="flex items-center gap-3 text-skin-base">
       <input
+        className={`${filters[name] ? "checked" : ""}`}
         type="checkbox"
         id={id}
         name={name}
         onChange={() =>
-          setFilters((prevFilter: FiltersState) => ({
-            ...prevFilter,
-            [name]: !prevFilter[name],
+          setFilters((prevFilters: FiltersState) => ({
+            ...prevFilters,
+            [name]: !prevFilters[name],
           }))
         }
         checked={filters[name]}

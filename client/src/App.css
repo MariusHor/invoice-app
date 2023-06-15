@@ -33,3 +33,42 @@ input.input-error {
 .active {
   font-weight: bold;
 }
+
+.checkbox-label svg {
+  fill: var(--color-text-accent);
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 0.15rem;
+  border: 0.15rem solid var(--color-text-accent);
+  outline: none;
+  cursor: pointer;
+}
+
+input.checked {
+  background-color: var(--color-text-accent);
+  position: relative;
+}
+
+input.checked::before {
+  content: "\2713";
+  font-size: 1.3em;
+  color: #fff;
+  position: absolute;
+  right: -50%;
+  top: -50%;
+  translate: -15% -5%;
+}
+
+input[type="checkbox"]:disabled {
+  border-color: #c0c0c0;
+  background-color: #c0c0c0;
+}
+
+input[type="checkbox"]:disabled + span {
+  color: #c0c0c0;
+}

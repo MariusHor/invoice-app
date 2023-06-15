@@ -12,7 +12,7 @@ export const Account = () => {
   if (isLoading) return <Spinner intent={"inner"} />;
 
   return (
-    <div className="flex-center w-full max-w-lg grow flex-col gap-10 text-start">
+    <div className="flex-center w-full max-w-lg grow flex-col gap-10 text-start text-skin-base">
       <AccountHeader username={user.username} />
       <div className="flex w-full flex-col gap-10 md:flex-row">
         <SelectNav classes="md:hidden" />

@@ -34,7 +34,7 @@ export const Dashboard = (): React.JSX.Element => {
     <>
       <ActionsBar />
       {currentInvoices.length ? (
-        <div className="flex w-full grow flex-col justify-center gap-6 p-4">
+        <div className="flex w-full max-w-6xl grow flex-col justify-center gap-6 p-4">
           <InvoiceList currentInvoices={currentInvoices} />
           <Pagination
             totalPages={totalPages}
@@ -44,8 +44,8 @@ export const Dashboard = (): React.JSX.Element => {
         </div>
       ) : (
         <InvoiceFallback>
-          <p className="text-sm-variant mx-auto mt-6 max-w-42 text-center text-skin-muted">
-            Create an invoice by clicking the New Invoice button and get started
+          <p className="text-sm-variant mx-auto mt-2 max-w-42 text-center text-skin-muted">
+            Create your first Invoice!
           </p>
         </InvoiceFallback>
       )}
