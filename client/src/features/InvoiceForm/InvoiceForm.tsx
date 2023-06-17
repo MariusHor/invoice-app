@@ -32,7 +32,7 @@ export const InvoiceForm = ({
   isEditing,
   invoice,
   onSubmit,
-}: InvoiceFormProps) => {
+}: InvoiceFormProps): React.JSX.Element => {
   const { auth } = useAuth();
   const { data: invoices, isLoading } = useInvoices();
 

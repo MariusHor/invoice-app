@@ -6,13 +6,12 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 
 import { useTheme } from "hooks";
+import { InputProps } from "types";
 
-interface InputDatePickerProps {
-  label: string;
-  id: string;
-}
-
-export const InputDatePicker = ({ label, id }: InputDatePickerProps) => {
+export const InputDatePicker = ({
+  label,
+  id,
+}: InputProps): React.JSX.Element => {
   const { theme } = useTheme();
 
   return (

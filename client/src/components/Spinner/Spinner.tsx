@@ -1,13 +1,18 @@
 import { HTMLAttributes } from "react";
 import { CircularProgress } from "@mui/material";
 import { type VariantProps } from "class-variance-authority";
+
 import { spinner } from "./styles";
 
 export interface SpinnerProps
   extends HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof spinner> {}
 
-export const Spinner = ({ className, intent, ...props }: SpinnerProps) => (
+export const Spinner = ({
+  className,
+  intent,
+  ...props
+}: SpinnerProps): React.JSX.Element => (
   <div className={spinner({ intent, className })} {...props}>
     <CircularProgress />
   </div>

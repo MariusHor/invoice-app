@@ -14,7 +14,7 @@ export const AccountGeneral = (): React.JSX.Element => {
   const { auth, setAuth } = useAuth();
   const [_, setState] = useState();
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner intent={"inner"} />;
 
   const handleSubmit = async (
     values: FormikValues,
@@ -25,12 +25,9 @@ export const AccountGeneral = (): React.JSX.Element => {
     try {
       await updateUser.mutateAsync({ username, email });
       setAuth((prev) => ({ ...prev, username, email }));
-
       if (username !== auth.username)
         toast.success(`Username updated: ${username}`);
-
       if (email !== auth.email) toast.success(`email updated: ${email}`);
-
       setSubmitting(false);
     } catch (error) {
       if (isAxiosError(error)) {

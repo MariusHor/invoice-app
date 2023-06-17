@@ -2,13 +2,12 @@ import { Field } from "formik";
 import { CheckboxWithLabel } from "formik-mui";
 
 import { useTheme } from "hooks";
+import { InputProps } from "types";
 
-interface InputSelectFieldProps {
-  label: string;
-  id: string;
-}
-
-export const InputCheckboxField = ({ label, id }: InputSelectFieldProps) => {
+export const InputCheckboxField = ({
+  label,
+  id,
+}: InputProps): React.JSX.Element => {
   const { theme } = useTheme();
 
   return (
@@ -18,7 +17,7 @@ export const InputCheckboxField = ({ label, id }: InputSelectFieldProps) => {
         name={id}
         id={id}
         type={"checkbox"}
-        className="checkbox-label"
+        className="checkbox"
         Label={{
           label,
         }}

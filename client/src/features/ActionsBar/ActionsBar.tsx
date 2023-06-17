@@ -1,8 +1,9 @@
+import { toast } from "react-hot-toast";
+
 import { Filters } from "features";
 import { ButtonLink } from "components";
 import { useAuth, useInvoices } from "hooks";
 import plusIcon from "assets/icon-plus.svg";
-import { toast } from "react-hot-toast";
 import { DEMO_MODE_MAX_INVOICES } from "utils/constants";
 
 export const ActionsBar = (): React.JSX.Element => {

@@ -2,20 +2,20 @@ import { useEffect } from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 
 import { Spinner } from "components";
-import { useAuth, usePersist, useRefreshToken } from "hooks";
-import { parseJwt } from "utils";
+import {
+  useAuth,
+  useCheckTokenExpiration,
+  usePersist,
+  useRefreshToken,
+} from "hooks";
 import { PERSIST_FALSE } from "utils/constants";
 
-export const AuthGuard = () => {
+export const AuthGuard = (): React.JSX.Element => {
   const location = useLocation();
   const { auth } = useAuth();
   const { setPersist } = usePersist();
   const refreshAccessToken = useRefreshToken();
-
-  const decodedJwt = parseJwt(auth.accessToken);
-  const isExpired = decodedJwt?.exp
-    ? decodedJwt?.exp * 1000 < Date.now()
-    : decodedJwt;
+  const isExpired = useCheckTokenExpiration(auth.accessToken);
 
   useEffect(() => {
     const refreshAuth = async () => {

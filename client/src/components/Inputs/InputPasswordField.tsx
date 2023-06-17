@@ -3,10 +3,9 @@ import { IconButton, InputAdornment } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 import { InputTextField } from "./InputTextField";
+import { InputProps } from "types";
 
-interface InputPasswordFieldProps {
-  label: string;
-  id: string;
+interface InputPasswordFieldProps extends InputProps {
   autocomplete?: string;
 }
 
@@ -14,7 +13,7 @@ export const InputPasswordField = ({
   label,
   id,
   autocomplete,
-}: InputPasswordFieldProps) => {
+}: InputPasswordFieldProps): React.JSX.Element => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {

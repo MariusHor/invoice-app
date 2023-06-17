@@ -3,10 +3,9 @@ import { Field } from "formik";
 import { TextField } from "formik-mui";
 
 import { useTheme } from "hooks";
+import { InputProps } from "types";
 
-interface InputTextFieldProps {
-  label: string;
-  id: string;
+interface InputTextFieldProps extends InputProps {
   type?: string;
   startAdornment?: ReactNode;
   endAdornment?: ReactNode;
@@ -20,7 +19,7 @@ export const InputTextField = ({
   id,
   type = "text",
   autocomplete,
-}: InputTextFieldProps) => {
+}: InputTextFieldProps): React.JSX.Element => {
   const { theme } = useTheme();
 
   return (

@@ -1,8 +1,11 @@
 import { OptionProps, components } from "react-select";
 import { NavLink } from "react-router-dom";
+
 import { SelectOption } from "types";
 
-export const SelectOptionLink = (props: OptionProps<SelectOption>) => {
+export const SelectOptionLink = (
+  props: OptionProps<SelectOption>
+): React.JSX.Element => {
   const { Option } = components;
   const { value, label } = props.data;
 

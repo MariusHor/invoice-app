@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Navbar, Hamburger, NavLinks } from "features";
 import { useAuth, useTheme } from "hooks";
 
-export const Public = () => {
+export const Public = (): React.JSX.Element => {
   const { theme } = useTheme();
   const {
     auth: { isLoggedIn },

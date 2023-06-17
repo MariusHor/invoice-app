@@ -7,7 +7,7 @@ import { Avatar, ButtonLink, ButtonSignout } from "components";
 import { useAuth, useUser } from "hooks";
 import { capitalize } from "utils";
 
-export const Hamburger = () => {
+export const Hamburger = (): React.JSX.Element => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: user } = useUser();
   const {

@@ -5,7 +5,10 @@ interface BillSectionProps {
   title: string;
 }
 
-export const BillSection = ({ children, title }: BillSectionProps) => {
+export const BillSection = ({
+  children,
+  title,
+}: BillSectionProps): React.JSX.Element => {
   return (
     <div className="flex flex-col gap-5">
       <h2 className="heading-sm text-skin-accent">{title}</h2>

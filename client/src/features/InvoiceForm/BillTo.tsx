@@ -1,7 +1,7 @@
 import { BillSection } from "./BillSection";
 import { InputTextField } from "components";
 
-export const BillTo = () => {
+export const BillTo = (): React.JSX.Element => {
   return (
     <BillSection title="Bill To">
       <InputTextField label={"Client's Name"} id={"clientName"} />

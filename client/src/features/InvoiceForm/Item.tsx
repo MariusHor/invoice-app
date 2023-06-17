@@ -13,7 +13,7 @@ interface ItemProps {
   remove: <T>(index: number) => T | undefined;
 }
 
-export const Item = ({ id, remove }: ItemProps) => {
+export const Item = ({ id, remove }: ItemProps): React.JSX.Element => {
   const { theme } = useTheme();
   const { values, setFieldValue } = useFormikContext<Invoice>();
   const { quantity, price } = values.items[id];

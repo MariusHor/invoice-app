@@ -1,5 +1,5 @@
-import { ReactNode, useState, createContext } from "react";
-import { FiltersState } from "types";
+import { useState, createContext } from "react";
+import { FiltersState, ProviderProps } from "types";
 
 interface InvoiceFiltersContextType {
   filters: FiltersState;
@@ -11,9 +11,7 @@ export const InvoiceFiltersContext =
 
 export const InvoiceFiltersProvider = ({
   children,
-}: {
-  children: ReactNode;
-}) => {
+}: ProviderProps): React.JSX.Element => {
   const [filters, setFilters] = useState<FiltersState>({
     paid: true,
     pending: true,

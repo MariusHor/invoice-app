@@ -20,7 +20,7 @@ export const RegisterLoginForm = ({
   onSubmit,
   initialValues,
   children,
-}: FormProps) => {
+}: FormProps): React.JSX.Element => {
   return (
     <div className="w-full">
       <h1 className="heading-lg mb-4">
@@ -60,7 +60,11 @@ interface FormRedirectProps {
   linkText: string;
 }
 
-const FormRedirect = ({ title, path, linkText }: FormRedirectProps) => {
+const FormRedirect = ({
+  title,
+  path,
+  linkText,
+}: FormRedirectProps): React.JSX.Element => {
   return (
     <div className="flex-center mt-4 gap-2">
       <p>{title}</p>

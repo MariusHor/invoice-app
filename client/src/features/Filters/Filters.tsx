@@ -63,7 +63,7 @@ export const Filters = (): React.JSX.Element => {
           variants={showFilters}
           initial="exit"
           animate={isShown ? "enter" : "exit"}
-          className="absolute -bottom-32 right-0 flex w-40 flex-col gap-2 rounded-lg bg-skin-fill-secondary p-6 shadow-xl"
+          className="absolute -bottom-44 right-0 flex w-40 flex-col gap-2 rounded-lg bg-skin-fill-secondary p-6 shadow-xl"
         >
           <Filter id="draft" name="draft" title="Draft" />
           <Filter id="pending" name="pending" title="Pending" />

@@ -17,7 +17,7 @@ export const InvoiceStatus = ({
   size,
   statusType = "pending",
   ...props
-}: StatusProps) => (
+}: StatusProps): React.JSX.Element => (
   <div className={status({ intent, size, className })} {...props}>
     <h3 className="heading-sm">
       <FiberManualRecordIcon style={{ fontSize: 12 }} />

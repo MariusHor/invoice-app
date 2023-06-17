@@ -19,7 +19,7 @@ import { checkInvoiceFalsyFields, invariant } from "utils";
 import { DRAFT, PAID, PENDING } from "utils/constants";
 import { toast } from "react-hot-toast";
 
-export const Invoice = () => {
+export const Invoice = (): React.JSX.Element => {
   const deleteInvoice = useDeleteInvoice();
   const updateInvoice = useUpdateInvoice();
   const navigate = useNavigate();
@@ -69,7 +69,6 @@ export const Invoice = () => {
     } catch (error) {
       let message = "Unknown Error";
       if (error instanceof Error) message = error.message;
-
       toast.error(message);
     }
   };

@@ -3,13 +3,12 @@ import { Field } from "formik";
 import { TextField } from "formik-mui";
 
 import { useTheme } from "hooks";
+import { InputProps } from "types";
 
-interface InputNumericFieldProps {
-  label: string;
-  id: string;
-}
-
-export const InputNumericField = ({ label, id }: InputNumericFieldProps) => {
+export const InputNumericField = ({
+  label,
+  id,
+}: InputProps): React.JSX.Element => {
   const { theme } = useTheme();
 
   return (

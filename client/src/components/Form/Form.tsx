@@ -1,23 +1,24 @@
+import { ReactNode } from "react";
 import { Formik, Form as FormikForm, FormikHelpers } from "formik";
+
 import { Button } from "components";
 import { SubmitBtn } from "types";
-import { ReactNode } from "react";
 
 export interface FormProps {
+  onSubmit: (values: object, { setSubmitting }: FormikHelpers<object>) => void;
   initialValues: object;
+  submitBtn: SubmitBtn;
   children?: ReactNode;
   validationSchema?: object;
-  submitBtn: SubmitBtn;
-  onSubmit: (values: object, { setSubmitting }: FormikHelpers<object>) => void;
 }
 
 export const Form = ({
-  validationSchema,
   onSubmit,
   initialValues,
-  children,
   submitBtn,
-}: FormProps) => {
+  validationSchema,
+  children,
+}: FormProps): React.JSX.Element => {
   return (
     <Formik
       initialValues={initialValues}

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { HOME_PATH } from "utils/constants";
 import { Button } from "../Button";
-import { useSignout } from "hooks";
-import { toast } from "react-hot-toast";
+import { useAuth } from "hooks";
+import { useNavigate } from "react-router-dom";
 
 interface ButtonSignoutProps {
   signoutCallback?: () => void;
@@ -10,24 +10,13 @@ interface ButtonSignoutProps {
 export const ButtonSignout = ({
   signoutCallback,
 }: ButtonSignoutProps): React.JSX.Element => {
-  const [_, setState] = useState();
-  const signout = useSignout();
-
-  const handleSignout = async () => {
-    try {
-      await signout();
-      toast.success("Successfully signed out!");
-    } catch (error) {
-      return setState(() => {
-        throw error;
-      });
-    }
-  };
+  const { handleSignout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <Button
-      onClick={() => {
-        handleSignout();
+      onClick={async () => {
+        await handleSignout(() => navigate(HOME_PATH));
         if (signoutCallback) signoutCallback();
       }}
       intent={"primary"}

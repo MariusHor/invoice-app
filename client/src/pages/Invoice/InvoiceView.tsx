@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Invoice } from "features/Invoice/Invoice";
 
-export const InvoiceView = () => {
+export const InvoiceView = (): React.JSX.Element => {
   return (
     <AnimatePresence>
       <motion.div

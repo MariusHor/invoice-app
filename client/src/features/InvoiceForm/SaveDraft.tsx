@@ -4,11 +4,17 @@ import { useAuth, useInvoices, useSubmitInvoice } from "hooks";
 import { Invoice } from "types";
 import { DEMO_MODE_MAX_INVOICES } from "utils/constants";
 
-export const SaveDraft = ({ isSubmitting }: { isSubmitting: boolean }) => {
+interface SaveDraftProps {
+  isSubmitting: boolean;
+}
+
+export const SaveDraft = ({
+  isSubmitting,
+}: SaveDraftProps): React.JSX.Element => {
   const { auth } = useAuth();
-  const submitInvoice = useSubmitInvoice();
   const { data: invoices } = useInvoices();
   const { values, setSubmitting } = useFormikContext<Invoice>();
+  const submitInvoice = useSubmitInvoice();
 
   return (
     <Button

@@ -7,7 +7,7 @@ export const NavLinks = (): React.JSX.Element => {
   } = useAuth();
 
   return (
-    <>
+    <div className="flex gap-2">
       <ButtonLink
         to={isLoggedIn ? "dashboard" : "login"}
         intent={"outlined-link"}
@@ -23,6 +23,6 @@ export const NavLinks = (): React.JSX.Element => {
           Register
         </ButtonLink>
       )}
-    </>
+    </div>
   );
 };

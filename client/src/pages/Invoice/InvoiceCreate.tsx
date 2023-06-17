@@ -4,7 +4,7 @@ import { InvoiceForm } from "features";
 import { Invoice } from "types";
 import { useSubmitInvoice } from "hooks";
 
-export const InvoiceCreate = () => {
+export const InvoiceCreate = (): React.JSX.Element => {
   const submitInvoice = useSubmitInvoice();
 
   const handleSubmit = async (

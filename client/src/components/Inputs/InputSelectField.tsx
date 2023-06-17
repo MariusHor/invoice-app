@@ -3,13 +3,12 @@ import { MenuItem } from "@mui/material";
 import { Select } from "formik-mui";
 
 import { useTheme } from "hooks";
+import { InputProps } from "types";
 
-interface InputSelectFieldProps {
-  label: string;
-  id: string;
-}
-
-export const InputSelectField = ({ label, id }: InputSelectFieldProps) => {
+export const InputSelectField = ({
+  label,
+  id,
+}: InputProps): React.JSX.Element => {
   const { theme } = useTheme();
 
   return (

@@ -5,7 +5,9 @@ interface AccountLinksProps {
   classes?: string;
 }
 
-export const AccountLinks = ({ classes }: AccountLinksProps) => {
+export const AccountLinks = ({
+  classes,
+}: AccountLinksProps): React.JSX.Element => {
   return (
     <ul className={`w-20 flex-col gap-3 ${classes}`}>
       {Object.entries(ACCOUNT_ROUTES_PATHS).map((entry) => (

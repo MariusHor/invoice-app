@@ -15,7 +15,7 @@ interface SelectNavProps {
   classes?: string;
 }
 
-export const SelectNav = ({ classes }: SelectNavProps) => {
+export const SelectNav = ({ classes }: SelectNavProps): React.JSX.Element => {
   const location = useLocation();
   const [selectedOption, setSelectedOption] = useState<SelectOption | null>(
     null

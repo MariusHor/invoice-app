@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { Hamburger, Navbar } from "features";
 import { useTheme } from "hooks";
 
-export const Private = () => {
+export const Private = (): React.JSX.Element => {
   const { theme } = useTheme();
 
   return (

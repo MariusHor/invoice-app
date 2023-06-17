@@ -2,7 +2,7 @@ import { isRouteErrorResponse, useRouteError } from "react-router-dom";
 import { ButtonLink } from "components";
 import { HOME_PATH } from "utils/constants";
 
-export const Errors = () => {
+export const Errors = (): React.JSX.Element => {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {

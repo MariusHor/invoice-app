@@ -1,4 +1,4 @@
-import { FormikValues } from "formik";
+import { FormikHelpers, FormikValues } from "formik";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export interface Address {
@@ -82,9 +82,20 @@ export interface AuthProviderProps {
   children: ReactNode;
 }
 
+type Navigate = () => void;
+
+export type HandleAuth<T> = (
+  values: RegisterValues,
+  { setSubmitting, setFieldError }: FormikHelpers<T>,
+  navigate: Navigate
+) => Promise<void>;
+
 export interface AuthContextInterface {
   auth: Auth;
   setAuth: Dispatch<SetStateAction<Auth>>;
+  handleRegister: HandleAuth<RegisterValues>;
+  handleLogin: HandleAuth<LoginValues>;
+  handleSignout: (navigate: Navigate, message?: string) => Promise<void>;
 }
 
 export interface SubmitBtn {
@@ -99,4 +110,13 @@ export interface SubmitBtn {
     | undefined;
   text?: string;
   disabled?: (isSubmitting: boolean, values: FormikValues) => boolean;
+}
+
+export interface InputProps {
+  label: string;
+  id: string;
+}
+
+export interface ProviderProps {
+  children: ReactNode;
 }

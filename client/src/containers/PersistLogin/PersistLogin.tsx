@@ -5,7 +5,7 @@ import { Spinner } from "components";
 import { useAuth, usePersist, useRefreshToken } from "hooks";
 import { PERSIST_TRUE } from "utils/constants";
 
-export const PersistLogin = () => {
+export const PersistLogin = (): React.JSX.Element => {
   const [isLoading, setIsLoading] = useState(true);
   const { auth } = useAuth();
   const { persist, setPersist } = usePersist();

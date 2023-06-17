@@ -34,3 +34,7 @@ export const formatBytes = (bytes: number, decimals = 2) => {
 
   return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
 };
+
+export const camelToNormal = (string: string) => {
+  return string.replace(/([A-Z])/g, " $1");
+};

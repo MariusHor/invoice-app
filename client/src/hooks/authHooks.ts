@@ -1,16 +1,15 @@
-import { useLocation, useNavigate } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuth, usePersist } from "./contextHooks";
 import { getSignout, postLogin, getRefreshToken } from "api";
-import { LoginValues } from "types";
-import { HOME_PATH, PERSIST_FALSE } from "utils/constants";
+import { Auth, LoginValues } from "types";
+import { PERSIST_FALSE } from "utils/constants";
+import { parseJwt } from "utils";
 
-export const useLogin = () => {
-  const { setAuth } = useAuth();
-  const { state } = useLocation();
+export const useLogin = (
+  setAuth: React.Dispatch<React.SetStateAction<Auth>>
+) => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
 
   return useMutation(
     async ({ password, username }: LoginValues) =>
@@ -27,7 +26,6 @@ export const useLogin = () => {
 
         queryClient.removeQueries();
         await queryClient.invalidateQueries();
-        navigate(state?.from ?? "/dashboard");
       },
       onError: (error) => {
         throw error;
@@ -36,20 +34,18 @@ export const useLogin = () => {
   );
 };
 
-export const useSignout = () => {
-  const { setAuth } = useAuth();
+export const useSignout = (
+  setAuth: React.Dispatch<React.SetStateAction<Auth>>
+) => {
   const { setPersist } = usePersist();
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
-  return async (path?: string) => {
-    setAuth({});
-    setPersist(PERSIST_FALSE);
-    queryClient.removeQueries();
-    navigate(path ?? HOME_PATH);
-
+  return async () => {
     try {
       await getSignout();
+      setAuth({});
+      setPersist(PERSIST_FALSE);
+      queryClient.removeQueries();
     } catch (error) {
       console.log(error);
       throw error;
@@ -82,4 +78,9 @@ export const useRefreshToken = () => {
       throw error;
     }
   };
+};
+
+export const useCheckTokenExpiration = (accessToken: string | undefined) => {
+  const decodedJwt = parseJwt(accessToken);
+  return decodedJwt?.exp ? decodedJwt?.exp * 1000 < Date.now() : decodedJwt;
 };

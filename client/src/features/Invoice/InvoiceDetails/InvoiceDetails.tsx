@@ -6,10 +6,7 @@ interface InvoiceDetailsProps {
 }
 
 export const InvoiceDetails = ({
-  invoice,
-  id,
-}: InvoiceDetailsProps): React.JSX.Element => {
-  const {
+  invoice: {
     description,
     senderAddress,
     clientAddress,
@@ -19,8 +16,9 @@ export const InvoiceDetails = ({
     total,
     clientName,
     paymentDue,
-  } = invoice;
-
+  },
+  id,
+}: InvoiceDetailsProps): React.JSX.Element => {
   return (
     <div className="flex flex-col gap-6 rounded-lg bg-skin-fill-secondary p-4 shadow-lg">
       <div className="flex justify-between p-4">
@@ -67,7 +65,7 @@ export const InvoiceDetails = ({
   );
 };
 
-const AddressInfo = ({ address }: { address: Address }) => (
+const AddressInfo = ({ address }: { address: Address }): React.JSX.Element => (
   <ul className="text-sm text-skin-muted">
     <li>{address.street}</li>
     <li>{address.city}</li>
@@ -84,14 +82,18 @@ const InvoiceInfo = ({
   title: string;
   text: string;
   classes?: string;
-}) => (
+}): React.JSX.Element => (
   <div className={classes}>
     <span className="text-sm text-skin-muted">{text}</span>
     <h2 className="heading-sm text-skin-base">{title}</h2>
   </div>
 );
 
-const InvoiceItemsList = ({ items }: { items: InvoiceItem[] }) => (
+const InvoiceItemsList = ({
+  items,
+}: {
+  items: InvoiceItem[];
+}): React.JSX.Element => (
   <ul className="flex flex-col gap-4">
     {items.map((item: InvoiceItem, index: number) => (
       <li className="heading-sm grid grid-cols-6 sm:grid-cols-5" key={index}>

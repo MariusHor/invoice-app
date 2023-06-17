@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom";
 import { Spinner } from "components";
 import { SelectNav } from "./SelectNav";
 import { AccountHeader } from "./AccountHeader";
-import { useUser } from "hooks";
 import { AccountLinks } from "./AccountLinks";
+import { useUser } from "hooks";
 
-export const Account = () => {
+export const Account = (): React.JSX.Element => {
   const { data: user, isLoading } = useUser();
 
   if (isLoading) return <Spinner intent={"inner"} />;

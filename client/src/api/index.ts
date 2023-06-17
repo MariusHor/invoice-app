@@ -1,7 +1,14 @@
 import { axiosPrivate, axiosPublic } from "lib";
 import { Invoice, LoginValues } from "types";
 
-export const postRegister = async ({ username, password }: LoginValues) => {
+const setApiConfig = (isDemo: boolean) => {
+  const path = isDemo ? "demo" : "user";
+  const api = isDemo ? axiosPublic : axiosPrivate;
+
+  return { path, api };
+};
+
+export const postRegister = async ({ username, password }: LoginValues) =>
   await axiosPublic.post(
     "/auth/register",
     JSON.stringify({ username, password }),
@@ -9,7 +16,6 @@ export const postRegister = async ({ username, password }: LoginValues) => {
       withCredentials: true,
     }
   );
-};
 
 export const postLogin = async ({ username, password }: LoginValues) =>
   await axiosPublic.post(
@@ -37,10 +43,8 @@ export const postInvoice = async ({
   invoice: Invoice;
   isDemo: boolean;
 }) => {
-  const path = isDemo ? "demo" : "user";
-  const api = isDemo ? axiosPublic : axiosPrivate;
-
-  await api.post(`/${path}/invoices`, invoice);
+  const { path, api } = setApiConfig(isDemo);
+  return await api.post(`/${path}/invoices`, invoice);
 };
 
 export const deleteInvoice = async ({
@@ -50,10 +54,8 @@ export const deleteInvoice = async ({
   id: string;
   isDemo: boolean;
 }) => {
-  const path = isDemo ? "demo" : "user";
-  const api = isDemo ? axiosPublic : axiosPrivate;
-
-  await api.delete(`/${path}/invoices/${id}`);
+  const { path, api } = setApiConfig(isDemo);
+  return await api.delete(`/${path}/invoices/${id}`);
 };
 
 export const updateInvoice = async ({
@@ -65,8 +67,6 @@ export const updateInvoice = async ({
   updatedInvoice: Invoice;
   isDemo: boolean;
 }) => {
-  const path = isDemo ? "demo" : "user";
-  const api = isDemo ? axiosPublic : axiosPrivate;
-
-  await api.patch(`/${path}/invoices/${id}`, updatedInvoice);
+  const { path, api } = setApiConfig(isDemo);
+  return await api.patch(`/${path}/invoices/${id}`, updatedInvoice);
 };

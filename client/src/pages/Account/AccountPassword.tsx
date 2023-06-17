@@ -1,15 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { isAxiosError } from "axios";
 import { FormikHelpers, FormikValues } from "formik";
 
 import { Form, InputPasswordField } from "components";
-import { useSignout, useUpdateUser, useUser } from "hooks";
+import { useAuth, useUpdateUser, useUser } from "hooks";
 import { updatePasswordSchema } from "schemas";
 import { RESET_PASS_INIT_VALUES } from "utils/constants";
-import { toast } from "react-hot-toast";
 
 export const AccountPassword = (): React.JSX.Element => {
-  const signout = useSignout();
+  const { handleSignout } = useAuth();
+  const navigate = useNavigate();
   const { data: user } = useUser();
   const updateUser = useUpdateUser();
   const [_, setState] = useState();
@@ -27,9 +28,10 @@ export const AccountPassword = (): React.JSX.Element => {
         username: user.username,
       });
 
-      toast.success(`Password updated. Please login again!`);
-      await signout("/login");
-
+      handleSignout(
+        () => navigate("/login"),
+        "Password updated. Please login again!"
+      );
       setSubmitting(false);
     } catch (error) {
       if (isAxiosError(error)) {

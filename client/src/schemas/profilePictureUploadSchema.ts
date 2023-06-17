@@ -33,10 +33,9 @@ export const profilePictureUploadSchema = yup.object().shape({
       return false;
     })
     .test("fileType", allowedFileTypesErrorMessage, (file) => {
-      const { type } = file as FileValuesExtended;
-
-      if (type) {
-        const fileType = type.split("/").pop();
+      if (file) {
+        const { type } = file as FileValuesExtended;
+        const fileType = type ? type.split("/").pop() : "unknown";
 
         if (
           typeof fileType === "string" &&
@@ -44,17 +43,23 @@ export const profilePictureUploadSchema = yup.object().shape({
         ) {
           return false;
         }
+
+        return true;
       }
 
-      return true;
+      return false;
     })
     .test("fileSize", maxFileSizeErrorMessage, (file) => {
-      const { size } = file as FileValuesExtended;
+      if (file) {
+        const { size } = file as FileValuesExtended;
 
-      if (size && size > MAX_ALLOWED_FILE_SIZE) {
-        return false;
+        if (size && size > MAX_ALLOWED_FILE_SIZE) {
+          return false;
+        }
+
+        return true;
       }
 
-      return true;
+      return false;
     }),
 });

@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import { ButtonBack } from "components";
 import arrowLeft from "assets/icon-arrow-left.svg";
 
-export const Invoice = () => {
+export const Invoice = (): React.JSX.Element => {
   return (
     <>
       <div className="container mx-auto h-fit w-full py-4 lg:p-10">

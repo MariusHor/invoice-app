@@ -1,6 +1,8 @@
 import { parse, add, format } from "date-fns";
 import { FiltersState, InvoiceResult } from "types";
 import { INVOICES_PER_PAGE } from "./constants";
+import { capitalize } from "@mui/material";
+import { camelToNormal } from "./utils";
 
 export const paginateInvoices = (
   filteredInvoices: InvoiceResult[],
@@ -42,17 +44,28 @@ export const formatDate = (createdAt: string, paymentTerms: number) => {
 };
 
 export const checkInvoiceFalsyFields = (obj: object, prop?: string) => {
-  let errors: string[] = [];
-  Object.entries(obj).map(([key, value]) => {
-    if (value === "" || value === 0)
-      errors = [...errors, `Invoice field ${prop} ${key} is not filled in`];
-    if (typeof value === "object" && value !== null && !Array.isArray(value))
-      checkInvoiceFalsyFields(value, key);
-    if (Array.isArray(value))
-      value.forEach((item) => checkInvoiceFalsyFields(item, key));
-  });
+  const errors = Object.entries(obj).reduce(
+    (result: string[], [key, value]) => {
+      if (key === "__v" || key === "_id") return result;
+      if (value === "" || value === 0) {
+        const field = prop
+          ? `${capitalize(camelToNormal(prop))} ${capitalize(key)}`
+          : capitalize(key);
+        return [...result, `Invoice field ${field} is not filled in`];
+      }
+      if (typeof value === "object" && value !== null && !Array.isArray(value))
+        checkInvoiceFalsyFields(value, key);
+      if (Array.isArray(value))
+        value.forEach((item) => checkInvoiceFalsyFields(item, key));
 
-  if (errors.length === 1) throw new Error(errors[1]);
+      return result;
+    },
+    []
+  );
+
+  if (errors.length === 1) {
+    throw new Error(errors[0]);
+  }
 
   if (errors.length > 1)
     throw new Error("Multiple invoice fields are not filled in");

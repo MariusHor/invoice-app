@@ -45,7 +45,13 @@ export const InvoiceCard = ({
   );
 };
 
-const CardSpan = ({ text, position }: { text: string; position: string }) => {
+const CardSpan = ({
+  text,
+  position,
+}: {
+  text: string;
+  position: string;
+}): React.JSX.Element => {
   return (
     <span className={`w-full text-${position} text-sm xl:text-center`}>
       {text}
@@ -61,7 +67,7 @@ const CardHeading = ({
   children: ReactNode;
   text: string | number;
   position: string;
-}) => {
+}): React.JSX.Element => {
   return (
     <h3
       className={`heading-sm w-full text-${position} text-skin-base xl:text-center`}

@@ -21,7 +21,7 @@ export const ButtonLink = ({
   state,
   replace,
   ...props
-}: LinkButtonProps) => (
+}: LinkButtonProps): React.JSX.Element => (
   <Link
     to={to}
     state={state}

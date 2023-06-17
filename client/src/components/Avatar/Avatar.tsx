@@ -8,7 +8,13 @@ interface SizesProps {
   };
 }
 
-export const Avatar = ({ intent = "small" }: { intent?: string }) => {
+interface AvatarProps {
+  intent?: string;
+}
+
+export const Avatar = ({
+  intent = "small",
+}: AvatarProps): React.JSX.Element => {
   const { data: user } = useUser();
   const sizes: SizesProps = {
     small: { width: 50, height: 50 },

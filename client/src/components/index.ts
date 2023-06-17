@@ -17,4 +17,4 @@ export { Spinner } from "./Spinner/Spinner";
 export { InvoiceFallback } from "./InvoiceFallback/InvoiceFallback";
 export { InvoiceStatus } from "./InvoiceStatus/InvoiceStatus";
 
-export { SelectOptionLink } from "./SelectOption/SelectOptionLink";
+export { SelectOptionLink } from "./SelectOptionLink/SelectOptionLink";

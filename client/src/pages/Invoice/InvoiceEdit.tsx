@@ -2,11 +2,11 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { FormikHelpers } from "formik";
 
 import { InvoiceForm } from "features";
+import { Spinner } from "components";
 import { Invoice, InvoiceResult } from "types";
 import { useAuth, useInvoiceProps, useInvoices, useUpdateInvoice } from "hooks";
-import { Spinner } from "components";
 
-export const InvoiceEdit = () => {
+export const InvoiceEdit = (): React.JSX.Element => {
   const getInvoiceProps = useInvoiceProps();
   const updateInvoice = useUpdateInvoice();
   const navigate = useNavigate();

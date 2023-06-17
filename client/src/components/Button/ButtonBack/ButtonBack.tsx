@@ -3,11 +3,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { Button } from "../Button";
 
+interface ButtonBackProps {
+  children: ReactNode;
+}
+
 export const ButtonBack = ({
   children,
-}: {
-  children: ReactNode;
-}): React.JSX.Element => {
+}: ButtonBackProps): React.JSX.Element => {
   const navigate = useNavigate();
   const location = useLocation();
 

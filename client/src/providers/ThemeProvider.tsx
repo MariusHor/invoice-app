@@ -1,6 +1,7 @@
-import { ReactNode, createContext } from "react";
+import { createContext } from "react";
 import { useLocalStorage } from "hooks";
 import { KEY_THEME, THEME_PRIMARY } from "utils/constants";
+import { ProviderProps } from "types";
 
 interface ThemeContextType {
   theme: string;
@@ -9,7 +10,7 @@ interface ThemeContextType {
 
 export const ThemeContext = createContext<ThemeContextType | null>(null);
 
-export const ThemeProvider = ({ children }: { children: ReactNode }) => {
+export const ThemeProvider = ({ children }: ProviderProps) => {
   const [theme, setTheme] = useLocalStorage(KEY_THEME, THEME_PRIMARY);
 
   return (

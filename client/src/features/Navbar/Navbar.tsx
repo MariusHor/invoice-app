@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { VariantProps } from "class-variance-authority";
+
 import { Logo } from "./Logo/Logo";
 import { useTheme } from "hooks";
 import moon from "assets/icon-moon.svg";

@@ -4,7 +4,7 @@ import { Button } from "components";
 import { Item } from "./Item";
 import { Invoice, InvoiceItem } from "types";
 
-export const ItemList = () => {
+export const ItemList = (): React.JSX.Element => {
   const { values } = useFormikContext<Invoice>();
   const emptyItem: InvoiceItem = { name: "", quantity: 0, price: 0, total: 0 };
 

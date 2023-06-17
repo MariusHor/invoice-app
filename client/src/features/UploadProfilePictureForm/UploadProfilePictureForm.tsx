@@ -43,11 +43,11 @@ export const UploadProfilePictureForm = (): React.JSX.Element => {
       resetForm();
       setAuth((prev) => ({ ...prev, hasProfilePicture: true }));
 
-      const feedback = auth.hasProfilePicture
+      const message = auth.hasProfilePicture
         ? "Profile picture updated!"
         : "Profile picture uploaded!";
 
-      toast.success(feedback);
+      toast.success(message);
     } catch (error) {
       return setState(() => {
         throw error;
