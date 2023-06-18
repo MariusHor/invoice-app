@@ -27,14 +27,14 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
                     },
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                {expiresIn: '10s'}
+                {expiresIn: '2h'}
             );
 
             const refreshToken = jwt.sign(
                 {username: foundUser.username, _id: foundUser._id},
                 process.env.REFRESH_TOKEN_SECRET,
                 {
-                    expiresIn: '1d',
+                    expiresIn: '2d',
                 }
             );
 
@@ -45,7 +45,7 @@ export const loginUser = async (req: Request, res: Response, next: NextFunction)
                 httpOnly: true,
                 secure: true,
                 sameSite: 'none',
-                maxAge: 24 * 60 * 60 * 1000,
+                maxAge: 2 * 24 * 60 * 60 * 1000,
             });
 
             const hasProfilePicture = foundUser.profilePicture ? true : false;

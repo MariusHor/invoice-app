@@ -1,35 +1,21 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAxiosPrivate } from "./useAxiosPrivate";
 import { useAuth } from "./contextHooks";
-import { QUERY_INVOICES, QUERY_USER } from "utils/constants";
-import toast from "react-hot-toast";
-import { isAxiosError } from "axios";
-import { axiosPublic } from "lib";
+import { QUERY_INVOICES, QUERY_USER, QUERY_USERS } from "utils/constants";
+import { setApiConfig } from "utils";
 
 export const useInvoices = () => {
   const axiosPrivate = useAxiosPrivate();
   const { auth } = useAuth();
 
   return useQuery({
-    queryKey: [QUERY_INVOICES],
+    queryKey: [QUERY_INVOICES, auth.isLoggedIn, axiosPrivate],
     queryFn: async () => {
-      try {
-        const path = auth.isLoggedIn ? "user" : "demo";
-        const api = auth.isLoggedIn ? axiosPrivate : axiosPublic;
-
-        const response = await api.get(`/${path}/invoices`, {
-          headers: { "Content-Type": "application/json" },
-        });
-
-        if (response.status !== 200) throw new Error();
-
-        return response.data;
-      } catch (error) {
-        if (isAxiosError(error)) {
-          toast.error(`Something went wrong: ${error.response?.data.message}`);
-        }
-        return [];
-      }
+      const { path, api } = setApiConfig(!auth.isLoggedIn);
+      const response = await api.get(`/${path}/invoices`, {
+        headers: { "Content-Type": "application/json" },
+      });
+      return response.data;
     },
   });
 };
@@ -39,19 +25,13 @@ export const useUser = () => {
   const { auth } = useAuth();
 
   return useQuery({
-    queryKey: [QUERY_USER],
+    queryKey: [QUERY_USER, auth.isLoggedIn, axiosPrivate],
     queryFn: async () => {
       if (!auth.isLoggedIn) return {};
-
-      try {
-        const response = await axiosPrivate.get("/user/account", {
-          headers: { "Content-Type": "application/json" },
-        });
-        return response.data;
-      } catch (error) {
-        console.log(error);
-        return {};
-      }
+      const response = await axiosPrivate.get("/user/account", {
+        headers: { "Content-Type": "application/json" },
+      });
+      return response.data;
     },
   });
 };
@@ -60,18 +40,13 @@ export const useUsers = () => {
   const axiosPrivate = useAxiosPrivate();
 
   return useQuery({
-    queryKey: ["users"],
+    queryKey: [QUERY_USERS, axiosPrivate],
     queryFn: async () => {
-      try {
-        const response = await axiosPrivate.get(`/admin/users`, {
-          headers: { "Content-Type": "application/json" },
-        });
+      const response = await axiosPrivate.get(`/admin/users`, {
+        headers: { "Content-Type": "application/json" },
+      });
 
-        return response.data;
-      } catch (error) {
-        console.log(error);
-        return [];
-      }
+      return response.data;
     },
     enabled: false,
   });

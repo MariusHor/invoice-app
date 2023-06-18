@@ -42,7 +42,7 @@ export const SelectNav = ({ classes }: SelectNavProps): React.JSX.Element => {
         Option: SelectOptionLink,
       }}
       styles={{
-        menu: (provided) => ({ ...provided, zIndex: 9999 }),
+        menu: (provided) => ({ ...provided, zIndex: 9999, color: "black" }),
       }}
     />
   );

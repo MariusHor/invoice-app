@@ -14,77 +14,72 @@ export const useUpdateUser = (
   const queryClient = useQueryClient();
   const axiosPrivate = useAxiosPrivate();
 
-  return useMutation(
-    async (payload: AccountUpdates | FormData) =>
+  return useMutation({
+    mutationFn: async (payload: AccountUpdates | FormData) =>
       await axiosPrivate.patch(`/user${path}`, payload, {
         headers: { "Content-Type": "application/json", ...options?.headers },
       }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_USER]);
-      },
-    }
-  );
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_USER]);
+    },
+  });
 };
 
 export const useDeleteUser = (path = "/account") => {
   const queryClient = useQueryClient();
   const axiosPrivate = useAxiosPrivate();
 
-  return useMutation(
-    async () =>
+  return useMutation({
+    mutationFn: async () =>
       await axiosPrivate.delete(`/user${path}`, {
         headers: { "Content-Type": "application/json" },
       }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_USER]);
-      },
-    }
-  );
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_USER]);
+    },
+  });
 };
 
 export const useCreateInvoice = () => {
   const queryClient = useQueryClient();
   const { auth } = useAuth();
 
-  return useMutation(
-    async ({ newInvoice }: { newInvoice: Invoice }) =>
+  return useMutation({
+    mutationFn: async ({ newInvoice }: { newInvoice: Invoice }) =>
       await postInvoice({ invoice: newInvoice, isDemo: !auth.isLoggedIn }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_INVOICES]);
-      },
-    }
-  );
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_INVOICES]);
+    },
+  });
 };
 
 export const useUpdateInvoice = () => {
   const queryClient = useQueryClient();
   const { auth } = useAuth();
 
-  return useMutation(
-    async ({ id, updatedInvoice }: { id: string; updatedInvoice: Invoice }) =>
-      await updateInvoice({ id, updatedInvoice, isDemo: !auth.isLoggedIn }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_INVOICES]);
-      },
-    }
-  );
+  return useMutation({
+    mutationFn: async ({
+      id,
+      updatedInvoice,
+    }: {
+      id: string;
+      updatedInvoice: Invoice;
+    }) => await updateInvoice({ id, updatedInvoice, isDemo: !auth.isLoggedIn }),
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_INVOICES]);
+    },
+  });
 };
 
 export const useDeleteInvoice = () => {
   const queryClient = useQueryClient();
   const { auth } = useAuth();
 
-  return useMutation(
-    async ({ id }: { id: string }) =>
+  return useMutation({
+    mutationFn: async ({ id }: { id: string }) =>
       await deleteInvoice({ id, isDemo: !auth.isLoggedIn }),
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries([QUERY_INVOICES]);
-      },
-    }
-  );
+    onSuccess: () => {
+      queryClient.invalidateQueries([QUERY_INVOICES]);
+    },
+  });
 };

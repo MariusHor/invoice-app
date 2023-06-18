@@ -28,7 +28,7 @@ export const refreshToken = async (req: Request, res: Response, next: NextFuncti
                     },
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                {expiresIn: '10s'}
+                {expiresIn: '2h'}
             );
 
             const hasProfilePicture = foundUser.profilePicture ? true : false;

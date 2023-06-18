@@ -4,6 +4,7 @@ export {
   paginateInvoices,
   filterInvoices,
   checkInvoiceFalsyFields,
+  setApiConfig,
 } from "./helpers";
 
 export {

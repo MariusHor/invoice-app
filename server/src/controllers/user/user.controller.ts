@@ -87,7 +87,6 @@ export const updateProfilePicture = (req: CustomRequest, res: Response, next: Ne
             if (result.secure_url) {
                 try {
                     const foundUser = await User.findOne({_id: req.userId});
-                    console.log(foundUser);
                     if (!foundUser) return res.sendStatus(403);
 
                     foundUser.profilePicture = result.secure_url;

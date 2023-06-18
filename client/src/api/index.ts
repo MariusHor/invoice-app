@@ -1,12 +1,6 @@
-import { axiosPrivate, axiosPublic } from "lib";
+import { axiosPublic } from "lib";
 import { Invoice, LoginValues } from "types";
-
-const setApiConfig = (isDemo: boolean) => {
-  const path = isDemo ? "demo" : "user";
-  const api = isDemo ? axiosPublic : axiosPrivate;
-
-  return { path, api };
-};
+import { setApiConfig } from "utils";
 
 export const postRegister = async ({ username, password }: LoginValues) =>
   await axiosPublic.post(

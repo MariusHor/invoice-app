@@ -11,27 +11,25 @@ export const useLogin = (
 ) => {
   const queryClient = useQueryClient();
 
-  return useMutation(
-    async ({ password, username }: LoginValues) =>
+  return useMutation({
+    mutationFn: async ({ password, username }: LoginValues) =>
       await postLogin({ password, username }),
-    {
-      onSuccess: async ({ data }) => {
-        const { accessToken, email, hasProfilePicture } = data;
-        setAuth({
-          isLoggedIn: true,
-          accessToken,
-          email,
-          hasProfilePicture,
-        });
+    onSuccess: async ({ data }) => {
+      const { accessToken, email, hasProfilePicture } = data;
+      setAuth({
+        isLoggedIn: true,
+        accessToken,
+        email,
+        hasProfilePicture,
+      });
 
-        queryClient.removeQueries();
-        await queryClient.invalidateQueries();
-      },
-      onError: (error) => {
-        throw error;
-      },
-    }
-  );
+      queryClient.removeQueries();
+      await queryClient.invalidateQueries();
+    },
+    onError: (error) => {
+      throw error;
+    },
+  });
 };
 
 export const useSignout = (

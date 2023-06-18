@@ -4,23 +4,16 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
-import {v2 as cloudinary} from 'cloudinary';
 
 import {errorLogger, errorResponder} from './middlewares';
-import {dbConfig, corsConfig, ROLES_LIST} from './config';
+import {dbConfig, corsConfig, cloudinaryConfig, ROLES_LIST} from './config';
 import {verifyJWT} from './middlewares/verifyJWT';
 import {authRoutes, demoRoutes, userRoutes, adminRoutes} from './routes';
 import {verifyRoles} from './middlewares/verifyRoles';
 
 dotenv.config();
 dbConfig();
-
-cloudinary.config({
-    cloud_name: 'dwdb9zdiu',
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-    secure: true,
-});
+cloudinaryConfig();
 
 const app = express();
 const port = process.env.PORT || 5000;

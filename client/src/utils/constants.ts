@@ -16,6 +16,7 @@ export const PAID = "paid";
 export const PENDING = "pending";
 export const INIT_PAGE = 1;
 export const QUERY_USER = "user";
+export const QUERY_USERS = "users";
 export const QUERY_INVOICES = "invoices";
 export const HOME_PATH = "/";
 export const DEMO_MODE_MAX_INVOICES = 3;

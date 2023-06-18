@@ -3,6 +3,7 @@ import { FiltersState, InvoiceResult } from "types";
 import { INVOICES_PER_PAGE } from "./constants";
 import { capitalize } from "@mui/material";
 import { camelToNormal } from "./utils";
+import { axiosPrivate, axiosPublic } from "lib";
 
 export const paginateInvoices = (
   filteredInvoices: InvoiceResult[],
@@ -69,4 +70,11 @@ export const checkInvoiceFalsyFields = (obj: object, prop?: string) => {
 
   if (errors.length > 1)
     throw new Error("Multiple invoice fields are not filled in");
+};
+
+export const setApiConfig = (isDemo: boolean) => {
+  const path = isDemo ? "demo" : "user";
+  const api = isDemo ? axiosPublic : axiosPrivate;
+
+  return { path, api };
 };
