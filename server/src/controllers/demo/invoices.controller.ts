@@ -4,8 +4,6 @@ import {Invoice} from '../../models';
 export const getDemoInvoices = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const invoices = await Invoice.find({isDemo: true}).exec();
-        if (!invoices.length) return res.status(204).json({message: 'No invoices found'});
-
         res.status(200).json(invoices);
     } catch (error) {
         next(error);
@@ -27,7 +25,7 @@ export const createDemoInvoice = async (req: Request, res: Response, next: NextF
     try {
         const invoices = await Invoice.find({isDemo: true}).exec();
 
-        if (invoices.length >= 3) return res.status(201).json();
+        if (invoices.length >= 3) return res.status(204).json();
 
         const newInvoice = new Invoice({
             ...req.body,
