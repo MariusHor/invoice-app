@@ -45,7 +45,7 @@ export const Dashboard = (): React.JSX.Element => {
       ) : (
         <InvoiceFallback>
           <p className="text-sm-variant mx-auto mt-2 max-w-42 text-center text-skin-muted">
-            No current invoices. Try creating a new one!
+            Try creating a new Invoice!
           </p>
         </InvoiceFallback>
       )}

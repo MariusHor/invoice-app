@@ -10,8 +10,6 @@ export const getInvoices = async (req: CustomRequest, res: Response, next: NextF
         if (!foundUser) return res.sendStatus(403);
 
         const invoices = await Invoice.find({userId: foundUser._id}).exec();
-        if (!invoices.length) return res.status(204).json({message: 'No invoices found'});
-
         res.status(200).json(invoices);
     } catch (error) {
         next(error);
