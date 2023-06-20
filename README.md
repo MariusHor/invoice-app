@@ -1,4 +1,6 @@
-# weather-app
+# paperless
+
+*** NOTE THAT BEACUSE THE API IS HOSTED ON THE FREE TIER OF RENDER.COM, THE FIRST TIME ACCESS OF THE APP WILL REQUIRE AROUND 3 MINUTES FOR THE SERVER TO BE BUILT.
 
 ## Table of contents
 
@@ -21,8 +23,8 @@
 
 ### Links
 
-- [Live Site Demo](https://invoice-app-mariushor.netlify.app)
-- [Code Repository](https://github.com/MariusHor/invoice-app)
+- [Live Site Demo](https://paperless-mariushor.netlify.app/)
+- [Code Repository](https://github.com/MariusHor/paperless)
 
 ### Features
 
