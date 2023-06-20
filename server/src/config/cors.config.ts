@@ -1,4 +1,4 @@
-const allowedOrigins = ['https://invoice-app-mariushor.netlify.app', 'http://localhost:5173', 'http://localhost:4173'];
+const allowedOrigins = ['https://paperless-mariushor.netlify.app', 'http://localhost:5173', 'http://localhost:4173'];
 
 export const corsConfig = {
     origin: (origin, callback) => {
