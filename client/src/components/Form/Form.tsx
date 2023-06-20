@@ -32,6 +32,7 @@ export const Form = ({
           <Button
             intent={submitBtn?.intent ?? "primary"}
             type="submit"
+            name="submit"
             disabled={
               submitBtn.disabled
                 ? submitBtn?.disabled(isSubmitting, values)

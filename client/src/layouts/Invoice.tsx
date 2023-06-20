@@ -9,7 +9,7 @@ export const Invoice = (): React.JSX.Element => {
         <ButtonBack>
           <div className="flex-center">
             <div className="mr-2">
-              <img src={arrowLeft} alt="" />
+              <img src={arrowLeft} alt="" width={7} height={10} />
             </div>
             <span>Go back</span>
           </div>

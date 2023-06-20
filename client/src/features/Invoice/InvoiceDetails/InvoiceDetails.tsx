@@ -97,17 +97,17 @@ const InvoiceItemsList = ({
   <ul className="flex flex-col gap-4">
     {items.map((item: InvoiceItem, index: number) => (
       <li className="heading-sm grid grid-cols-6 sm:grid-cols-5" key={index}>
-        <h3 className="col-span-6 text-skin-base sm:col-span-2">{item.name}</h3>
-        <h3 className="text-left  text-skin-muted sm:text-center">
+        <p className="col-span-6 text-skin-base sm:col-span-2">{item.name}</p>
+        <p className="text-left  text-skin-muted sm:text-center">
           {item.quantity}
-        </h3>
-        <h3 className="text-left text-skin-base sm:hidden sm:text-center">x</h3>
-        <h3 className="text-left text-skin-muted sm:text-center">
+        </p>
+        <p className="text-left text-skin-base sm:hidden sm:text-center">x</p>
+        <p className="text-left text-skin-muted sm:text-center">
           ${item.price}
-        </h3>
-        <h3 className="col-start-6 text-end text-skin-base sm:col-start-auto">
+        </p>
+        <p className="col-start-6 text-end text-skin-base sm:col-start-auto">
           ${item.total}
-        </h3>
+        </p>
       </li>
     ))}
   </ul>

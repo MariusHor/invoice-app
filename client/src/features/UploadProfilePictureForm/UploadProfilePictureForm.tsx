@@ -89,6 +89,7 @@ export const UploadProfilePictureForm = (): React.JSX.Element => {
                 key={"upload-picture"}
                 intent="accent"
                 type="submit"
+                name="submit"
                 disabled={isSubmitting || !values.file}
               >
                 Upload Now
@@ -99,6 +100,7 @@ export const UploadProfilePictureForm = (): React.JSX.Element => {
                 onClick={() => setIsUploading(true)}
                 intent="accent"
                 type="button"
+                name="show-form"
               >
                 Upload new picture
               </Button>
@@ -110,6 +112,7 @@ export const UploadProfilePictureForm = (): React.JSX.Element => {
               key={"delete-picture"}
               intent={"outlined"}
               disabled={!user.profilePicture}
+              name="delete-picture"
             >
               Delete
             </Button>

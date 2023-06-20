@@ -18,6 +18,7 @@ export const SaveDraft = ({
 
   return (
     <Button
+      name="save-draft"
       intent="secondary"
       type="button"
       onClick={() => submitInvoice({ values, setSubmitting, isDraft: true })}

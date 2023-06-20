@@ -58,6 +58,7 @@ export const InvoiceForm = ({
             <ButtonBack>Discard</ButtonBack>
             {!isEditing ? <SaveDraft isSubmitting={isSubmitting} /> : null}
             <Button
+              name="submit"
               type="submit"
               intent="primary"
               disabled={

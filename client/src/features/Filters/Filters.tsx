@@ -51,8 +51,10 @@ export const Filters = (): React.JSX.Element => {
         }}
       >
         <img
+          width={11}
+          height={7}
           src={arrowDownIcon}
-          alt=""
+          alt="show filters"
           className={`transition-primary mr-2 ${isShown ? "rotate-180" : ""}`}
         />
         <span className="heading-sm text-skin-base">Filters</span>

@@ -27,6 +27,8 @@ export const ActionsBar = (): React.JSX.Element => {
       >
         <div className="flex-center gap-2">
           <img
+            width={27}
+            height={27}
             src={plusIcon}
             alt="add new entry"
             className="transition-primary hidden rounded-full bg-white p-2 hover:rotate-180 sm:block"

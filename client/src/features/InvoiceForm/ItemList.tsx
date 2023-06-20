@@ -22,6 +22,7 @@ export const ItemList = (): React.JSX.Element => {
             ))}
 
             <Button
+              name="add-item"
               intent="primary"
               size="medium"
               onClick={() => push(emptyItem)}

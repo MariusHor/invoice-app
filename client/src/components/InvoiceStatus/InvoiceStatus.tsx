@@ -19,9 +19,9 @@ export const InvoiceStatus = ({
   ...props
 }: StatusProps): React.JSX.Element => (
   <div className={status({ intent, size, className })} {...props}>
-    <h3 className="heading-sm">
+    <p className="heading-sm">
       <FiberManualRecordIcon style={{ fontSize: 12 }} />
       <span className="ml-2">{capitalize(statusType)}</span>
-    </h3>
+    </p>
   </div>
 );

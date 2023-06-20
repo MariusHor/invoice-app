@@ -9,6 +9,7 @@ export const Errors = (): React.JSX.Element => {
   if (isRouteErrorResponse(error)) {
     return (
       <div className="col-span-full row-span-full flex flex-col items-center justify-center gap-4">
+        <img src={fallbackImg} alt="error fallback" width={242} height={240} />
         <h1>An unexpected error has occured</h1>
         <p>
           <i>{error.statusText}</i>
@@ -22,7 +23,7 @@ export const Errors = (): React.JSX.Element => {
 
   return (
     <div className="col-span-full col-start-2 row-span-full flex h-screen flex-col items-center justify-center gap-4">
-      <img src={fallbackImg} alt="error fallback" />
+      <img src={fallbackImg} alt="error fallback" width={242} height={240} />
       <h1>An unexpected error has occured</h1>
       <ButtonLink intent={"primary-link"} to={HOME_PATH}>
         Go to homepage

@@ -38,6 +38,8 @@ export const Navbar = ({
           }
         >
           <img
+            width={20}
+            height={20}
             src={moon}
             alt="switch theme"
             className="transition-primary hover:-rotate-45"

@@ -21,6 +21,7 @@ export const ButtonSignout = ({
       }}
       intent={"primary"}
       size={"fixed"}
+      name="signout"
       className="hover:bg-skin-btn-primary-hover"
     >
       Sign Out

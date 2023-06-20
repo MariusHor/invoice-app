@@ -94,10 +94,14 @@ export const Invoice = (): React.JSX.Element => {
         >
           Edit
         </ButtonLink>
-        <Button intent={"accent"} onClick={handleDelete}>
+        <Button intent={"accent"} onClick={handleDelete} name="delete-invoice">
           Delete
         </Button>
-        <Button onClick={handleUpdateStatus} disabled={invoice.status === PAID}>
+        <Button
+          onClick={handleUpdateStatus}
+          disabled={invoice.status === PAID}
+          name="update-status"
+        >
           Paid
         </Button>
       </div>

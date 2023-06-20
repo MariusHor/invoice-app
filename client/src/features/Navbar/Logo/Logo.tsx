@@ -14,6 +14,8 @@ export const Logo = ({ intent }: LogoProps): React.JSX.Element => {
       <div className="h-full w-full"></div>
       <div className="h-full w-full rounded-tl-3xl bg-primary-400"></div>
       <img
+        width={28}
+        height={28}
         src={logo}
         alt="invoice app logo"
         className="transition-primary absolute h-7 w-7 hover:rotate-45"

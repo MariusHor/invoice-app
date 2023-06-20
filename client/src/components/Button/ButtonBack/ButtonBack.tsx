@@ -19,7 +19,12 @@ export const ButtonBack = ({
   }, [navigate, location.state?.from]);
 
   return (
-    <Button intent="outlined" size="medium" onClick={handleNavigateBack}>
+    <Button
+      intent="outlined"
+      size="medium"
+      name="navigate-back"
+      onClick={handleNavigateBack}
+    >
       {children}
     </Button>
   );

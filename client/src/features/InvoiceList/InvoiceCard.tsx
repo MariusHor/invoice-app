@@ -38,7 +38,13 @@ export const InvoiceCard = ({
           to={`/${isLoggedIn ? "dashboard" : "demo"}/${invoice.invoiceId}`}
           className="min-h-10 center h-full min-w-10 border-l border-base p-2 transition-all ease-in-out hover:bg-skin-box"
         >
-          <img src={arrowRight} alt="view invoice" className="" />
+          <img
+            width={7}
+            height={10}
+            src={arrowRight}
+            alt="view invoice"
+            className=""
+          />
         </Link>
       </div>
     </div>
@@ -69,11 +75,11 @@ const CardHeading = ({
   position: string;
 }): React.JSX.Element => {
   return (
-    <h3
+    <p
       className={`heading-sm w-full text-${position} text-skin-base xl:text-center`}
     >
       {children}
       {text}
-    </h3>
+    </p>
   );
 };
